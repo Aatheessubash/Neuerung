@@ -4,11 +4,11 @@ import './Logo.css';
 export default function Logo({ className = "", showText = true, size = "normal" }) {
   return (
     <div className={`logo-wrapper ${className}`}>
-      {/* Brand Logo Image with enhanced size, brightness, and glow */}
+      {/* Brand Logo Image with transparent background */}
       <div className="logo-image-container">
         <div className="logo-glow" />
         <img
-          src="/images/logo.jpeg"
+          src="/images/logo-remove_bg.png"
           alt="Neuerung HealthTech Logo"
           className={`logo-img size-${size}`}
           onError={(e) => {
