@@ -2,6 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import './OurTeam.css';
+import drSubashImg from '../assets/dr_subash.png';
+import drMeenakshiImg from '../assets/dr_meenakshi.png';
+import karthikImg from '../assets/karthik.png';
+import priyaImg from '../assets/priya.png';
 
 export default function OurTeam({ openModal }) {
   const teamMembers = [
@@ -11,14 +15,14 @@ export default function OurTeam({ openModal }) {
       role: "Founder & CEO",
       badge: "Leadership",
       bio: "Visionary leader bridging the gap between rigorous medical practice and scalable technology. With over 15 years in clinical diagnostics, Dr. Subash spearheads Neuerung's strategic direction, ensuring all innovations meet the highest standards of clinical precision and patient safety.",
-      img: `${import.meta.env.BASE_URL}/images/dr_subash.png`.replace(/\/+/g, '/')
+      img: drSubashImg
     },
     {
       id: 'meenakshi',
       name: "Dr. K. Meenakshi",
       role: "CMO & AI Advisor",
       bio: "Pioneering the integration of machine learning in diagnostic workflows.",
-      img: `${import.meta.env.BASE_URL}/images/dr_meenakshi.png`.replace(/\/+/g, '/')
+      img: drMeenakshiImg
     },
     {
       id: 'karthik',
@@ -26,7 +30,7 @@ export default function OurTeam({ openModal }) {
       role: "Head of IoT & Telemetry",
       tags: ["Hardware", "Sensors"],
       bio: "Architecting robust data pipelines from edge devices to cloud infrastructure.",
-      img: `${import.meta.env.BASE_URL}/images/karthik.png`.replace(/\/+/g, '/')
+      img: karthikImg
     },
     {
       id: 'priya',
@@ -34,7 +38,7 @@ export default function OurTeam({ openModal }) {
       role: "Lead Software Architect",
       tags: ["Cloud", "Security"],
       bio: "Designing secure, scalable, and HIPAA-compliant software architectures.",
-      img: `${import.meta.env.BASE_URL}/images/priya.png`.replace(/\/+/g, '/')
+      img: priyaImg
     }
   ];
 

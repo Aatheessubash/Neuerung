@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight, Play, TrendingUp, Monitor } from 'lucide-react';
 import './Hero.css';
+import dicomScanImg from '../assets/dicom_chest_scan.png';
 
 export default function Hero({ openModal }) {
   return (
@@ -115,7 +116,7 @@ export default function Hero({ openModal }) {
                       <div className="animate-laser-scan" />
 
                       <img 
-                        src={`${import.meta.env.BASE_URL}/images/dicom_chest_scan.png`.replace(/\/+/g, '/')} 
+                        src={dicomScanImg} 
                         alt="DICOM Clinical AI Scan" 
                         className="dicom-img"
                       />
