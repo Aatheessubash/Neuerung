@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - gh-pages
   pull_request:
     branches:
       - main
@@ -13,10 +12,9 @@ on:
       target_branch:
         description: 'Target branch to push production build'
         required: true
-        default: 'gh-pages'
+        default: 'main'
         type: choice
         options:
-          - gh-pages
           - main
 
 permissions:
@@ -30,7 +28,7 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    name: Build & Push to Target Branch
+    name: Build & Deploy Main Branch
     runs-on: ubuntu-latest
 
     steps:
@@ -52,22 +50,6 @@ jobs:
 
       - name: Build Project
         run: npm run build
-
-      - name: Determine Target Branch
-        id: target
-        run: |
-          BRANCH="${{ github.event.inputs.target_branch }}"
-          if [ -z "$BRANCH" ]; then
-            BRANCH="gh-pages"
-          fi
-          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
-
-      - name: Push Build to Target Branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: dist
-          branch: ${{ steps.target.outputs.branch }}
-          commit-message: "deploy: production build from commit ${{ github.sha }} to ${{ steps.target.outputs.branch }}"
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3

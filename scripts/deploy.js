@@ -22,15 +22,14 @@ function getBranches() {
       if (clean.includes('->')) return;
       clean = clean.replace(/^remotes\/origin\//, '');
       clean = clean.replace(/^origin\//, '');
-      if (clean) branches.add(clean);
+      if (clean && clean !== 'gh-pages') branches.add(clean);
     });
 
     const result = Array.from(branches);
     if (!result.includes('main')) result.unshift('main');
-    if (!result.includes('gh-pages')) result.push('gh-pages');
     return Array.from(new Set(result));
   } catch {
-    return ['main', 'gh-pages'];
+    return ['main'];
   }
 }
 
@@ -77,22 +76,18 @@ async function main() {
 
   console.log(`\n🚀 Deploying & Pushing to branch '${selectedBranch}' on origin...\n`);
 
-  if (selectedBranch === 'gh-pages') {
-    run(`npx gh-pages -d dist -b gh-pages -m "${commitMsg.replace(/"/g, '\\"')}"`);
-  } else {
-    try {
-      const status = execSync('git status --porcelain', { encoding: 'utf8' }).trim();
-      if (status) {
-        console.log('📦 Staging and committing local changes...');
-        run('git add -A');
-        run(`git commit -m "${commitMsg.replace(/"/g, '\\"')}"`);
-      }
-    } catch (e) {
-      // Continue if no changes to commit
+  try {
+    const status = execSync('git status --porcelain', { encoding: 'utf8' }).trim();
+    if (status) {
+      console.log('📦 Staging and committing local changes...');
+      run('git add -A');
+      run(`git commit -m "${commitMsg.replace(/"/g, '\\"')}"`);
     }
-
-    run(`git push origin HEAD:refs/heads/${selectedBranch}`);
+  } catch (e) {
+    // Continue if no changes to commit
   }
+
+  run(`git push origin HEAD:refs/heads/${selectedBranch}`);
 
   console.log(`\n🎉 Success! Deployed and pushed to '${selectedBranch}' with message: "${commitMsg}"\n`);
 }
