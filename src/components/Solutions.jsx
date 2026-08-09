@@ -84,7 +84,7 @@ export default function Solutions() {
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-['Poppins']">
             Intelligent, Connected{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
+            <span className="gradient-text">
               Clinical Solutions
             </span>
           </h2>
@@ -120,7 +120,7 @@ export default function Solutions() {
                   </div>
 
                   {/* Icon */}
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${item.gradient} text-white flex items-center justify-center mb-6 shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform`}>
+                  <div className="w-14 h-14 rounded-2xl bg-brand-gradient text-white flex items-center justify-center mb-6 shadow-md shadow-[#5E81FF]/25 group-hover:scale-105 transition-transform">
                     <Icon className="w-7 h-7" />
                   </div>
 
@@ -169,7 +169,7 @@ export default function Solutions() {
               </button>
 
               <div className="flex items-center gap-4 mb-5">
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-r ${selectedSolution.gradient} text-white flex items-center justify-center shadow-md`}>
+                <div className="w-12 h-12 rounded-2xl bg-brand-gradient text-white flex items-center justify-center shadow-md">
                   <selectedSolution.icon className="w-6 h-6" />
                 </div>
                 <div>
@@ -220,7 +220,7 @@ export default function Solutions() {
                 <a
                   href="#contact"
                   onClick={() => setSelectedSolution(null)}
-                  className="px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 shadow-md"
+                  className="px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-brand-gradient hover:opacity-90 shadow-md shadow-[#5E81FF]/25"
                 >
                   Request Consultation
                 </a>

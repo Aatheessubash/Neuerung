@@ -1,0 +1,227 @@
+/* WhatToExpect / Core Capabilities Section Styles */
+.capabilities-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .capabilities-section {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+.capabilities-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .capabilities-container {
+    padding: 0 3rem;
+  }
+}
+
+.capabilities-header {
+  text-align: left;
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 4rem;
+}
+
+.capabilities-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-slate-900);
+  letter-spacing: -0.025em;
+  font-family: var(--font-heading);
+}
+
+@media (min-width: 640px) {
+  .capabilities-title {
+    font-size: 2.25rem;
+  }
+}
+
+.capabilities-subtext {
+  font-size: 1rem;
+  color: var(--color-slate-600);
+  font-family: var(--font-body);
+  line-height: 1.625;
+}
+
+.bento-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.bento-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .bento-row {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+.bento-card-5 {
+  grid-column: span 1;
+  background-color: var(--color-slate-50);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .bento-card-5 {
+    grid-column: span 5 / span 5;
+  }
+}
+
+.bento-card-7 {
+  grid-column: span 1;
+  background-color: var(--color-slate-50);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .bento-card-7 {
+    grid-column: span 7 / span 7;
+    flex-direction: row;
+  }
+}
+
+.bento-card-full {
+  background-color: var(--color-slate-50);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .bento-card-full {
+    flex-direction: row;
+  }
+}
+
+.bento-card-icon-circle {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  background: var(--brand-gradient);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(94, 129, 255, 0.25);
+  transition: transform 0.3s ease;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-slate-900);
+  font-family: var(--font-heading);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-desc {
+  font-size: 0.875rem;
+  color: var(--color-slate-600);
+  font-family: var(--font-body);
+  line-height: 1.625;
+}
+
+.card-action-btn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  transition: color 0.2s ease;
+}
+
+.card-action-btn:hover {
+  color: var(--color-primary-hover);
+}
+
+.waveform-card {
+  width: 100%;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-slate-200);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .waveform-card {
+    width: 16rem;
+  }
+}
+
+.waveform-screen {
+  height: 5rem;
+  background-color: var(--color-slate-900);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.radial-chart-box {
+  width: 9rem;
+  height: 9rem;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-slate-200);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.radial-chart-box:hover {
+  transform: scale(1.05);
+}

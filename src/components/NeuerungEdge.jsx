@@ -34,7 +34,7 @@ export default function NeuerungEdge() {
   return (
     <section id="neuerung-edge" className="bg-[#f2f4f6] py-24">
       <div className="max-w-[1280px] mx-auto px-6 sm:px-12 mb-16">
-        <h2 className="font-['Plus_Jakarta_Sans'] text-4xl sm:text-5xl font-bold text-[#004e9c] tracking-tight">
+        <h2 className="font-['Plus_Jakarta_Sans'] text-4xl sm:text-5xl font-bold gradient-text tracking-tight">
           Neuerung Edge
         </h2>
       </div>
@@ -46,7 +46,7 @@ export default function NeuerungEdge() {
             return (
               <motion.div
                 key={card.title}
-                className="bg-[#004e9c] text-white p-6 rounded-3xl ambient-shadow hover-lift flex flex-col h-full"
+                className="bg-brand-gradient text-white p-6 rounded-3xl ambient-shadow hover-lift flex flex-col h-full shadow-lg shadow-[#5E81FF]/20"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

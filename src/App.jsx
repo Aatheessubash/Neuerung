@@ -23,12 +23,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7f9fb] text-[#191c1e] font-['Inter'] selection:bg-[#003772]/20 selection:text-[#003772]">
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-body-bg)', color: 'var(--color-body-text)', fontFamily: 'var(--font-body)' }}>
       {/* Top Glass Navigation Bar */}
       <Navbar openModal={openModal} />
 
-      {/* Main Single-Page Content matching screen.png & code.html */}
-      <main className="pt-24">
+      {/* Main Single-Page Content */}
+      <main style={{ paddingTop: '6rem' }}>
         <Hero openModal={openModal} />
         <WhatToExpect openModal={openModal} />
         <HowIsItDone openModal={openModal} />
@@ -48,4 +48,3 @@ export default function App() {
     </div>
   );
 }
-

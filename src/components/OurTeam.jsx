@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle } from 'lucide-react';
+import './OurTeam.css';
 
 export default function OurTeam({ openModal }) {
   const teamMembers = [
@@ -38,64 +39,64 @@ export default function OurTeam({ openModal }) {
   ];
 
   return (
-    <section id="our-team" className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 mb-24 lg:mb-32 space-y-16 pt-12 relative overflow-hidden">
+    <section id="our-team" className="team-section">
       
       {/* Header */}
       <motion.div 
-        className="text-center max-w-3xl mx-auto space-y-4"
+        className="team-header"
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#003772] font-['Plus_Jakarta_Sans'] tracking-tight">
+        <h2 className="team-title">
           Leadership & Innovation
         </h2>
-        <p className="text-base sm:text-lg text-[#565e74] font-['Inter'] leading-relaxed">
+        <p className="team-subtext">
           At the intersection of clinical precision and advanced technology. Meet the experts driving Neuerung HealthTech's mission to redefine patient telemetry and diagnostics.
         </p>
       </motion.div>
 
-      {/* Grid Layout matching code.html */}
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+      {/* Grid Layout */}
+      <div className="team-grid">
         
         {/* Card 1: Dr. A. Subash (8 Cols) */}
         <motion.div
-          className="md:col-span-8 bg-white/90 backdrop-blur-md rounded-[24px] p-8 border border-[#E2E8F0] shadow-sm flex flex-col md:flex-row gap-8 items-start hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+          className="team-card-lead"
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-30px" }}
           transition={{ duration: 0.5, ease: [0.25, 0.8, 0.25, 1] }}
           whileHover={{ y: -4 }}
         >
-          <div className="w-full md:w-1/3 shrink-0 rounded-2xl overflow-hidden aspect-square bg-slate-100">
+          <div className="team-img-lead-box">
             <img
               src={teamMembers[0].img}
               alt={teamMembers[0].name}
-              className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
-          <div className="flex-grow space-y-4">
-            <div className="flex justify-between items-start">
+          <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>
-                <h3 className="text-2xl font-bold text-[#003772] font-['Plus_Jakarta_Sans'] group-hover:text-[#004e9c] transition-colors">
+                <h3 className="team-member-name">
                   {teamMembers[0].name}
                 </h3>
-                <p className="text-sm font-semibold text-[#565e74] font-['Inter'] mt-0.5">
+                <p className="team-member-role">
                   {teamMembers[0].role}
                 </p>
               </div>
-              <span className="inline-flex items-center gap-1 bg-[#003772]/10 text-[#003772] px-3 py-1 rounded-full text-xs font-bold font-['Inter']">
-                <CheckCircle className="w-3.5 h-3.5" /> Leadership
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', backgroundColor: 'rgba(94, 129, 255, 0.12)', color: 'var(--color-accent)', padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.75rem', fontWeight: 700 }}>
+                <CheckCircle style={{ width: '0.875rem', height: '0.875rem' }} /> Leadership
               </span>
             </div>
-            <p className="text-sm text-[#424751] font-['Inter'] leading-relaxed">
+            <p style={{ fontSize: '0.875rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)', lineHeight: 1.625 }}>
               {teamMembers[0].bio}
             </p>
-            <div className="pt-2">
+            <div style={{ paddingTop: '0.5rem' }}>
               <button
                 onClick={() => openModal('team-bio', teamMembers[0])}
-                className="px-6 py-2 bg-[#004e9c] text-white font-['Inter'] text-xs font-bold rounded-full hover:bg-[#003772] transition-colors shadow-sm"
+                className="team-bio-btn"
               >
                 Read Bio
               </button>
@@ -105,35 +106,36 @@ export default function OurTeam({ openModal }) {
 
         {/* Card 2: Dr. K. Meenakshi (4 Cols) */}
         <motion.div
-          className="md:col-span-4 bg-white/90 backdrop-blur-md rounded-[24px] p-6 border border-[#E2E8F0] shadow-sm flex flex-col gap-6 hover:shadow-xl transition-all duration-300 group"
+          className="team-card-compact"
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-30px" }}
           transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.8, 0.25, 1] }}
           whileHover={{ y: -4 }}
         >
-          <div className="w-full rounded-2xl overflow-hidden aspect-video bg-slate-100">
+          <div style={{ width: '100%', borderRadius: '1rem', overflow: 'hidden', aspectRatio: '16 / 9', backgroundColor: '#f1f5f9' }}>
             <img
               src={teamMembers[1].img}
               alt={teamMembers[1].name}
-              className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
-          <div className="space-y-3">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <div>
-              <h3 className="text-xl font-bold text-[#003772] font-['Plus_Jakarta_Sans'] group-hover:text-[#004e9c] transition-colors">
+              <h3 className="team-member-name" style={{ fontSize: '1.25rem' }}>
                 {teamMembers[1].name}
               </h3>
-              <p className="text-xs font-semibold text-[#565e74] font-['Inter']">
+              <p className="team-member-role" style={{ fontSize: '0.75rem' }}>
                 {teamMembers[1].role}
               </p>
             </div>
-            <p className="text-xs text-[#424751] font-['Inter'] leading-relaxed">
+            <p style={{ fontSize: '0.75rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)', lineHeight: 1.625 }}>
               {teamMembers[1].bio}
             </p>
             <button
               onClick={() => openModal('team-bio', teamMembers[1])}
-              className="w-full py-2.5 mt-2 bg-[#dae2fd] text-[#003772] font-['Inter'] text-xs font-bold rounded-full hover:bg-[#bec6e0] transition-colors"
+              className="team-bio-btn"
+              style={{ width: '100%', marginTop: '0.5rem' }}
             >
               Read Bio
             </button>
@@ -142,90 +144,90 @@ export default function OurTeam({ openModal }) {
 
         {/* Card 3: R. Karthik (6 Cols) */}
         <motion.div
-          className="md:col-span-6 bg-white/90 backdrop-blur-md rounded-[24px] p-6 border border-[#E2E8F0] shadow-sm flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:shadow-xl transition-all duration-300 group"
+          className="team-card-half"
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-30px" }}
           transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.8, 0.25, 1] }}
           whileHover={{ y: -4 }}
         >
-          <div className="w-28 h-28 shrink-0 rounded-full overflow-hidden border-4 border-white shadow-sm bg-slate-100">
+          <div style={{ width: '7rem', height: '7rem', flexShrink: 0, borderRadius: '9999px', overflow: 'hidden', border: '4px solid #ffffff', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', backgroundColor: '#f1f5f9' }}>
             <img
               src={teamMembers[2].img}
               alt={teamMembers[2].name}
-              className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
-          <div className="space-y-3 text-center sm:text-left w-full">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
             <div>
-              <h3 className="text-xl font-bold text-[#003772] font-['Plus_Jakarta_Sans'] group-hover:text-[#004e9c] transition-colors">
+              <h3 className="team-member-name" style={{ fontSize: '1.25rem' }}>
                 {teamMembers[2].name}
               </h3>
-              <p className="text-xs font-semibold text-[#565e74] font-['Inter']">
+              <p className="team-member-role" style={{ fontSize: '0.75rem' }}>
                 {teamMembers[2].role}
               </p>
             </div>
-            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
               {teamMembers[2].tags.map((t) => (
-                <span key={t} className="bg-[#e0e3e5] text-[#424751] px-2.5 py-0.5 rounded-md font-['Inter'] text-[10px] font-semibold">
+                <span key={t} style={{ backgroundColor: '#e2e8f0', color: '#475569', padding: '0.125rem 0.625rem', borderRadius: '0.375rem', fontFamily: 'var(--font-body)', fontSize: '0.625rem', fontWeight: 600 }}>
                   {t}
                 </span>
               ))}
             </div>
-            <p className="text-xs text-[#424751] font-['Inter'] leading-relaxed">
+            <p style={{ fontSize: '0.75rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)', lineHeight: 1.625 }}>
               {teamMembers[2].bio}
             </p>
             <button
               onClick={() => openModal('team-bio', teamMembers[2])}
-              className="text-[#003772] font-['Inter'] text-xs font-bold hover:underline flex items-center justify-center sm:justify-start gap-1 group/btn"
+              style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
             >
               <span>Read Bio</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+              <ArrowRight style={{ width: '0.875rem', height: '0.875rem' }} />
             </button>
           </div>
         </motion.div>
 
         {/* Card 4: S. Priya (6 Cols) */}
         <motion.div
-          className="md:col-span-6 bg-white/90 backdrop-blur-md rounded-[24px] p-6 border border-[#E2E8F0] shadow-sm flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:shadow-xl transition-all duration-300 group"
+          className="team-card-half"
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-30px" }}
           transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.8, 0.25, 1] }}
           whileHover={{ y: -4 }}
         >
-          <div className="w-28 h-28 shrink-0 rounded-full overflow-hidden border-4 border-white shadow-sm bg-slate-100">
+          <div style={{ width: '7rem', height: '7rem', flexShrink: 0, borderRadius: '9999px', overflow: 'hidden', border: '4px solid #ffffff', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', backgroundColor: '#f1f5f9' }}>
             <img
               src={teamMembers[3].img}
               alt={teamMembers[3].name}
-              className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
-          <div className="space-y-3 text-center sm:text-left w-full">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
             <div>
-              <h3 className="text-xl font-bold text-[#003772] font-['Plus_Jakarta_Sans'] group-hover:text-[#004e9c] transition-colors">
+              <h3 className="team-member-name" style={{ fontSize: '1.25rem' }}>
                 {teamMembers[3].name}
               </h3>
-              <p className="text-xs font-semibold text-[#565e74] font-['Inter']">
+              <p className="team-member-role" style={{ fontSize: '0.75rem' }}>
                 {teamMembers[3].role}
               </p>
             </div>
-            <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
               {teamMembers[3].tags.map((t) => (
-                <span key={t} className="bg-[#e0e3e5] text-[#424751] px-2.5 py-0.5 rounded-md font-['Inter'] text-[10px] font-semibold">
+                <span key={t} style={{ backgroundColor: '#e2e8f0', color: '#475569', padding: '0.125rem 0.625rem', borderRadius: '0.375rem', fontFamily: 'var(--font-body)', fontSize: '0.625rem', fontWeight: 600 }}>
                   {t}
                 </span>
               ))}
             </div>
-            <p className="text-xs text-[#424751] font-['Inter'] leading-relaxed">
+            <p style={{ fontSize: '0.75rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)', lineHeight: 1.625 }}>
               {teamMembers[3].bio}
             </p>
             <button
               onClick={() => openModal('team-bio', teamMembers[3])}
-              className="text-[#003772] font-['Inter'] text-xs font-bold hover:underline flex items-center justify-center sm:justify-start gap-1 group/btn"
+              style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
             >
               <span>Read Bio</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+              <ArrowRight style={{ width: '0.875rem', height: '0.875rem' }} />
             </button>
           </div>
         </motion.div>
@@ -234,5 +236,3 @@ export default function OurTeam({ openModal }) {
     </section>
   );
 }
-
-

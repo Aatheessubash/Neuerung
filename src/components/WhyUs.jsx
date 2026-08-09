@@ -30,7 +30,7 @@ export default function WhyUs({ openModal }) {
           <div className="pt-2">
             <button
               onClick={() => openModal('why-us')}
-              className="bg-white text-[#004e9c] px-8 py-3 rounded-full font-['Inter'] text-xs font-semibold uppercase tracking-wider hover:bg-slate-100 transition-all shadow-lg hover:scale-[1.02]"
+              className="bg-brand-gradient text-white px-8 py-3 rounded-full font-['Inter'] text-xs font-semibold uppercase tracking-wider hover:opacity-90 transition-all shadow-lg shadow-[#5E81FF]/30 hover:scale-[1.02]"
             >
               Explore
             </button>

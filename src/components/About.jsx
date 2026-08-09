@@ -53,7 +53,7 @@ export default function About() {
           
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-['Poppins']">
             Empowering Modern Healthcare Through{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
+            <span className="gradient-text">
               Connected Intelligence
             </span>
           </h2>
@@ -103,11 +103,11 @@ export default function About() {
             {/* Right Side Info Box */}
             <div className="lg:col-span-4 bg-white rounded-2xl p-6 border border-slate-200 shadow-md space-y-4">
               <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                <div className="p-3 rounded-xl bg-blue-600 text-white">
+                <div className="p-3 rounded-xl bg-brand-gradient text-white shadow-md">
                   <TrendingUp className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-500 uppercase font-semibold">Registered Entity</div>
+                  <div className="text-xs text-slate-400 uppercase font-semibold">Registered Entity</div>
                   <div className="text-sm font-bold text-slate-900">Neuerung HealthTech Pvt. Ltd.</div>
                 </div>
               </div>
@@ -119,7 +119,7 @@ export default function About() {
                 </div>
                 <div className="flex justify-between py-1 border-b border-slate-100">
                   <span className="text-slate-400">Official Domain</span>
-                  <span className="font-semibold text-blue-600">neuerung.in</span>
+                  <span className="font-semibold text-[#5E81FF]">neuerung.in</span>
                 </div>
                 <div className="flex justify-between py-1">
                   <span className="text-slate-400">Primary Contact</span>
@@ -144,10 +144,10 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${pillar.color} text-white flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform`}>
+                <div className="w-12 h-12 rounded-xl bg-brand-gradient text-white flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2 font-['Poppins'] group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg font-bold text-slate-900 mb-2 font-['Poppins'] group-hover:text-[#5E81FF] transition-colors">
                   {pillar.title}
                 </h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
@@ -162,7 +162,7 @@ export default function About() {
         <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((stat, idx) => (
             <div key={idx} className="bg-slate-50 rounded-2xl p-5 border border-slate-200/60 text-center">
-              <div className="text-2xl sm:text-3xl font-extrabold text-blue-600 font-['Poppins']">
+              <div className="text-2xl sm:text-3xl font-extrabold gradient-text font-['Poppins']">
                 {stat.value}
               </div>
               <div className="text-sm font-semibold text-slate-800 mt-1">{stat.label}</div>

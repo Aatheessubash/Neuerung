@@ -24,10 +24,10 @@ export default function Testimonials() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
-          <span className="text-xs font-bold text-[#004E9C] uppercase tracking-wider bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-200">
+          <span className="text-xs font-bold text-[#5E81FF] uppercase tracking-wider bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-200">
             Clinical Endorsements
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#004E9C] tracking-tight font-['Poppins']">
+          <h2 className="text-3xl sm:text-4xl font-extrabold gradient-text tracking-tight font-['Poppins']">
             WHAT OUR CLINICIANS SAY
           </h2>
           <p className="text-base text-slate-600">

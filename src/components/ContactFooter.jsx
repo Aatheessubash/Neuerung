@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Logo from './Logo';
 import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import './ContactFooter.css';
 
 export default function ContactFooter({ openModal }) {
   const [form, setForm] = useState({
@@ -37,51 +38,51 @@ export default function ContactFooter({ openModal }) {
   };
 
   return (
-    <section id="contact" className="relative pt-12 overflow-hidden">
+    <section id="contact" className="contact-footer-section">
       {/* Experience the Neuerung Advantage Header */}
       <motion.div 
-        className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 mb-16 text-center md:text-left max-w-3xl"
+        className="contact-header-container"
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#003772] font-['Plus_Jakarta_Sans'] tracking-tight mb-6">
+        <h2 className="contact-section-title">
           Experience the Neuerung Advantage.
         </h2>
-        <p className="text-base sm:text-lg text-[#565e74] font-['Inter'] leading-relaxed">
+        <p className="contact-section-subtext">
           Schedule a personalized demonstration of our clinical precision tools. See firsthand how our intuitive interfaces and robust analytics can elevate your medical practice.
         </p>
       </motion.div>
 
       {/* Main Grid: Form + Headquarters */}
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-12 mb-24 lg:mb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="contact-main-container">
+        <div className="contact-grid">
           
           {/* Clinical Inquiry Form (8 Cols) */}
           <motion.div
-            className="lg:col-span-8 bg-white/90 backdrop-blur-md rounded-2xl border border-[#E2E8F0] shadow-sm p-8 md:p-12 relative overflow-hidden"
+            className="inquiry-form-card"
             initial={{ opacity: 0, x: -30, scale: 0.98 }}
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
           >
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#d6e3ff] rounded-full blur-3xl opacity-30 pointer-events-none" />
+            <div style={{ position: 'absolute', top: '-6rem', right: '-6rem', width: '16rem', height: '16rem', backgroundColor: '#d6e3ff', borderRadius: '9999px', filter: 'blur(40px)', opacity: 0.3, pointerEvents: 'none' }} />
 
-            <div className="mb-8 relative z-10">
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#003772] font-['Plus_Jakarta_Sans'] mb-2">
+            <div style={{ marginBottom: '2rem', position: 'relative', zIndex: 10 }}>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-primary)', fontFamily: 'var(--font-heading)', marginBottom: '0.5rem' }}>
                 Clinical Inquiry
               </h3>
-              <p className="text-sm text-[#565e74] font-['Inter']">
+              <p style={{ fontSize: '0.875rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)' }}>
                 Please provide your details, and our technical integration team will reach out shortly.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 relative z-10 font-['Inter']">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-[#424751] uppercase tracking-wider block" htmlFor="fullName">
-                    Full Name <span className="text-[#ba1a1a]">*</span>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', zIndex: 10, fontFamily: 'var(--font-body)' }}>
+              <div className="form-grid-2">
+                <div className="form-field-group">
+                  <label className="form-field-label" htmlFor="fullName">
+                    Full Name <span style={{ color: '#ba1a1a' }}>*</span>
                   </label>
                   <input
                     id="fullName"
@@ -90,13 +91,13 @@ export default function ContactFooter({ openModal }) {
                     placeholder="Dr. Jane Doe"
                     value={form.fullName}
                     onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                    className="w-full h-14 px-4 bg-white border border-[#E2E8F0] rounded-xl text-sm text-[#191c1e] input-focus-ring transition-all placeholder:text-slate-400"
+                    className="form-input"
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-[#424751] uppercase tracking-wider block" htmlFor="email">
-                    Professional Email <span className="text-[#ba1a1a]">*</span>
+                <div className="form-field-group">
+                  <label className="form-field-label" htmlFor="email">
+                    Professional Email <span style={{ color: '#ba1a1a' }}>*</span>
                   </label>
                   <input
                     id="email"
@@ -105,17 +106,17 @@ export default function ContactFooter({ openModal }) {
                     placeholder="jane.doe@hospital.org"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full h-14 px-4 bg-white border border-[#E2E8F0] rounded-xl text-sm text-[#191c1e] input-focus-ring transition-all placeholder:text-slate-400"
+                    className="form-input"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-[#424751] uppercase tracking-wider block" htmlFor="organization">
-                  Hospital or Organization <span className="text-[#ba1a1a]">*</span>
+              <div className="form-field-group">
+                <label className="form-field-label" htmlFor="organization">
+                  Hospital or Organization <span style={{ color: '#ba1a1a' }}>*</span>
                 </label>
-                <div className="relative">
-                  <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                <div style={{ position: 'relative' }}>
+                  <Building2 style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', width: '1.25rem', height: '1.25rem', color: '#94a3b8' }} />
                   <input
                     id="organization"
                     type="text"
@@ -123,21 +124,22 @@ export default function ContactFooter({ openModal }) {
                     placeholder="General Medical Center"
                     value={form.organization}
                     onChange={(e) => setForm({ ...form, organization: e.target.value })}
-                    className="w-full h-14 pl-12 pr-4 bg-white border border-[#E2E8F0] rounded-xl text-sm text-[#191c1e] input-focus-ring transition-all placeholder:text-slate-400"
+                    className="form-input"
+                    style={{ paddingLeft: '3rem' }}
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-[#424751] uppercase tracking-wider block" htmlFor="businessType">
+              <div className="form-grid-2">
+                <div className="form-field-group">
+                  <label className="form-field-label" htmlFor="businessType">
                     Business Type
                   </label>
                   <select
                     id="businessType"
                     value={form.businessType}
                     onChange={(e) => setForm({ ...form, businessType: e.target.value })}
-                    className="w-full h-14 px-4 bg-white border border-[#E2E8F0] rounded-xl text-sm text-[#191c1e] input-focus-ring transition-all"
+                    className="form-input"
                   >
                     <option value="" disabled>Select facility type...</option>
                     <option value="hospital">Hospital / Medical Center</option>
@@ -147,8 +149,8 @@ export default function ContactFooter({ openModal }) {
                   </select>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-[#424751] uppercase tracking-wider block" htmlFor="demoDate">
+                <div className="form-field-group">
+                  <label className="form-field-label" htmlFor="demoDate">
                     Preferred Demo Date
                   </label>
                   <input
@@ -156,13 +158,13 @@ export default function ContactFooter({ openModal }) {
                     type="date"
                     value={form.demoDate}
                     onChange={(e) => setForm({ ...form, demoDate: e.target.value })}
-                    className="w-full h-14 px-4 bg-white border border-[#E2E8F0] rounded-xl text-sm text-[#191c1e] input-focus-ring transition-all"
+                    className="form-input"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-[#424751] uppercase tracking-wider block" htmlFor="message">
+              <div className="form-field-group">
+                <label className="form-field-label" htmlFor="message">
                   Specific Requirements or Focus Areas
                 </label>
                 <textarea
@@ -171,13 +173,13 @@ export default function ContactFooter({ openModal }) {
                   placeholder="We are particularly interested in seeing your diagnostic imaging module..."
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="w-full p-4 bg-white border border-[#E2E8F0] rounded-xl text-sm text-[#191c1e] input-focus-ring transition-all placeholder:text-slate-400 resize-none"
+                  className="form-textarea"
                 ></textarea>
               </div>
 
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="flex items-center gap-2 text-slate-500 text-xs">
-                  <Lock className="w-4 h-4 text-emerald-600" />
+              <div style={{ paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.75rem' }}>
+                  <Lock style={{ width: '1rem', height: '1rem', color: '#059669' }} />
                   <span>Secure & HIPAA Compliant Inquiry</span>
                 </div>
 
@@ -186,14 +188,14 @@ export default function ContactFooter({ openModal }) {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className="w-full sm:w-auto h-14 px-8 bg-[#003772] hover:bg-[#004e9c] text-white rounded-full text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-md group font-['Inter']"
+                  className="form-submit-btn"
                 >
                   {isSubmitting ? (
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <div style={{ width: '1.25rem', height: '1.25rem', border: '2px solid #ffffff', borderTopColor: 'transparent', borderRadius: '9999px', animation: 'spin 1s linear infinite' }} />
                   ) : (
                     <>
                       <span>Submit Request</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight style={{ width: '1rem', height: '1rem' }} />
                     </>
                   )}
                 </motion.button>
@@ -203,41 +205,41 @@ export default function ContactFooter({ openModal }) {
 
           {/* Sidebar Headquarters & Map (4 Cols) */}
           <motion.div
-            className="lg:col-span-4 flex flex-col gap-6"
+            className="sidebar-col"
             initial={{ opacity: 0, x: 30, scale: 0.98 }}
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.8, 0.25, 1] }}
           >
             {/* Headquarters Contact Card */}
-            <div className="bg-white/90 backdrop-blur-md rounded-2xl border border-[#E2E8F0] shadow-sm p-8">
-              <h4 className="text-xl font-bold text-[#003772] font-['Plus_Jakarta_Sans'] mb-6 flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-[#004e9c]" />
+            <div className="hq-card">
+              <h4 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-primary)', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Building2 style={{ width: '1.25rem', height: '1.25rem', color: 'var(--color-accent)' }} />
                 Our Headquarters
               </h4>
-              <div className="space-y-4 text-xs sm:text-sm text-[#565e74] font-['Inter']">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-[#003772] mt-0.5 shrink-0" />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.875rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
+                  <MapPin style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)', marginTop: '0.25rem', flexShrink: 0 }} />
                   <div>
-                    <p className="font-bold text-[#191c1e] mb-1">Neuerung HealthTech Innovations</p>
+                    <p style={{ fontWeight: 'bold', color: 'var(--color-body-text)', marginBottom: '0.25rem' }}>Neuerung HealthTech Innovations</p>
                     <p>Tech Park, Level 4</p>
                     <p>Madurai, Tamil Nadu 625001</p>
                     <p>India</p>
                   </div>
                 </div>
 
-                <div className="w-full h-px bg-[#E2E8F0] my-4" />
+                <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--color-slate-200)', margin: '0.5rem 0' }} />
 
-                <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-[#003772] shrink-0" />
-                  <a href="tel:+918005550199" className="hover:text-[#003772] transition-colors font-medium">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <Phone style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)', flexShrink: 0 }} />
+                  <a href="tel:+918005550199" style={{ fontWeight: 500 }}>
                     +91 800 555 0199
                   </a>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-[#003772] shrink-0" />
-                  <a href="mailto:demo@neuerung.health" className="hover:text-[#003772] transition-colors font-medium">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <Mail style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)', flexShrink: 0 }} />
+                  <a href="mailto:demo@neuerung.health" style={{ fontWeight: 500 }}>
                     demo@neuerung.health
                   </a>
                 </div>
@@ -245,22 +247,21 @@ export default function ContactFooter({ openModal }) {
             </div>
 
             {/* Embedded Google Map Card */}
-            <div className="rounded-2xl overflow-hidden shadow-sm h-64 relative border border-[#E2E8F0] bg-slate-100">
+            <div style={{ borderRadius: '1rem', overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', height: '16rem', position: 'relative', border: '1px solid var(--color-slate-200)', backgroundColor: '#f1f5f9' }}>
               <iframe
                 title="Neuerung Madurai Headquarters Map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.123456789!2d78.123456789!3d9.923456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00c58242173863%3A0x706106051137ee1!2sMadurai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
-                style={{ border: 0 }}
+                style={{ border: 0, filter: 'grayscale(0.5) contrast(1.2)' }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale contrast-125 opacity-85 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
               />
-              <div className="absolute bottom-3 right-3 pointer-events-none">
-                <div className="bg-white/90 backdrop-blur-sm border border-[#E2E8F0] px-3 py-1.5 rounded-full shadow-sm flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#003772]" />
-                  <span className="font-['Inter'] text-xs font-bold text-[#003772]">Tech Park, Madurai</span>
+              <div style={{ position: 'absolute', bottom: '0.75rem', right: '0.75rem', pointerEvents: 'none' }}>
+                <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(4px)', border: '1px solid var(--color-slate-200)', padding: '0.375rem 0.75rem', borderRadius: '9999px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <MapPin style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)' }} />
+                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-primary)' }}>Tech Park, Madurai</span>
                 </div>
               </div>
             </div>
@@ -270,55 +271,55 @@ export default function ContactFooter({ openModal }) {
       </div>
 
       {/* Clean Slate Footer */}
-      <footer className="bg-[#e0e3e5] border-t border-[#c2c6d3]">
-        <div className="w-full py-16 px-4 sm:px-6 md:px-12 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="col-span-1 space-y-4">
+      <footer className="site-footer">
+        <div className="site-footer-inner">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <Logo showText={true} />
-            <p className="font-['Inter'] text-xs sm:text-sm text-[#424751] mt-4 leading-relaxed">
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: '#424751', marginTop: '1rem', leading: 1.625 }}>
               Intelligent healthcare solutions for a connected world.
             </p>
           </div>
 
-          <div className="col-span-1">
-            <h4 className="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-wider text-[#191c1e] mb-4">
+          <div>
+            <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#191c1e', marginBottom: '1rem' }}>
               Platform
             </h4>
-            <ul className="space-y-3 font-['Inter'] text-xs sm:text-sm text-[#424751]">
-              <li><a href="#solutions" className="hover:text-[#003772] transition-colors">Solutions</a></li>
-              <li><a href="#who-are-we-with" className="hover:text-[#003772] transition-colors">Mission</a></li>
-              <li><a href="#how-is-it-done" className="hover:text-[#003772] transition-colors">Why Choose Us</a></li>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
+              <li><a href="#solutions">Solutions</a></li>
+              <li><a href="#who-are-we-with">Mission</a></li>
+              <li><a href="#how-is-it-done">Why Choose Us</a></li>
             </ul>
           </div>
 
-          <div className="col-span-1">
-            <h4 className="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-wider text-[#191c1e] mb-4">
+          <div>
+            <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#191c1e', marginBottom: '1rem' }}>
               Company
             </h4>
-            <ul className="space-y-3 font-['Inter'] text-xs sm:text-sm text-[#424751]">
-              <li><a href="#our-team" className="hover:text-[#003772] transition-colors">About</a></li>
-              <li><a href="#contact" className="hover:text-[#003772] transition-colors">Contact</a></li>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
+              <li><a href="#our-team">About</a></li>
+              <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
 
-          <div className="col-span-1">
-            <h4 className="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-wider text-[#191c1e] mb-4">
+          <div>
+            <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#191c1e', marginBottom: '1rem' }}>
               Legal
             </h4>
-            <ul className="space-y-3 font-['Inter'] text-xs sm:text-sm text-[#424751]">
-              <li><a href="#" className="hover:text-[#003772] transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-[#003772] transition-colors">Terms of Service</a></li>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
             </ul>
           </div>
         </div>
 
-        <div className="w-full border-t border-[#c2c6d3]/60 py-6 px-4 sm:px-6 md:px-12 text-center">
-          <p className="font-['Inter'] text-xs text-[#424751]">
-            © 2024 Neuerung HealthTech Private Limited. Madurai, Tamil Nadu.
+        <div style={{ width: '100%', borderTop: '1px solid rgba(194, 198, 211, 0.6)', padding: '1.5rem 1rem', textAlignment: 'center' }}>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: '#424751', textAlign: 'center' }}>
+            © 2026 Neuerung HealthTech Private Limited. Madurai, Tamil Nadu.
           </p>
         </div>
       </footer>
 
-      {/* Floating Success Toast Notification with Spring Physics */}
+      {/* Floating Success Toast Notification */}
       <AnimatePresence>
         {showToast && (
           <motion.div
@@ -326,16 +327,16 @@ export default function ContactFooter({ openModal }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 350, damping: 25 }}
-            className="fixed bottom-8 right-8 z-50 bg-white border border-[#003772] shadow-2xl rounded-2xl p-4 flex items-start gap-4 max-w-sm"
+            className="toast-notification"
           >
-            <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-              <CheckCircle2 className="w-6 h-6 text-[#003772]" />
+            <div style={{ width: '2.5rem', height: '2.5rem', borderRadius: '9999px', backgroundColor: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <CheckCircle2 style={{ width: '1.5rem', height: '1.5rem', color: 'var(--color-primary)' }} />
             </div>
             <div>
-              <h4 className="font-['Plus_Jakarta_Sans'] text-xs font-bold text-[#003772] uppercase tracking-wider mb-1">
+              <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>
                 Inquiry Received
               </h4>
-              <p className="font-['Inter'] text-xs text-[#565e74] leading-relaxed">
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--color-slate-600)', lineHeight: 1.625 }}>
                 Thank you. Our integration team will contact you shortly to confirm your demo schedule.
               </p>
             </div>
@@ -346,5 +347,3 @@ export default function ContactFooter({ openModal }) {
     </section>
   );
 }
-
-

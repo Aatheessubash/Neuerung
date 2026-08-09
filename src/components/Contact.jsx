@@ -44,7 +44,7 @@ export default function Contact() {
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight font-['Poppins']">
             Let's Shape the Future of{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-sky-500 bg-clip-text text-transparent">
+            <span className="gradient-text">
               Healthcare Together
             </span>
           </h2>
@@ -296,7 +296,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 shadow-lg shadow-blue-500/25 transition-all duration-200 flex items-center justify-center gap-2 group"
+                    className="w-full py-4 rounded-xl text-base font-semibold text-white bg-brand-gradient hover:opacity-90 shadow-lg shadow-[#5E81FF]/30 transition-all duration-200 flex items-center justify-center gap-2 group"
                   >
                     {isSubmitting ? (
                       <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
