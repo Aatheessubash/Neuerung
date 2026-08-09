@@ -1,0 +1,798 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Neuerung HealthTech | Healthcare, Reimagined</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-white": "#FFFFFF",
+                "primary-fixed-dim": "#aac7ff",
+                "on-surface": "#191c1e",
+                "secondary": "#565e74",
+                "on-tertiary-fixed": "#001e2c",
+                "surface": "#f7f9fb",
+                "primary-fixed": "#d6e3ff",
+                "on-tertiary-container": "#69ccff",
+                "inverse-primary": "#aac7ff",
+                "secondary-fixed": "#dae2fd",
+                "tertiary-fixed": "#c4e7ff",
+                "inverse-on-surface": "#eff1f3",
+                "surface-tint": "#215eac",
+                "tertiary-fixed-dim": "#7bd0ff",
+                "on-secondary-fixed-variant": "#3f465c",
+                "outline": "#727782",
+                "on-error": "#ffffff",
+                "on-primary-fixed": "#001b3e",
+                "surface-container-lowest": "#ffffff",
+                "border-subtle": "#E2E8F0",
+                "on-primary-fixed-variant": "#00468c",
+                "primary": "#003772",
+                "tertiary-container": "#005574",
+                "outline-variant": "#c2c6d3",
+                "surface-container-low": "#f2f4f6",
+                "background": "#f7f9fb",
+                "on-secondary-fixed": "#131b2e",
+                "primary-container": "#004e9c",
+                "surface-variant": "#e0e3e5",
+                "on-primary": "#ffffff",
+                "surface-dim": "#d8dadc",
+                "on-tertiary-fixed-variant": "#004c69",
+                "surface-container-highest": "#e0e3e5",
+                "on-secondary-container": "#5c647a",
+                "on-tertiary": "#ffffff",
+                "on-error-container": "#93000a",
+                "surface-bright": "#f7f9fb",
+                "error": "#ba1a1a",
+                "secondary-container": "#dae2fd",
+                "on-surface-variant": "#424751",
+                "surface-container-high": "#e6e8ea",
+                "secondary-fixed-dim": "#bec6e0",
+                "on-primary-container": "#a1c2ff",
+                "surface-container": "#eceef0",
+                "on-secondary": "#ffffff",
+                "tertiary": "#003d54",
+                "error-container": "#ffdad6",
+                "on-background": "#191c1e",
+                "inverse-surface": "#2d3133"
+        },
+        "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "base": "8px",
+                "margin-desktop": "48px",
+                "gutter": "24px",
+                "container-max": "1280px",
+                "margin-mobile": "16px"
+        },
+        "fontFamily": {
+                "headline-display": [
+                        "Plus Jakarta Sans"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "headline-lg": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "body-sm": [
+                        "Inter"
+                ],
+                "headline-lg-mobile": [
+                        "Plus Jakarta Sans"
+                ],
+                "headline-md": [
+                        "Plus Jakarta Sans"
+                ],
+                "body-lg": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "headline-display": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-surface'); }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid theme('colors.border-subtle');
+        }
+        
+        .shadow-ambient {
+            box-shadow: 0 20px 40px rgba(0, 78, 156, 0.05);
+        }
+
+        .ambient-shadow {
+            box-shadow: 0 20px 40px -10px rgba(0, 78, 156, 0.05);
+        }
+
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(0, 78, 156, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 78, 156, 0.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        .glow-dot {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, theme('colors.tertiary-fixed-dim') 0%, transparent 70%);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+        
+        .input-focus-ring:focus {
+            border-color: #003772;
+            box-shadow: 0 0 0 4px rgba(170, 199, 255, 0.3);
+            outline: none;
+        }
+        
+        .success-toast {
+            transform: translateY(150%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .success-toast.show {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col relative overflow-x-hidden font-body-md">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface-white/80 dark:bg-surface/80 backdrop-blur-lg border-b border-border-subtle dark:border-outline-variant shadow-sm transition-all duration-300 ease-in-out">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex justify-between items-center h-20">
+<!-- Brand -->
+<a class="flex items-center gap-3" href="#">
+<img alt="Neuerung HealthTech Logo" class="h-10 w-10 object-contain rounded-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaPbypFAfcll6RUmopJBZ_1qtXNBche6ve_OVQtWHXGlN8FmysmdjCOHtIIG5wkjzzy-4wImTx5c4rbsXZooH9wubmDrJsimWb2AHOlgTKSYkbBw8V4OQK9yJOGoyQtsz_y3_JKSFVgPih5N8r5-M3r99CI7lk-CeZqhQwiN22kLc86LpzlxP6JnvnV1__-naIMTWgA882FFmU90qEyB9kkon9BvmwVg1kegdC9B49RmSSdPmI47N4iY9ASMdtXgHwlck">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim hidden sm:block">Neuerung HealthTech</span>
+</a>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:opacity-80 transition-opacity font-body-md text-body-md" href="#">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:opacity-80 transition-opacity font-body-md text-body-md" href="#">We are</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary font-body-md text-body-md py-1" href="#">Solutions</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:opacity-80 transition-opacity font-body-md text-body-md" href="#">Why us</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:opacity-80 transition-opacity font-body-md text-body-md" href="#">Our team</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="hidden lg:block text-primary hover:opacity-80 transition-opacity font-label-md text-label-md uppercase tracking-wider">Contact us</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md uppercase tracking-wider hover:bg-primary-container transition-colors shadow-sm">Book a Demo</button>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-28 pb-20 relative z-10">
+<!-- Hero Section (from SCREEN_22) -->
+<section class="relative max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 lg:mb-32">
+<div class="absolute inset-0 bg-grid-pattern -z-10 opacity-60"></div>
+<div class="glow-dot top-0 right-0 transform translate-x-1/2 -translate-y-1/4"></div>
+<div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 pt-12 lg:pt-20">
+<div class="flex-1 space-y-6">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tertiary-fixed/30 border border-tertiary-fixed-dim text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">neurology</span>
+                        Healthcare, Reimagined
+                    </div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-display md:text-headline-display text-primary tracking-tight">
+                        Clinical AI Engine:<br>
+                        Precision Diagnostics
+                    </h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">
+                        Empowering critical care with real-time risk scoring, predictive triage, and anomaly detection. Seamlessly integrated into your existing EHR and DICOM workflows for immediate clinical impact.
+                    </p>
+<div class="pt-4 flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md text-label-md hover:opacity-80 transition-opacity shadow-sm flex items-center gap-2">
+                            Explore Technical Specs
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="bg-secondary-fixed/50 text-primary px-8 py-4 rounded-full font-label-md text-label-md hover:bg-secondary-fixed transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+                            Watch System Demo
+                        </button>
+</div>
+</div>
+<div class="flex-1 w-full relative">
+<div class="glass-panel rounded-xl shadow-ambient p-6 relative overflow-hidden h-[400px] flex flex-col justify-center items-center">
+<div class="absolute top-4 left-4 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span class="font-label-md text-label-md text-secondary uppercase">Live Inference</span>
+</div>
+<div class="w-full h-full border border-border-subtle rounded-lg bg-surface flex flex-col items-center justify-center p-8 mt-6">
+<img class="w-full h-full object-cover rounded-md opacity-80 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA32LumpmRMqWj9B7wN26OgQ2R0osAtUMQnnlBAkq-QDfFmOLulZ59zHJitEIjuZrUQZIvRp5cfGKFZOjZm9lEQIFqqve1hYD95Ms1v7n4fFO2Sq0985uLdqRq9u1ljVQO7n7LsDy1KNCYYuh1pyHS3G5Du2A9NC2K_38ZVEOK6iGUfkG8rYrPQZaz8-zFEtcEj0jZlDuTZMftlgXCa_Ny5XimKSr9cKf1ZCiBY4Q5EaWwEWpHv6qPGfA">
+</div>
+<div class="absolute bottom-6 right-6 glass-panel rounded-lg p-4 shadow-sm border border-border-subtle flex items-center gap-4">
+<div>
+<div class="font-label-md text-label-md text-secondary">ICU Alert Accuracy</div>
+<div class="font-headline-md text-headline-md text-primary">99.2%</div>
+</div>
+<span class="material-symbols-outlined text-tertiary-container text-3xl">monitoring</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Core Capabilities & AI Engine (from SCREEN_22) -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 lg:mb-32 relative">
+<div class="glow-dot bottom-0 left-0 transform -translate-x-1/3 translate-y-1/3"></div>
+<div class="mb-12">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-4">Core Capabilities</h2>
+<p class="font-body-md text-body-md text-secondary max-w-3xl">Our algorithms operate continuously in the background, surfacing critical insights directly into your clinical line of sight.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-24">
+<div class="glass-panel rounded-xl p-8 shadow-ambient flex flex-col hover:-translate-y-1 transition-transform duration-300">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">rule</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Automated Guidelines</h3>
+<p class="font-body-sm text-body-sm text-secondary flex-grow">
+                        Real-time cross-referencing of patient vitals and history against the latest global clinical protocols, reducing diagnostic variance.
+                    </p>
+<div class="mt-6 pt-6 border-t border-border-subtle">
+<span class="inline-flex items-center gap-1 text-primary text-label-md font-label-md">
+                            View Protocol Library <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</span>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-8 shadow-ambient flex flex-col md:col-span-2 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex items-start justify-between mb-6">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">troubleshoot</span>
+</div>
+<div class="px-3 py-1 bg-surface-container rounded-full text-secondary font-label-md text-label-md flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
+                             Continuous Monitoring
+                        </div>
+</div>
+<div class="flex flex-col md:flex-row gap-8 items-center h-full">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Sub-clinical Anomaly Detection</h3>
+<p class="font-body-sm text-body-sm text-secondary">
+                                Identifying minute physiological deviations before they cascade into critical events. Our early warning system analyzes multi-modal data streams for ICU risk scoring.
+                            </p>
+</div>
+<div class="w-full md:w-1/2 h-40 bg-surface rounded-lg border border-border-subtle p-4 relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-9vVFkRYgOR4L5y0UkbEfolBkPKhLScu_7AMkrcZxUAmwG8MLnCnxxHVpCyPfa_gdOm4yPztdSH83TjZ_F-nx06v7SziSP3u-LdJNY7QP7M3E_aJ7NW5i2ykFiDcJTJLtUBMeItbhJBUsgag7juqRvWEQZjXPWiYOs4A2ONz-jh6lMcpDjV0yt423Liq8nmgjBZS9OBGA2_xAqYxBFtmTTgPDoh6Zi7jpqvlI5yHBNF09PNYcnhW4Mw">
+</div>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-8 shadow-ambient flex flex-col md:col-span-3 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex flex-col md:flex-row items-center gap-8">
+<div class="w-full md:w-1/3 flex justify-center">
+<div class="relative w-48 h-48">
+<svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+<circle class="text-surface-container-highest" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-dasharray="283" stroke-dashoffset="70" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">75%</span>
+<span class="font-label-md text-label-md text-secondary">Risk Score</span>
+</div>
+</div>
+</div>
+<div class="flex-1">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">vital_signs</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Predictive Triage Engine</h3>
+<p class="font-body-md text-body-md text-secondary max-w-2xl mb-4">
+                                Optimize emergency department flow by forecasting patient deterioration trajectories. The AI assesses incoming vital signs and historical context to prioritize intervention automatically.
+                            </p>
+<button class="text-primary font-label-md text-label-md hover:opacity-80 flex items-center gap-1">
+                                See ED Workflow Integration <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-8 lg:p-16 border border-border-subtle relative overflow-hidden">
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-surface-white/50 to-transparent pointer-events-none"></div>
+<div class="flex flex-col lg:flex-row gap-12 items-center">
+<div class="flex-1 z-10">
+<span class="font-label-md text-label-md text-tertiary-container uppercase tracking-wider mb-2 block">System Architecture</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-6">Zero-Friction Integration</h2>
+<p class="font-body-md text-body-md text-secondary mb-8">
+                            Deploy securely within your existing infrastructure. Our clinical engine interfaces directly with standard protocols, requiring no specialized hardware or disruption to clinical routines.
+                        </p>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-white shadow-sm flex items-center justify-center shrink-0 border border-border-subtle">
+<span class="material-symbols-outlined text-primary text-[20px]">dataset</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-primary font-semibold">Native DICOM Processing</h4>
+<p class="font-body-sm text-body-sm text-secondary">Direct ingestion of imaging modalities for structural anomaly correlation.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-white shadow-sm flex items-center justify-center shrink-0 border border-border-subtle">
+<span class="material-symbols-outlined text-primary text-[20px]">sync_alt</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-primary font-semibold">HL7 &amp; FHIR Compliant EHR Sync</h4>
+<p class="font-body-sm text-body-sm text-secondary">Bi-directional data flow ensuring risk scores are written back directly to the patient chart.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 w-full relative z-10">
+<div class="glass-panel p-6 rounded-xl shadow-ambient border-t border-l border-surface-white/80">
+<div class="bg-inverse-surface rounded-lg p-4 font-mono text-sm text-surface-variant overflow-hidden">
+<div class="flex gap-2 mb-4">
+<div class="w-3 h-3 rounded-full bg-error-container"></div>
+<div class="w-3 h-3 rounded-full bg-tertiary-container"></div>
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+</div>
+<pre class="text-xs"><code>{
+  "patient_id": "PT-88492-X",
+  "engine_status": "active",
+  "streams": ["HL7_v2", "DICOM_WADO"],
+  "inference": {
+    "model": "ICU_Early_Warning_v4",
+    "risk_score": 0.82,
+    "confidence": 0.94,
+    "flags": ["respiratory_distress", "sepsis_risk_elevated"]
+  },
+  "action": "trigger_rapid_response"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Partner Ecosystem (from SCREEN_17) -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 lg:mb-32">
+<div class="mb-16 text-center md:text-left max-w-3xl">
+<span class="inline-block bg-secondary-container/30 text-primary font-label-md text-label-md px-3 py-1 rounded-full mb-4 uppercase tracking-wider">Strategic Ecosystem</span>
+<h2 class="font-headline-display text-headline-display text-on-surface mb-6">
+                    Integrated for <span class="text-primary">Clinical Precision</span>
+</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                    We partner with global healthcare leaders and adhere to foundational medical standards to ensure seamless data interoperability, advanced AI diagnostics, and robust cloud infrastructure.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<div class="bg-surface-white border border-border-subtle rounded-lg p-8 flex flex-col h-full ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="h-16 w-32 mb-6 flex items-center justify-start">
+<img class="max-h-full max-w-full object-contain mix-blend-multiply opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYJxQJllJWhtPYsF0zWKR5bskPJ-BadOa1GEdjCELSbmEWi_tw8t8v2-ctfc6XR8rnAxWNsvEekmzmdE6r1yRieSLiKDE7aqNzckPRfeuD8vHAJPJkDq6ayzFzpgFLBgp60_wm9nLriRrnYrpr7rbMYRWe0LrKHQJXGPejAnP72SQ4uECnf_0ovs54hzarRKDZKd_vjGH0HcmvE2xNfjXRZVS-CjZoKZw_MWPwO3-kV6ZM34vcqImD5Q">
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">DICOM 3.0</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Native compliance with the international standard for medical images and related information, ensuring pristine fidelity in radiological data handling and cross-modality communication.
+                        </p>
+</div>
+<div class="pt-4 border-t border-border-subtle mt-auto">
+<button class="group flex items-center text-primary font-label-md text-label-md hover:text-primary-container transition-colors">
+                            VIEW INTEGRATION
+                            <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-white border border-border-subtle rounded-lg p-8 flex flex-col h-full ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="h-16 w-32 mb-6 flex items-center justify-start">
+<img class="max-h-full max-w-full object-contain mix-blend-multiply opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk929kuRfbDXsyzoLS7qPfLcgYIh1G2-JuKuM4PVtQACwSVGsJqCxNg4g6fQaa8wH8ZNF-DHrW3_V6YXAU9g1vnF-UteTLIjbRBksWE6K7A_G6_0c73s0ysqh-GUUJaki8umAHaUgl2PmZW14r30E07VexBn1M21gwRQagHvRV8Zd2p4OIusOrZIxGKk5e9fhwjPpNtWEI040BHcZwb6a9zW0q8RSWAPK56byupbZpP5q0k5-QazKVtQ">
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">HL7 / FHIR</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Deep integration with Fast Healthcare Interoperability Resources, enabling fluid, secure, and standardized exchange of electronic health records across disparate enterprise systems.
+                        </p>
+</div>
+<div class="pt-4 border-t border-border-subtle mt-auto">
+<button class="group flex items-center text-primary font-label-md text-label-md hover:text-primary-container transition-colors">
+                            VIEW INTEGRATION
+                            <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-white border border-border-subtle rounded-lg p-8 flex flex-col h-full ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="h-16 w-32 mb-6 flex items-center justify-start">
+<img class="max-h-full max-w-full object-contain mix-blend-multiply opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4eCi6W5Gw9FkqAcWq_f2AE1hgzbYatx7ne-TxGAO99DzRcpHn_szFGUZSgJ3vXf1lWCyScVI0dej5qw_59qmWhRFWOhI6sdtCo4zeN4sT_AlK87E-TK9ovKSINGyEigEGSlitGLb4EugzVl9VX_eSIabSkBGHj-R2qxVyJdBj42pFYR30L-AHYd5nqzV3OTjLHbiskELkVG4eM5V15G9TdOkKp23XB_dPjuWUaXdpawc_gUahJrHYLA">
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Apollo Hospitals</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Strategic clinical deployment partner. Co-developing and validating advanced diagnostic workflows within one of the largest and most advanced healthcare ecosystems in Asia.
+                        </p>
+</div>
+<div class="pt-4 border-t border-border-subtle mt-auto">
+<button class="group flex items-center text-primary font-label-md text-label-md hover:text-primary-container transition-colors">
+                            VIEW PARTNERSHIP
+                            <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-white border border-border-subtle rounded-lg p-8 flex flex-col h-full ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="h-16 w-32 mb-6 flex items-center justify-start">
+<img class="max-h-full max-w-full object-contain mix-blend-multiply opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHoNLWIfl0OZP3TsxcS7PPhsucKNZ6ZLbY4bF1oeEP9WbATpLwwiElRvyDAIrZfuYRJ03GE_gVvyyJiQw6J88UfKuwKCj9jJNhdRT5O8l6j96AS6lbTlvNZ8cMiqMwxYcWo7NGE8VZ8mIowWWfqmRGKq12wgE0WvuKcIlgpDR_UYbJdUkS94Ko6VEJi9VwI2I9wMl4HrojE-B3KFZdcXAgz6xhGi0G7yaCtwbaRfFsMfsg3vbrGM8YkA">
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Meenakshi Mission</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Collaborative research and implementation site focused on enhancing patient throughput and diagnostic accuracy using our next-generation imaging and analysis pipelines.
+                        </p>
+</div>
+<div class="pt-4 border-t border-border-subtle mt-auto">
+<button class="group flex items-center text-primary font-label-md text-label-md hover:text-primary-container transition-colors">
+                            VIEW PARTNERSHIP
+                            <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-white border border-border-subtle rounded-lg p-8 flex flex-col h-full ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="h-16 w-32 mb-6 flex items-center justify-start">
+<img class="max-h-full max-w-full object-contain mix-blend-multiply opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHN1GgSxLOIGCBVEi-NDHgD80kaHdOl1AWqrPAP14ldhBZYBdlt353kaB1Z2iG_xveZSilWoG0Aj3rPxRm8h1bnOScN9VcuTMHkyPqiAlzdxjXbC2rRSe4I9P3zACvc0OaMpMyIcBH2gWGgCVMNHYCynJ6yDEfiiRvJ4M30aR7CsdKogWrBdlDNNPUZPqGQ7pzXcSliIYl4_M-sjinby6zYSc_Bzh42_rO8-2Hu8IPndCueC9GXbqquA">
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">NVIDIA Clara AI</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Leveraging NVIDIA's specialized healthcare computing platform to accelerate our machine learning models, delivering near real-time AI-assisted diagnostic insights at the point of care.
+                        </p>
+</div>
+<div class="pt-4 border-t border-border-subtle mt-auto">
+<button class="group flex items-center text-primary font-label-md text-label-md hover:text-primary-container transition-colors">
+                            VIEW TECHNOLOGY
+                            <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-white border border-border-subtle rounded-lg p-8 flex flex-col h-full ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="h-16 w-32 mb-6 flex items-center justify-start">
+<img class="max-h-full max-w-full object-contain mix-blend-multiply opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbgIa6WMcryYc4-rEO4-it_8KfozmGjxD_VeOJiL9fUY43wGuRsGS6uyFSIEbrOEj-AVRfJK8hgsVdJ5JkWMtVMnPpKAUxVMFeJV_DoO-3NfnB8k1W63o6lFb4LzrXkVIedBEt2H23kReUkPBIByvwzeHPFsSFZ0wrXbVC0XW8UQHvl83iuKDbpi9nZ4sE4fEfsXDJGHKw5GktLJwh5YJK2T198AOo5IHUSoWdSlCi9SOAgKeTjgWRKg">
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">AWS HealthOmics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Built on purpose-built cloud infrastructure for healthcare, ensuring HIPAA-compliant, infinitely scalable storage and rapid processing for massive multi-modal clinical datasets.
+                        </p>
+</div>
+<div class="pt-4 border-t border-border-subtle mt-auto">
+<button class="group flex items-center text-primary font-label-md text-label-md hover:text-primary-container transition-colors">
+                            VIEW INFRASTRUCTURE
+                            <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Leadership & Innovation (from SCREEN_20) -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 lg:mb-32 space-y-16">
+<div class="text-center max-w-3xl mx-auto space-y-6">
+<h2 class="font-headline-display text-headline-display md:text-headline-display text-primary">Leadership &amp; Innovation</h2>
+<p class="font-body-lg text-body-lg text-secondary">
+                At the intersection of clinical precision and advanced technology. Meet the experts driving Neuerung HealthTech's mission to redefine patient telemetry and diagnostics.
+            </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<div class="md:col-span-8 glass-panel ambient-shadow rounded-[24px] p-8 flex flex-col md:flex-row gap-8 items-start hover:shadow-lg transition-shadow duration-300 relative overflow-hidden group">
+<div class="w-full md:w-1/3 shrink-0 rounded-2xl overflow-hidden aspect-square">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVeLR-7LKrB9Y57aR0RLA5LAWNp2mTV_p8a3ul4tRvCvEWGgkGFYb8vHZ5dLDyIMQgnfU5HpFJYbeuTbu0CJrxtRKC4QsB0jlkJQE8pADuq2HmhulQiUg3iD5JFV1rZUfBMkjpmFvvp2162Lpdb6gGZ23ZertHul1CnHoFg61HBNSzBqXAYFDLQ2on4_0_4bcZJkjASo00_uNFAQt924DYrFp2CmSUee4-L8OSxERadvBL0IIUSVz5tw">
+</div>
+<div class="flex-grow space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-primary">Dr. A. Subash</h3>
+<p class="font-body-md text-body-md text-secondary mt-1">Founder &amp; CEO</p>
+</div>
+<span class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1 rounded-full font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">verified</span> Leadership
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">
+                        Visionary leader bridging the gap between rigorous medical practice and scalable technology. With over 15 years in clinical diagnostics, Dr. Subash spearheads Neuerung's strategic direction, ensuring all innovations meet the highest standards of clinical precision and patient safety.
+                    </p>
+<div class="pt-4 flex gap-3">
+<button class="px-6 py-2 bg-primary-container text-on-primary font-label-md text-label-md rounded-full hover:bg-primary transition-colors">Read Bio</button>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 glass-panel ambient-shadow rounded-[24px] p-6 flex flex-col gap-6 hover:shadow-lg transition-shadow duration-300">
+<div class="w-full rounded-2xl overflow-hidden aspect-video">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM0H3-1HJRhdEnBI2scGFFnq8d3Rsp2Mypaj9FcPKbgZTguweLyuVZ-PeO1P5ABZnHNH_RSKJubL3P9VppyaXsuAY-zJ8Fo42m9i054x_pcMTepYxMaTsmMM2w1QwsXNQ6x2ZY9Zp9yAeqg9X2k5aCJwFiNZSKgT6ODMMq3CXG9LyvD1oO9oK8zPItBBNCfpLOYXl-Cssxq27gfjOCWQBifI2guONAQuKOZWLxPGvnQzRdpeQF4m4iyw">
+</div>
+<div class="space-y-3">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">Dr. K. Meenakshi</h3>
+<p class="font-body-sm text-body-sm text-secondary">CMO &amp; AI Advisor</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                        Pioneering the integration of machine learning in diagnostic workflows.
+                    </p>
+<button class="w-full py-2 mt-2 bg-secondary-container text-primary font-label-md text-label-md rounded-full hover:bg-secondary-fixed transition-colors">Read Bio</button>
+</div>
+</div>
+<div class="md:col-span-6 glass-panel ambient-shadow rounded-[24px] p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:shadow-lg transition-shadow duration-300">
+<div class="w-32 h-32 shrink-0 rounded-full overflow-hidden border-4 border-surface-white">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD34q-u5OexWrVGcErN5cOxdmBDiWrhSDUr1kZwdHKSpo2jfBOWkGtFVEaTenRjRagsXs6sg2-GgtKXLY3DKVCL--mMwb6SyEUSeDWQF_imOCnTZA5v5T6szXiLh630QdCSV5avmB1Eqm7MFfow_RAjFBGg5yKUbeBqrTMRg6DZON2TWXD9vMczW_uygKnJFYYd-F4pnqzpJvqoldOoJm_GULIE4uEmI42xFWSR6aoMZxTdDqBAKkOxEw">
+</div>
+<div class="space-y-3 text-center sm:text-left w-full">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">R. Karthik</h3>
+<p class="font-body-sm text-body-sm text-secondary">Head of IoT &amp; Telemetry</p>
+</div>
+<div class="flex flex-wrap gap-2 justify-center sm:justify-start">
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-md font-label-md text-[10px]">Hardware</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-md font-label-md text-[10px]">Sensors</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Architecting robust data pipelines from edge devices to cloud infrastructure.
+                    </p>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center justify-center sm:justify-start gap-1">
+                        Read Bio <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="md:col-span-6 glass-panel ambient-shadow rounded-[24px] p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:shadow-lg transition-shadow duration-300">
+<div class="w-32 h-32 shrink-0 rounded-full overflow-hidden border-4 border-surface-white">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA66Q3sJU-1y54uvg2pIWQ_9H6IPXoU4bZU_OXvxLg-74z8OexCclrstPWxH0_s7sxSBLsanKTJiuugGy3Z05JLGGawxCFd1ZwygcBylr2Tm5pnkaa9PH_JzV1RlOQL7ryEgR8oabBik5hDT-EgxM8xGZxiNV818xWXDf_kvGvSbOtJ2UGC--y1hGo-yOBuQvuv8LMihFyP7qhWhuommzRlWSa-uneu8ZNDXgV6-ncjYvKRNs1MWdrpEQ">
+</div>
+<div class="space-y-3 text-center sm:text-left w-full">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">S. Priya</h3>
+<p class="font-body-sm text-body-sm text-secondary">Lead Software Architect</p>
+</div>
+<div class="flex flex-wrap gap-2 justify-center sm:justify-start">
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-md font-label-md text-[10px]">Cloud</span>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded-md font-label-md text-[10px]">Security</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                        Designing secure, scalable, and HIPAA-compliant software architectures.
+                    </p>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center justify-center sm:justify-start gap-1">
+                        Read Bio <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Clinical Inquiry & Contact (from SCREEN_19) -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 lg:mb-32">
+<div class="mb-16 text-center md:text-left max-w-3xl mx-auto">
+<h2 class="font-headline-display text-headline-lg-mobile md:text-headline-display text-primary mb-6">Experience the Neuerung Advantage.</h2>
+<p class="font-body-lg text-body-lg text-secondary">Schedule a personalized demonstration of our clinical precision tools. See firsthand how our intuitive interfaces and robust analytics can elevate your medical practice.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-8 glass-panel rounded-xl ambient-shadow p-8 md:p-12 relative overflow-hidden">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-fixed rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+<div class="mb-8">
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Clinical Inquiry</h3>
+<p class="font-body-md text-body-md text-secondary">Please provide your details, and our technical integration team will reach out shortly.</p>
+</div>
+<form class="space-y-6 relative z-10" id="demo-form" onsubmit="event.preventDefault(); showToast();">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="fullName">Full Name <span class="text-error">*</span></label>
+<input class="w-full h-14 px-4 bg-surface-white border border-border-subtle rounded-DEFAULT font-body-md text-body-md text-on-surface input-focus-ring transition-all placeholder:text-outline/50" id="fullName" placeholder="Dr. Jane Doe" required="" type="text">
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="email">Professional Email <span class="text-error">*</span></label>
+<input class="w-full h-14 px-4 bg-surface-white border border-border-subtle rounded-DEFAULT font-body-md text-body-md text-on-surface input-focus-ring transition-all placeholder:text-outline/50" id="email" placeholder="jane.doe@hospital.org" required="" type="email">
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="organization">Hospital or Organization <span class="text-error">*</span></label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="local_hospital">local_hospital</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-white border border-border-subtle rounded-DEFAULT font-body-md text-body-md text-on-surface input-focus-ring transition-all placeholder:text-outline/50" id="organization" placeholder="General Medical Center" required="" type="text">
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="businessType">Business Type</label>
+<div class="relative">
+<select class="w-full h-14 px-4 pr-10 appearance-none bg-surface-white border border-border-subtle rounded-DEFAULT font-body-md text-body-md text-on-surface input-focus-ring transition-all" id="businessType">
+<option disabled="" selected="" value="">Select facility type...</option>
+<option value="hospital">Hospital / Medical Center</option>
+<option value="clinic">Private Clinic</option>
+<option value="diagnostic">Diagnostic Laboratory</option>
+<option value="other">Other Healthcare Provider</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="demoDate">Preferred Demo Date</label>
+<div class="relative">
+<input class="w-full h-14 px-4 bg-surface-white border border-border-subtle rounded-DEFAULT font-body-md text-body-md text-on-surface input-focus-ring transition-all" id="demoDate" type="date">
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block" for="message">Specific Requirements or Focus Areas</label>
+<textarea class="w-full p-4 bg-surface-white border border-border-subtle rounded-DEFAULT font-body-md text-body-md text-on-surface input-focus-ring transition-all placeholder:text-outline/50 resize-none" id="message" placeholder="We are particularly interested in seeing your diagnostic imaging module..." rows="4"></textarea>
+</div>
+<div class="pt-4 flex items-center justify-between">
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-[18px]" data-icon="lock">lock</span>
+<span class="font-body-sm text-body-sm">Secure &amp; HIPAA Compliant Inquiry</span>
+</div>
+<button class="h-14 px-8 bg-primary hover:bg-tertiary text-on-primary rounded-full font-label-md text-label-md transition-colors flex items-center gap-2 shadow-md" type="submit">
+                            Submit Request
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="glass-panel rounded-xl ambient-shadow p-8">
+<h4 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" data-icon="location_city">location_city</span>
+                        Our Headquarters
+                    </h4>
+<div class="space-y-4 font-body-sm text-body-sm text-secondary">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline mt-0.5" data-icon="location_on">location_on</span>
+<div>
+<p class="font-bold text-on-surface mb-1">Neuerung HealthTech Innovations</p>
+<p class="">Tech Park, Level 4</p>
+<p class="">Madurai, Tamil Nadu 625001</p>
+<p class="">India</p>
+</div>
+</div>
+<div class="w-full h-px bg-border-subtle my-4"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="call">call</span>
+<a class="hover:text-primary transition-colors" href="tel:+918005550199">+91 800 555 0199</a>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline" data-icon="mail">mail</span>
+<a class="hover:text-primary transition-colors" href="mailto:demo@neuerung.health">demo@neuerung.health</a>
+</div>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden ambient-shadow h-64 relative border border-border-subtle bg-surface-container-low">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.123456789!2d78.123456789!3d9.923456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00c58242173863%3A0x706106051137ee1!2sMadurai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="grayscale contrast-125 opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+  </iframe>
+  <div class="absolute bottom-3 right-3 pointer-events-none">
+    <div class="bg-surface-white/90 backdrop-blur-sm border border-border-subtle px-3 py-1.5 rounded-full shadow-sm flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary text-[16px]">location_on</span>
+      <span class="font-label-md text-label-md text-primary">Tech Park, Madurai</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-surface-border dark:border-outline-variant">
+<div class="w-full py-16 px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="col-span-1 md:col-span-1 space-y-4">
+<a class="flex items-center gap-2" href="#">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Neuerung HealthTech</span>
+</a>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant mt-4">
+                Intelligent healthcare solutions for a connected world.
+            </p>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface mb-4">Platform</h4>
+<ul class="space-y-3 font-body-sm text-body-sm">
+<li class=""><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-all" href="#">Solutions</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-all" href="#">Mission</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-all" href="#">Why Choose Us</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface mb-4">Company</h4>
+<ul class="space-y-3 font-body-sm text-body-sm">
+<li class=""><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-all" href="#">About</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-all" href="#">Contact</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-on-surface dark:text-inverse-on-surface mb-4">Legal</h4>
+<ul class="space-y-3 font-body-sm text-body-sm">
+<li class=""><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-all" href="#">Privacy Policy</a></li>
+<li class=""><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-all" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="w-full border-t border-outline-variant/30 py-6 px-margin-desktop text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">© 2024 Neuerung HealthTech Private Limited. Madurai, Tamil Nadu.</p>
+</div>
+</footer>
+<!-- Success Toast Notification -->
+<div class="success-toast fixed bottom-8 right-8 z-50 glass-panel border-primary-fixed shadow-lg rounded-xl p-4 flex items-start gap-4 max-w-sm pointer-events-none" id="toast">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/30 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-1">Inquiry Received</h4>
+<p class="font-body-sm text-body-sm text-secondary">Thank you. Our integration team will contact you shortly to confirm your demo schedule.</p>
+</div>
+</div>
+<script>
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+                document.getElementById('demo-form').reset();
+            }, 4000);
+        }
+    </script>
+
+
+</body></html>
