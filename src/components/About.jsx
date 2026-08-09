@@ -97,7 +97,7 @@ export default function About({ openModal }) {
             {/* Left Content Column */}
             <div className="about-content-left">
               <p className="about-main-text">
-                <span className="about-company-highlight">Neuerung HealthTech Private Limited</span> is a healthcare technology company focused on developing intelligent, connected, and clinically relevant solutions for modern healthcare. We combine artificial intelligence, medical imaging, IoT and digital platforms to support healthcare professionals, improve operational efficiency, enhance clinical decision-making, and contribute to better patient care.
+                <span className="about-company-highlight">Neuerung HealthTech</span> is a healthcare technology company focused on developing intelligent, connected, and clinically relevant solutions for modern healthcare. We combine artificial intelligence, medical imaging, IoT and digital platforms to support healthcare professionals, improve operational efficiency, enhance clinical decision-making, and contribute to better patient care.
               </p>
 
               {/* 4 Feature Highlights */}
@@ -124,47 +124,7 @@ export default function About({ openModal }) {
               </div>
             </div>
 
-            {/* Right Side Entity & Meta Box */}
-            <div className="about-entity-card">
-              <div className="entity-header">
-                <div className="entity-icon-box">
-                  <TrendingUp style={{ width: '1.5rem', height: '1.5rem' }} />
-                </div>
-                <div>
-                  <div className="entity-subtitle">Registered Entity</div>
-                  <div className="entity-name">Neuerung HealthTech Pvt. Ltd.</div>
-                </div>
-              </div>
 
-              <div className="entity-details">
-                <div className="entity-row">
-                  <span className="entity-label">Headquarters</span>
-                  <span className="entity-value">Madurai, TN, India</span>
-                </div>
-                <div className="entity-row">
-                  <span className="entity-label">Official Domain</span>
-                  <span className="entity-value" style={{ color: 'var(--color-accent)' }}>neuerung.in</span>
-                </div>
-                <div className="entity-row">
-                  <span className="entity-label">Primary Contact</span>
-                  <span className="entity-value">healthtech@neuerung.in</span>
-                </div>
-                <div className="entity-row">
-                  <span className="entity-label">Target Audience</span>
-                  <span className="entity-value">Hospitals & Diagnostics</span>
-                </div>
-              </div>
-
-              {openModal && (
-                <button
-                  onClick={() => openModal('book-demo')}
-                  className="entity-action-btn"
-                >
-                  <span>Book a Demo</span>
-                  <ArrowRight style={{ width: '1rem', height: '1rem' }} />
-                </button>
-              )}
-            </div>
 
           </div>
         </motion.div>

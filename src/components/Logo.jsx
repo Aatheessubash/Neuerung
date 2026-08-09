@@ -6,7 +6,6 @@ export default function Logo({ className = "", showText = true, size = "normal" 
     <div className={`logo-wrapper ${className}`}>
       {/* Brand Logo Image with transparent background */}
       <div className="logo-image-container">
-        <div className="logo-glow" />
         <img
           src={`${import.meta.env.BASE_URL}/images/logo-removebg-preview.png`.replace(/\/+/g, '/')}
           alt="Neuerung HealthTech Logo"
