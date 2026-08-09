@@ -8,7 +8,7 @@ export default function Logo({ className = "", showText = true, size = "normal" 
       <div className="logo-image-container">
         <div className="logo-glow" />
         <img
-          src="/images/logo-removebg-preview.png"
+          src={`${import.meta.env.BASE_URL}/images/logo-removebg-preview.png`.replace(/\/+/g, '/')}
           alt="Neuerung HealthTech Logo"
           className={`logo-img size-${size}`}
           onError={(e) => {

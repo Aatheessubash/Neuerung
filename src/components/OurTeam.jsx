@@ -11,14 +11,14 @@ export default function OurTeam({ openModal }) {
       role: "Founder & CEO",
       badge: "Leadership",
       bio: "Visionary leader bridging the gap between rigorous medical practice and scalable technology. With over 15 years in clinical diagnostics, Dr. Subash spearheads Neuerung's strategic direction, ensuring all innovations meet the highest standards of clinical precision and patient safety.",
-      img: "/images/dr_subash.png"
+      img: `${import.meta.env.BASE_URL}/images/dr_subash.png`.replace(/\/+/g, '/')
     },
     {
       id: 'meenakshi',
       name: "Dr. K. Meenakshi",
       role: "CMO & AI Advisor",
       bio: "Pioneering the integration of machine learning in diagnostic workflows.",
-      img: "/images/dr_meenakshi.png"
+      img: `${import.meta.env.BASE_URL}/images/dr_meenakshi.png`.replace(/\/+/g, '/')
     },
     {
       id: 'karthik',
@@ -26,7 +26,7 @@ export default function OurTeam({ openModal }) {
       role: "Head of IoT & Telemetry",
       tags: ["Hardware", "Sensors"],
       bio: "Architecting robust data pipelines from edge devices to cloud infrastructure.",
-      img: "/images/karthik.png"
+      img: `${import.meta.env.BASE_URL}/images/karthik.png`.replace(/\/+/g, '/')
     },
     {
       id: 'priya',
@@ -34,7 +34,7 @@ export default function OurTeam({ openModal }) {
       role: "Lead Software Architect",
       tags: ["Cloud", "Security"],
       bio: "Designing secure, scalable, and HIPAA-compliant software architectures.",
-      img: "/images/priya.png"
+      img: `${import.meta.env.BASE_URL}/images/priya.png`.replace(/\/+/g, '/')
     }
   ];
 

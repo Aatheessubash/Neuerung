@@ -115,7 +115,7 @@ export default function Hero({ openModal }) {
                       <div className="animate-laser-scan" />
 
                       <img 
-                        src="/images/dicom_chest_scan.png" 
+                        src={`${import.meta.env.BASE_URL}/images/dicom_chest_scan.png`.replace(/\/+/g, '/')} 
                         alt="DICOM Clinical AI Scan" 
                         className="dicom-img"
                       />
