@@ -18,9 +18,10 @@ export default function Logo({ className = "", showText = true, size = "normal" 
       </div>
 
       {showText && (
-        <span className={`logo-text size-${size}`}>
-          Neuerung HealthTech
-        </span>
+        <div className={`logo-text-container size-${size}`}>
+          <span className="logo-title">N e u e r u n g</span>
+          <span className="logo-subtitle">H E A L T H T E C H</span>
+        </div>
       )}
     </div>
   );

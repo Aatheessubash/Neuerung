@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import WhatToExpect from './components/WhatToExpect';
-import HowIsItDone from './components/HowIsItDone';
+import About from './components/About';
+import Products from './components/Products';
 import WhoAreWeWith from './components/WhoAreWeWith';
 import OurTeam from './components/OurTeam';
 import ContactFooter from './components/ContactFooter';
@@ -30,8 +30,8 @@ export default function App() {
       {/* Main Single-Page Content */}
       <main style={{ paddingTop: '6rem' }}>
         <Hero openModal={openModal} />
-        <WhatToExpect openModal={openModal} />
-        <HowIsItDone openModal={openModal} />
+        <About openModal={openModal} />
+        <Products openModal={openModal} />
         <WhoAreWeWith openModal={openModal} />
         <OurTeam openModal={openModal} />
       </main>

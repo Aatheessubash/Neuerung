@@ -1,0 +1,393 @@
+/* Products Section Styles - HEXA Product Suite */
+.products-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: var(--color-slate-50);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .products-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+.products-bg-orb-1 {
+  position: absolute;
+  top: 10%;
+  left: -5%;
+  width: 25rem;
+  height: 25rem;
+  background: radial-gradient(circle, rgba(94, 129, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.products-bg-orb-2 {
+  position: absolute;
+  bottom: 5%;
+  right: -5%;
+  width: 25rem;
+  height: 25rem;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.products-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 640px) {
+  .products-container {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .products-container {
+    padding: 0 3rem;
+  }
+}
+
+/* Header */
+.products-header {
+  text-align: center;
+  max-width: 48rem;
+  margin: 0 auto 3.5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.products-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background: rgba(94, 129, 255, 0.1);
+  border: 1px solid rgba(94, 129, 255, 0.25);
+  color: var(--color-primary);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.products-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-slate-900);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  font-family: var(--font-heading);
+}
+
+@media (min-width: 640px) {
+  .products-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .products-title {
+    font-size: 3rem;
+  }
+}
+
+.products-subtext {
+  font-size: 1rem;
+  color: var(--color-slate-600);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* Grid Layout for Products */
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Product Card */
+.product-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0, 78, 156, 0.12);
+  border-color: rgba(94, 129, 255, 0.4);
+}
+
+/* Top Accent Bar per theme */
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  transition: opacity 0.3s ease;
+}
+
+.product-card.theme-care::before {
+  background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%);
+}
+
+.product-card.theme-doctor::before {
+  background: linear-gradient(90deg, #4f46e5 0%, #818cf8 100%);
+}
+
+.product-card.theme-service::before {
+  background: linear-gradient(90deg, #d97706 0%, #fbbf24 100%);
+}
+
+.product-card.theme-pharmacy::before {
+  background: linear-gradient(90deg, #059669 0%, #34d399 100%);
+}
+
+/* Card Header: Logo & Badge */
+.product-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.product-logo-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product-hexagon-logo {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-hexagon-logo {
+  transform: scale(1.08) rotate(2deg);
+}
+
+.theme-care .product-hexagon-logo {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+}
+
+.theme-doctor .product-hexagon-logo {
+  background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+  color: #ffffff;
+}
+
+.theme-service .product-hexagon-logo {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  color: #ffffff;
+}
+
+.theme-pharmacy .product-hexagon-logo {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+}
+
+.product-brand-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-brand-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  color: var(--color-slate-900);
+  line-height: 1.2;
+}
+
+.product-brand-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-slate-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.15rem;
+}
+
+.product-category-pill {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.theme-care .product-category-pill {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.theme-doctor .product-category-pill {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.theme-service .product-category-pill {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.theme-pharmacy .product-category-pill {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* Card Body */
+.product-description {
+  font-size: 0.9375rem;
+  color: var(--color-slate-600);
+  line-height: 1.6;
+  font-family: var(--font-body);
+  margin-bottom: 1.5rem;
+}
+
+/* Feature List */
+.product-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-bottom: 1.75rem;
+}
+
+.product-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.84375rem;
+  color: var(--color-slate-700);
+  font-weight: 500;
+}
+
+.product-check-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.theme-care .product-check-icon {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.theme-doctor .product-check-icon {
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+.theme-service .product-check-icon {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.theme-pharmacy .product-check-icon {
+  background: #d1fae5;
+  color: #059669;
+}
+
+/* Action Button */
+.product-action-btn {
+  width: 100%;
+  padding: 0.8125rem 1.25rem;
+  border-radius: 0.875rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.theme-care .product-action-btn {
+  background: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+}
+
+.theme-care .product-action-btn:hover {
+  background: #0369a1;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.45);
+}
+
+.theme-doctor .product-action-btn {
+  background: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+}
+
+.theme-doctor .product-action-btn:hover {
+  background: #3730a3;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
+}
+
+.theme-service .product-action-btn {
+  background: #d97706;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
+}
+
+.theme-service .product-action-btn:hover {
+  background: #b45309;
+  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.45);
+}
+
+.theme-pharmacy .product-action-btn {
+  background: #059669;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+}
+
+.theme-pharmacy .product-action-btn:hover {
+  background: #047857;
+  box-shadow: 0 6px 18px rgba(5, 150, 105, 0.45);
+}

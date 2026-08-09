@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowUp } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, ArrowUp, ChevronRight } from 'lucide-react';
 import Logo from './Logo';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import './Navbar.css';
@@ -8,6 +8,8 @@ export default function Navbar({ openModal }) {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const isNavClicking = useRef(false);
+  const scrollTimeout = useRef(null);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -16,11 +18,10 @@ export default function Navbar({ openModal }) {
     restDelta: 0.001
   });
 
-  // Re-aligned in exact DOM order of page sections
   const navLinks = [
     { name: 'Home', href: '#home', id: 'home' },
-    { name: 'Solutions', href: '#solutions', id: 'solutions' },
-    { name: 'Architecture', href: '#how-is-it-done', id: 'how-is-it-done' },
+    { name: 'About Us', href: '#about', id: 'about' },
+    { name: 'Products', href: '#products', id: 'products' },
     { name: 'Ecosystem', href: '#who-are-we-with', id: 'who-are-we-with' },
     { name: 'Our Team', href: '#our-team', id: 'our-team' },
     { name: 'Contact', href: '#contact', id: 'contact' },
@@ -28,40 +29,64 @@ export default function Navbar({ openModal }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
+      setShowScrollTop(window.scrollY > 300);
 
-      const scrollPosition = window.scrollY + 120;
+      if (isNavClicking.current) return;
+
+      // Bottom of page detection -> activate 'contact'
+      const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60);
+      if (isAtBottom) {
+        setActiveSection('contact');
+        return;
+      }
+
+      const scrollPosition = window.scrollY + 140;
+      let current = 'home';
+
       for (const link of navLinks) {
         const el = document.getElementById(link.id);
         if (el) {
-          const top = el.offsetTop;
+          const top = el.getBoundingClientRect().top + window.scrollY;
           const height = el.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(link.id);
-            break;
+            current = link.id;
           }
         }
       }
+
+      setActiveSection(current);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
   }, []);
 
   const handleNavClick = (e, href, id) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
+
     setMobileMenuOpen(false);
+    isNavClicking.current = true;
     setActiveSection(id);
+
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+
     if (id === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
-    const element = document.getElementById(id);
-    if (element) {
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }
+
+    scrollTimeout.current = setTimeout(() => {
+      isNavClicking.current = false;
+    }, 1000);
   };
 
   const scrollToTop = () => {
@@ -72,7 +97,7 @@ export default function Navbar({ openModal }) {
     <>
       <header className="navbar-header">
         
-        {/* Scroll Progress Bar at the top of Header */}
+        {/* Top Progress Bar */}
         <motion.div
           className="navbar-scroll-progress"
           style={{ scaleX }}
@@ -80,9 +105,9 @@ export default function Navbar({ openModal }) {
 
         <div className="navbar-inner-container">
           
-          {/* Brand */}
+          {/* Brand Logo */}
           <a href="#home" onClick={(e) => handleNavClick(e, '#home', 'home')} className="navbar-brand-link">
-            <Logo showText={true} />
+            <Logo showText={true} size="normal" />
           </a>
 
           {/* Navigation Links (Desktop) */}
@@ -101,7 +126,7 @@ export default function Navbar({ openModal }) {
                     <motion.div
                       layoutId="activeTabUnderline"
                       className="navbar-active-underline"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                 </a>
@@ -111,13 +136,6 @@ export default function Navbar({ openModal }) {
 
           {/* Actions */}
           <div className="navbar-actions">
-            <button
-              onClick={(e) => handleNavClick(e, '#contact', 'contact')}
-              className="navbar-contact-btn"
-            >
-              Contact us
-            </button>
-            
             <motion.button
               onClick={() => openModal('book-demo')}
               whileHover={{ scale: 1.04 }}
@@ -127,47 +145,71 @@ export default function Navbar({ openModal }) {
               Book a Demo
             </motion.button>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="navbar-mobile-toggle"
+              className={`navbar-mobile-toggle ${mobileMenuOpen ? 'open' : ''}`}
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X style={{ width: '1.5rem', height: '1.5rem' }} /> : <Menu style={{ width: '1.5rem', height: '1.5rem' }} />}
             </button>
           </div>
 
         </div>
 
         {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="navbar-mobile-drawer"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href, link.id)}
-                className={`navbar-mobile-link ${activeSection === link.id ? 'active' : ''}`}
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="navbar-mobile-contact">
-              <button
-                onClick={(e) => handleNavClick(e, '#contact', 'contact')}
-                className="navbar-mobile-contact-btn"
-              >
-                Contact us
-              </button>
-            </div>
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="navbar-mobile-drawer"
+            >
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.id;
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href, link.id)}
+                    className={`navbar-mobile-link ${isActive ? 'active' : ''}`}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronRight style={{ width: '1rem', height: '1rem', opacity: isActive ? 1 : 0.4 }} />
+                  </a>
+                );
+              })}
+
+              <div className="navbar-mobile-contact">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    openModal('book-demo');
+                  }}
+                  className="navbar-mobile-contact-btn"
+                >
+                  Book a Demo
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
+
+      {/* Backdrop Overlay when Mobile Drawer is Open */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setMobileMenuOpen(false)}
+            className="navbar-mobile-overlay"
+          />
+        )}
+      </AnimatePresence>
 
       {/* Floating Scroll-to-Top Button */}
       <AnimatePresence>
@@ -182,7 +224,7 @@ export default function Navbar({ openModal }) {
             className="navbar-scroll-top-btn"
             title="Scroll to Top"
           >
-            <ArrowUp className="w-5 h-5" />
+            <ArrowUp style={{ width: '1.25rem', height: '1.25rem' }} />
           </motion.button>
         )}
       </AnimatePresence>

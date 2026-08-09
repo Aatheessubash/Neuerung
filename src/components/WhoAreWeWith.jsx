@@ -1,228 +1,236 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ShieldCheck, Cpu, Cloud, Building2, Stethoscope, FileCode, Zap, Radio } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { 
+  Building2, 
+  Stethoscope, 
+  ShieldCheck, 
+  Cpu, 
+  Cloud, 
+  FileCode, 
+  Network, 
+  CheckCircle2, 
+  ArrowRight,
+  Radio,
+  Users
+} from 'lucide-react';
 import './WhoAreWeWith.css';
 
 export default function WhoAreWeWith({ openModal }) {
-  const [activeCategory, setActiveCategory] = useState('all');
-
-  const categories = [
-    { id: 'all', label: 'All Ecosystem Partners' },
-    { id: 'standards', label: 'Standards & Protocols' },
-    { id: 'clinical', label: 'Clinical Partners' },
-    { id: 'tech', label: 'AI & Cloud Infrastructure' }
-  ];
-
-  const partners = [
+  const pillars = [
     {
-      id: 'dicom',
-      title: "DICOM 3.0 Standard",
-      category: 'standards',
-      categoryLabel: "Medical Imaging Protocol",
-      icon: FileCode,
-      tag: "PACS Compliant",
-      desc: "Native compliance with the international DICOM 3.0 standard for high-fidelity radiological data handling, structured reporting, and multi-vendor PACS communication.",
-      actionText: "EXPLORE PACS PIPELINE",
-      modalType: "medical-imaging",
-    },
-    {
-      id: 'hl7',
-      title: "HL7 / FHIR v4 Integration",
-      category: 'standards',
-      categoryLabel: "EHR Interoperability",
-      icon: ShieldCheck,
-      tag: "FHIR R4 Native",
-      desc: "Bi-directional integration with Fast Healthcare Interoperability Resources, writing diagnostic scores and triage alerts directly into patient charts.",
-      actionText: "VIEW EHR INTERFACE",
-      modalType: "clinical-ai",
-    },
-    {
-      id: 'apollo',
-      title: "Apollo Hospitals Ecosystem",
-      category: 'clinical',
-      categoryLabel: "Clinical Deployment Site",
+      id: 'providers',
       icon: Building2,
-      tag: "Active Clinical Co-Op",
-      desc: "Primary clinical deployment partner co-validating real-time diagnostic workflows and emergency department risk scoring across Asia's largest hospital network.",
-      actionText: "VIEW CLINICAL CASE",
-      modalType: "we-are",
+      title: 'Healthcare Providers',
+      desc: 'Collaborating with hospitals, clinics, and healthcare organizations to understand real-world clinical needs and develop solutions that fit existing workflows.',
+      tags: ['Hospitals', 'Clinics', 'Diagnostic Centers']
     },
     {
-      id: 'meenakshi',
-      title: "Meenakshi Mission Research",
-      category: 'clinical',
-      categoryLabel: "Clinical Research Partner",
+      id: 'clinical',
       icon: Stethoscope,
-      tag: "Diagnostic Validation",
-      desc: "Collaborative research and clinical site focused on evaluating AI diagnostic accuracy, patient throughput metrics, and bedside telemetry efficiency.",
-      actionText: "VIEW RESEARCH HUB",
-      modalType: "we-are",
+      title: 'Clinical & Research Partners',
+      desc: 'Working with clinical and research communities to support validation, continuous improvement, and evidence-based development of healthcare technologies.',
+      tags: ['Clinicians', 'Researchers', 'Medical Institutions']
     },
     {
-      id: 'nvidia',
-      title: "NVIDIA Clara AI Platform",
-      category: 'tech',
-      categoryLabel: "GPU Acceleration",
+      id: 'standards',
+      icon: ShieldCheck,
+      title: 'Healthcare Standards',
+      desc: 'Designed with established healthcare interoperability standards to support secure and consistent exchange of medical and clinical data across systems.',
+      subItems: [
+        { name: 'DICOM', detail: 'Medical imaging and diagnostic data interoperability.' },
+        { name: 'HL7 / FHIR', detail: 'Structured exchange of healthcare and patient information.' }
+      ]
+    },
+    {
+      id: 'infrastructure',
       icon: Cpu,
-      tag: "TensorRT Accelerated",
-      desc: "Harnessing specialized NVIDIA Clara healthcare computing architecture to accelerate deep learning inference, delivering sub-15ms bedside anomaly alerts.",
-      actionText: "VIEW COMPUTING STACK",
-      modalType: "clinical-ai",
-    },
-    {
-      id: 'aws',
-      title: "AWS HealthOmics Cloud",
-      category: 'tech',
-      categoryLabel: "HIPAA Compliant Cloud",
-      icon: Cloud,
-      tag: "ISO 27001 Secure",
-      desc: "Built on AWS HealthOmics cloud infrastructure for HIPAA-compliant, infinitely scalable multi-modal storage and zero-latency clinical telemetry.",
-      actionText: "VIEW CLOUD ARCHITECTURE",
-      modalType: "medical-imaging",
+      title: 'AI & Cloud Infrastructure',
+      desc: 'Leveraging modern AI, cloud, and data technologies to build scalable healthcare applications capable of supporting complex clinical and operational workloads.',
+      subItems: [
+        { name: 'AI & Machine Learning', detail: 'Intelligent analysis, prediction, and decision-support capabilities.' },
+        { name: 'Cloud Infrastructure', detail: 'Scalable infrastructure for secure data processing, storage, and application delivery.' }
+      ]
     }
   ];
 
-  const filteredPartners = activeCategory === 'all' 
-    ? partners 
-    : partners.filter(p => p.category === activeCategory);
+  const networkNodes = [
+    {
+      icon: Building2,
+      title: 'Healthcare Providers',
+      list: 'Hospitals • Clinics • Diagnostic Centers'
+    },
+    {
+      icon: Users,
+      title: 'Clinical & Research',
+      list: 'Clinicians • Researchers • Medical Institutions'
+    },
+    {
+      icon: Cpu,
+      title: 'Technology Partners',
+      list: 'AI • Cloud • IoT • Digital Health'
+    },
+    {
+      icon: FileCode,
+      title: 'Standards & Infrastructure',
+      list: 'DICOM • HL7 • FHIR • Secure APIs'
+    }
+  ];
 
   return (
     <section id="who-are-we-with" className="ecosystem-section">
-      
-      {/* Ambient Radial Background Glow */}
-      <div className="glow-dot" style={{ top: '50%', left: 0, transform: 'translate(-50%, -50%)', opacity: 0.2 }} />
-      <div className="glow-dot" style={{ bottom: 0, right: 0, transform: 'translateX(33%)', opacity: 0.2 }} />
+      <div className="ecosystem-bg-orb-1" />
+      <div className="ecosystem-bg-orb-2" />
 
       <div className="ecosystem-container">
         
-        {/* Section Header */}
+        {/* Main Header */}
         <motion.div 
           className="ecosystem-header"
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="ecosystem-badge">
+          {/* <div className="ecosystem-badge">
             <Radio style={{ width: '0.875rem', height: '0.875rem' }} />
-            <span>STRATEGIC ECOSYSTEM</span>
-          </div>
+            <span>Healthcare Ecosystem</span>
+          </div> */}
 
-          <h2 className="ecosystem-title">
-            Integrated for{' '}
-            <span className="gradient-text">
-              Clinical Precision
-            </span>
+          <h2 className="ecosystem-main-title">
+            Connected Healthcare.{' '}
+            <span className="gradient-text">Built for Better Outcomes.</span>
           </h2>
 
-          <p className="ecosystem-desc">
-            Adhering to foundational medical data standards and partnering with healthcare pioneers to deliver seamless interoperability, advanced AI diagnostics, and scalable cloud infrastructure.
+          <p className="ecosystem-intro-text">
+            We bring together healthcare providers, technology partners, clinical experts, and industry standards to create secure, interoperable, and scalable healthcare solutions.
+          </p>
+          <p className="ecosystem-intro-text" style={{ marginTop: '-0.5rem' }}>
+            Our ecosystem enables seamless data exchange, intelligent clinical workflows, and reliable integration across modern healthcare environments.
           </p>
         </motion.div>
 
-        {/* Live Interoperability Data Flow Banner */}
-        <motion.div 
-          className="data-flow-banner"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <div style={{ width: '2.25rem', height: '2.25rem', borderRadius: '0.75rem', backgroundColor: 'rgba(0, 55, 114, 0.1)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyCenter: 'center', fontWeight: 'bold' }}>
-              <Zap style={{ width: '1.25rem', height: '1.25rem', color: 'var(--color-accent)' }} />
-            </div>
-            <div>
-              <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--color-slate-900)', fontFamily: 'var(--font-heading)' }}>
-                Active Interoperability Mesh
-              </div>
-              <div style={{ fontSize: '0.6875rem', color: 'var(--color-slate-500)' }}>
-                DICOM 3.0 • HL7 FHIR v4 • NVIDIA Clara AI • AWS HealthOmics
-              </div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', fontFamily: 'monospace', backgroundColor: '#f1f5f9', padding: '0.375rem 0.875rem', borderRadius: '9999px', border: '1px solid #e2e8f0', color: '#334155' }}>
-            <span style={{ width: '0.5rem', height: '0.5rem', borderRadius: '9999px', backgroundColor: '#10b981' }} />
-            <span>Telemetry Pipeline: 100% Synchronized</span>
-          </div>
-        </motion.div>
-
-        {/* Category Filter Tabs */}
-        <div className="category-tab-bar">
-          {categories.map((cat) => {
-            const isActive = activeCategory === cat.id;
+        {/* 4 Core Ecosystem Pillars */}
+        <div className="ecosystem-pillars-grid">
+          {pillars.map((pillar, idx) => {
+            const IconComp = pillar.icon;
             return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`category-tab-btn ${isActive ? 'active' : ''}`}
+              <motion.div
+                key={pillar.id}
+                className="eco-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
               >
-                {cat.label}
-              </button>
+                <div>
+                  <div className="eco-card-top">
+                    <div className="eco-icon-box">
+                      <IconComp style={{ width: '1.75rem', height: '1.75rem' }} />
+                    </div>
+                    <h3 className="eco-card-title">{pillar.title}</h3>
+                  </div>
+
+                  <p className="eco-card-desc">{pillar.desc}</p>
+
+                  {/* Render Tags if present */}
+                  {pillar.tags && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: 'auto' }}>
+                      {pillar.tags.map((tag, tIdx) => (
+                        <span 
+                          key={tIdx} 
+                          style={{
+                            padding: '0.35rem 0.85rem',
+                            borderRadius: '9999px',
+                            backgroundColor: '#eff6ff',
+                            border: '1px solid #bfdbfe',
+                            color: '#1d4ed8',
+                            fontSize: '0.8125rem',
+                            fontWeight: 700,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.35rem'
+                          }}
+                        >
+                          <CheckCircle2 style={{ width: '0.875rem', height: '0.875rem', color: '#2563eb' }} />
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Render SubItems if present */}
+                  {pillar.subItems && (
+                    <div className="eco-items-box">
+                      {pillar.subItems.map((item, iIdx) => (
+                        <div key={iIdx} className="eco-item-row">
+                          <div className="eco-item-name">{item.name}</div>
+                          <div className="eco-item-desc">{item.detail}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
             );
           })}
         </div>
 
-        {/* Interactive Partner Matrix Cards */}
+        {/* An Integrated Healthcare Network Card */}
         <motion.div 
-          layout
-          className="partner-card-grid"
+          className="network-section-card"
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          <AnimatePresence mode="popLayout">
-            {filteredPartners.map((p, idx) => {
-              const IconComp = p.icon;
+          <div className="network-header">
+            <div className="network-badge">
+              <Network style={{ width: '0.875rem', height: '0.875rem' }} />
+              <span>Network Synergy</span>
+            </div>
+            <h3 className="network-title">An Integrated Healthcare Network</h3>
+          </div>
+
+          <div className="network-grid">
+            {networkNodes.map((node, nIdx) => {
+              const NodeIcon = node.icon;
               return (
-                <motion.div
-                  key={p.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  whileHover={{ y: -6 }}
-                  className="partner-card"
-                >
-                  <div className="partner-card-hover-line" />
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <div className="partner-icon-box">
-                        <IconComp style={{ width: '1.5rem', height: '1.5rem' }} />
-                      </div>
-
-                      <span style={{ padding: '0.25rem 0.75rem', borderRadius: '9999px', fontSize: '0.625rem', fontWeight: 700, letterSpacing: '0.05em', textTransform: 'uppercase', border: '1px solid #bfdbfe', backgroundColor: '#eff6ff', color: '#1d4ed8' }}>
-                        {p.tag}
-                      </span>
-                    </div>
-
-                    <div>
-                      <div style={{ fontSize: '0.625rem', fontWeight: 700, color: 'var(--color-slate-400)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.25rem' }}>
-                        {p.categoryLabel}
-                      </div>
-                      <h3 className="partner-card-title">
-                        {p.title}
-                      </h3>
-                    </div>
-
-                    <p style={{ fontSize: '0.875rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)', lineHeight: 1.625 }}>
-                      {p.desc}
-                    </p>
+                <div key={nIdx} className="network-node-card">
+                  <div className="network-node-icon">
+                    <NodeIcon style={{ width: '1.25rem', height: '1.25rem' }} />
                   </div>
-
-                  <div style={{ paddingTop: '1.5rem', marginTop: '1.5rem', borderTop: '1px solid var(--color-slate-100)' }}>
-                    <button
-                      onClick={() => openModal(p.modalType)}
-                      className="partner-card-action"
-                    >
-                      <span>{p.actionText}</span>
-                      <ArrowRight style={{ width: '1rem', height: '1rem' }} />
-                    </button>
-                  </div>
-                </motion.div>
+                  <div className="network-node-title">{node.title}</div>
+                  <div className="network-node-list">{node.list}</div>
+                </div>
               );
             })}
-          </AnimatePresence>
+          </div>
+        </motion.div>
+
+        {/* Callout Summary Banner */}
+        <motion.div 
+          className="ecosystem-callout"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 className="callout-title">
+            Built to Connect. <span className="gradient-text">Designed to Scale.</span>
+          </h3>
+          <p className="callout-text">
+            Our ecosystem approach helps healthcare organizations adopt innovative technology while maintaining interoperability, scalability, and a strong focus on clinical needs.
+          </p>
+
+          {openModal && (
+            <button
+              onClick={() => openModal('book-demo')}
+              className="callout-action-btn"
+            >
+              <span>Explore Partnership & Integrations</span>
+              <ArrowRight style={{ width: '1.125rem', height: '1.125rem' }} />
+            </button>
+          )}
         </motion.div>
 
       </div>

@@ -7,7 +7,7 @@ export default function OurTeam({ openModal }) {
   const teamMembers = [
     {
       id: 'subash',
-      name: "Dr. A. Subash",
+      name: "Dr. M. Subash",
       role: "Founder & CEO",
       badge: "Leadership",
       bio: "Visionary leader bridging the gap between rigorous medical practice and scalable technology. With over 15 years in clinical diagnostics, Dr. Subash spearheads Neuerung's strategic direction, ensuring all innovations meet the highest standards of clinical precision and patient safety.",

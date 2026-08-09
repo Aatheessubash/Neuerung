@@ -285,9 +285,9 @@ export default function ContactFooter({ openModal }) {
               Platform
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
-              <li><a href="#solutions">Solutions</a></li>
-              <li><a href="#who-are-we-with">Mission</a></li>
-              <li><a href="#how-is-it-done">Why Choose Us</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#who-are-we-with">Ecosystem</a></li>
             </ul>
           </div>
 
@@ -296,7 +296,7 @@ export default function ContactFooter({ openModal }) {
               Company
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
-              <li><a href="#our-team">About</a></li>
+              <li><a href="#our-team">Our Team</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </div>

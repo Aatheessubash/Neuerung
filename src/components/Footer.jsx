@@ -88,7 +88,7 @@ export default function Footer() {
               Quick Navigation
             </h4>
             <ul className="space-y-2.5 text-sm">
-              {['Home', 'About', 'Solutions', 'Mission', 'Why Us', 'Contact'].map((item) => (
+              {['Home', 'About Us', 'Products', 'Ecosystem', 'Our Team', 'Contact'].map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase().replace(' ', '-')}`}
