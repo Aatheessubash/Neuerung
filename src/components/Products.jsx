@@ -168,11 +168,11 @@ export default function Products({ openModal }) {
           </div> */}
 
           <h2 className="products-title">
-            The <span className="gradient-text">HEXA Product Line</span>
+             Our<span className="gradient-text"> Products</span>
           </h2>
 
           <p className="products-subtext">
-            Four specialized, fully integrated healthcare platforms engineered to elevate patient outcomes, support physicians, optimize hospital operations, and automate pharmacy workflows.
+            Hexa connects patients, doctors, and healthcare providers through integrated digital solutions, enabling personalized care, seamless appointments, efficient workflows, and specialized support for geriatric care, dementia, and rehabilitation.
           </p>
         </motion.div>
 
