@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Phone, Send, CheckCircle2, Building, User, MessageSquare, Globe } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, CheckCircle2, Building, User, MessageSquare, Globe, Navigation } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { COMPANY } from '../constants/company';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -111,11 +112,18 @@ export default function Contact() {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <div className="text-xs text-slate-400 font-semibold uppercase">Headquarters</div>
-                  <div className="text-sm font-bold text-slate-800">
-                    Madurai, Tamil Nadu, India
-                  </div>
-                  <div className="text-xs text-slate-500 mt-0.5">Registered Office & Development Hub</div>
+                  <div className="text-xs text-slate-400 font-semibold uppercase">Registered Office</div>
+                  <a
+                    href={COMPANY.placeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm font-bold text-slate-800 hover:text-blue-600 transition-colors"
+                  >
+                    {COMPANY.address.line1},<br />
+                    {COMPANY.address.line2},<br />
+                    {COMPANY.address.line3},<br />
+                    {COMPANY.address.state}, {COMPANY.address.country}
+                  </a>
                 </div>
               </div>
 
@@ -138,12 +146,12 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Embedded Google Map Placeholder / Madurai Iframe */}
+            {/* Embedded Google Map with Logo Pin */}
             <div className="bg-white rounded-3xl p-3 border border-slate-200/80 shadow-lg overflow-hidden">
               <div className="relative w-full h-56 rounded-2xl overflow-hidden">
                 <iframe
-                  title="Neuerung HealthTech Madurai Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15723.364239841804!2d78.1189!3d9.9252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00c582b1189633%3A0xdc94e5a9c0019e0d!2sMadurai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  title="Neuerung HealthTech – Nagamalai, Madurai"
+                  src={COMPANY.mapEmbedUrl}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -152,6 +160,39 @@ export default function Contact() {
                   referrerPolicy="no-referrer-when-downgrade"
                   className="w-full h-full"
                 ></iframe>
+
+                {/* Navigate Button — bottom-right corner */}
+                <a
+                  href={COMPANY.directionsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={`Get Directions to ${COMPANY.shortName}`}
+                  style={{
+                    position: 'absolute',
+                    bottom: '10px',
+                    right: '10px',
+                    zIndex: 20,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    backgroundColor: '#1d4ed8',
+                    color: '#ffffff',
+                    padding: '7px 12px',
+                    borderRadius: '999px',
+                    fontSize: '12px',
+                    fontWeight: 700,
+                    fontFamily: 'Poppins, sans-serif',
+                    textDecoration: 'none',
+                    boxShadow: '0 4px 14px rgba(29,78,216,0.45)',
+                    transition: 'background-color 0.2s, transform 0.15s',
+                    whiteSpace: 'nowrap'
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#1e40af'; e.currentTarget.style.transform = 'scale(1.05)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1)'; }}
+                >
+                  <Navigation size={13} style={{ flexShrink: 0 }} />
+                  Get Directions
+                </a>
               </div>
             </div>
 

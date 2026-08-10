@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Logo from './Logo';
-import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2, Navigation } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ContactFooter.css';
+import { COMPANY } from '../constants/company';
 
 export default function ContactFooter({ openModal }) {
   const [form, setForm] = useState({
@@ -221,10 +222,12 @@ export default function ContactFooter({ openModal }) {
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                   <MapPin style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)', marginTop: '0.25rem', flexShrink: 0 }} />
                   <div>
-                    <p style={{ fontWeight: 'bold', color: 'var(--color-body-text)', marginBottom: '0.25rem' }}>Neuerung HealthTech Innovations</p>
-                    <p>Tech Park, Level 4</p>
-                    <p>Madurai, Tamil Nadu 625001</p>
-                    <p>India</p>
+                    <p style={{ fontWeight: 'bold', color: 'var(--color-body-text)', marginBottom: '0.25rem' }}>{COMPANY.name}</p>
+                    <p>{COMPANY.address.line1},</p>
+                    <p>{COMPANY.address.line2},</p>
+                    <p>{COMPANY.address.line3},</p>
+                    <p>{COMPANY.address.state},</p>
+                    <p>{COMPANY.address.country}</p>
                   </div>
                 </div>
 
@@ -249,8 +252,8 @@ export default function ContactFooter({ openModal }) {
             {/* Embedded Google Map Card */}
             <div style={{ borderRadius: '1rem', overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.05)', height: '16rem', position: 'relative', border: '1px solid var(--color-slate-200)', backgroundColor: '#f1f5f9' }}>
               <iframe
-                title="Neuerung Madurai Headquarters Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.123456789!2d78.123456789!3d9.923456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00c58242173863%3A0x706106051137ee1!2sMadurai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
+                title="Neuerung HealthTech – Nagamalai, Madurai"
+                src={COMPANY.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: 'grayscale(0.5) contrast(1.2)' }}
@@ -258,12 +261,39 @@ export default function ContactFooter({ openModal }) {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-              <div style={{ position: 'absolute', bottom: '0.75rem', right: '0.75rem', pointerEvents: 'none' }}>
-                <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(4px)', border: '1px solid var(--color-slate-200)', padding: '0.375rem 0.75rem', borderRadius: '9999px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <MapPin style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)' }} />
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-primary)' }}>Tech Park, Madurai</span>
-                </div>
-              </div>
+
+              {/* Navigate Button — bottom-right corner */}
+              <a
+                href={COMPANY.directionsUrl}
+                target="_blank"
+                rel="noreferrer"
+                title={`Get Directions to ${COMPANY.shortName}`}
+                style={{
+                  position: 'absolute',
+                  bottom: '10px',
+                  right: '10px',
+                  zIndex: 20,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  backgroundColor: '#1d4ed8',
+                  color: '#ffffff',
+                  padding: '7px 12px',
+                  borderRadius: '999px',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  fontFamily: 'var(--font-heading, Poppins, sans-serif)',
+                  textDecoration: 'none',
+                  boxShadow: '0 4px 14px rgba(29,78,216,0.45)',
+                  transition: 'background-color 0.2s, transform 0.15s',
+                  whiteSpace: 'nowrap'
+                }}
+                onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#1e40af'; e.currentTarget.style.transform = 'scale(1.05)'; }}
+                onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1)'; }}
+              >
+                <Navigation size={13} style={{ flexShrink: 0 }} />
+                Get Directions
+              </a>
             </div>
           </motion.div>
 
