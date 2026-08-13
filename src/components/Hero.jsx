@@ -1,13 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Play, TrendingUp, Monitor } from 'lucide-react';
+import { Sparkles, ArrowRight, Stethoscope, Users, Building2, Activity, Server, Network } from 'lucide-react';
 import './Hero.css';
-import dicomScanImg from '../assets/dicom_chest_scan.png';
 
 export default function Hero({ openModal }) {
+  const handleScroll = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <section id="home" className="hero-section">
-      
       {/* Background Subtle Gradient & Mesh */}
       <div className="hero-bg-gradient" />
       <div className="glow-dot hero-glow-dot" />
@@ -28,47 +33,46 @@ export default function Hero({ openModal }) {
               whileHover={{ scale: 1.03 }}
             >
               <Sparkles className="hero-badge-icon" />
-              <span>Healthcare, Reimagined</span>
+              <span>INTELLIGENT HEALTHCARE TECHNOLOGY</span>
             </motion.div>
 
             {/* Headline */}
             <h1 className="hero-title">
-              Clinical AI Engine:{' '}
+              Healthcare,{' '}
               <span className="gradient-text">
-                Precision Diagnostics
+                Reimagined.
               </span>
             </h1>
 
             {/* Subtext */}
             <p className="hero-description">
-              Empowering critical care with real-time risk scoring, predictive triage, and anomaly detection. Seamlessly integrated into your existing EHR and DICOM workflows for immediate clinical impact.
+              Intelligent, connected and clinically relevant technology designed to support healthcare professionals, connect care providers and enable better patient care.
             </p>
 
-            {/* Dual CTAs */}
+            {/* Dual CTAs - Primary Conversion Journey */}
             <div className="hero-cta-group">
               <motion.button
-                onClick={() => openModal('tech-specs')}
-                whileHover={{ scale: 1.04, y: -2 }}
+                onClick={() => handleScroll('hexa')}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="hero-btn-primary"
               >
-                <span>Explore Technical Specs</span>
+                <span>Explore Hexa</span>
                 <ArrowRight style={{ width: '1rem', height: '1rem', marginLeft: '0.5rem' }} />
               </motion.button>
 
               <motion.button
-                onClick={() => openModal('video-demo')}
-                whileHover={{ scale: 1.04, y: -2 }}
+                onClick={() => handleScroll('contact')}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="hero-btn-secondary"
               >
-                <Play style={{ width: '1rem', height: '1rem', marginRight: '0.5rem', fill: 'currentColor' }} />
-                <span>Watch System Demo</span>
+                <span>Talk to Us</span>
               </motion.button>
             </div>
           </motion.div>
 
-          {/* Right Column: Visual Monitor Showcase Card */}
+          {/* Right Column: Connected Ecosystem Diagram (Doctor ↔ Hexa ↔ Service Provider ↔ Patient) */}
           <motion.div
             className="hero-visual-col"
             initial={{ opacity: 0, scale: 0.92, y: 30 }}
@@ -77,7 +81,7 @@ export default function Hero({ openModal }) {
           >
             <motion.div 
               className="hero-visual-card"
-              animate={{ y: [0, -8, 0] }}
+              animate={{ y: [0, -6, 0] }}
               transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
             >
               
@@ -86,85 +90,143 @@ export default function Hero({ openModal }) {
                 <div className="live-inference-badge">
                   <span className="pulse-dot" />
                   <span className="live-inference-text">
-                    LIVE INFERENCE
+                    CONNECTED ECOSYSTEM
                   </span>
+                </div>
+                <div style={{ fontSize: '0.75rem', fontFamily: 'monospace', color: '#94a3b8' }}>
+                  HEXA PLATFORM
                 </div>
               </div>
 
-              {/* Monitor Graphic Frame */}
+              {/* Connected Stakeholders Visual Diagram */}
               <div className="monitor-frame">
-                
-                {/* Desktop Monitor Screen Mockup */}
-                <div className="monitor-screen">
+                <div className="monitor-screen" style={{ padding: '1.25rem 1rem' }}>
                   
-                  {/* Top Bar of DICOM Viewer */}
-                  <div className="monitor-screen-top">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontFamily: 'monospace' }}>
-                      <Monitor style={{ width: '1rem', height: '1rem', color: '#38BDF8' }} />
-                      <span>Neuerung HealthTech — Clinical AI Engine</span>
+                  {/* Central Hexa Hub */}
+                  <div style={{ textAlign: 'center', margin: '0.25rem 0 1rem 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div style={{ 
+                      display: 'inline-flex', 
+                      alignItems: 'center', 
+                      gap: '0.5rem', 
+                      backgroundColor: 'rgba(37, 99, 235, 0.15)', 
+                      border: '1px solid rgba(56, 189, 248, 0.4)', 
+                      padding: '0.5rem 1rem', 
+                      borderRadius: '9999px',
+                      color: '#ffffff',
+                      boxShadow: '0 0 20px rgba(56, 189, 248, 0.25)'
+                    }}>
+                      <Network style={{ width: '1.25rem', height: '1.25rem', color: '#38bdf8' }} />
+                      <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '0.875rem', letterSpacing: '0.05em' }}>HEXA PLATFORM CORE</span>
                     </div>
-                    <span style={{ color: '#34d399', fontFamily: 'monospace', fontSize: '0.625rem', backgroundColor: '#022c22', padding: '0.125rem 0.5rem', borderRadius: '0.25rem' }}>
+                    <div style={{ fontSize: '0.6875rem', color: '#94a3b8', marginTop: '0.375rem', fontFamily: 'monospace', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                      <abbr title="Artificial Intelligence">AI</abbr> • <abbr title="Digital Imaging & Communications in Medicine">DICOM</abbr> • <abbr title="Internet of Things Telemetry Sensors">IoT</abbr> • <abbr title="Electronic Health Record">EHR</abbr> Data Layer
+                    </div>
+                  </div>
+
+                  {/* Connected Grid (Doctor, Service Provider, Patient, Telemetry) */}
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.75rem' }}>
+                    
+                    {/* Node 1: Doctor */}
+                    <div style={{ 
+                      backgroundColor: 'rgba(15, 23, 42, 0.75)', 
+                      border: '1px solid rgba(56, 189, 248, 0.25)', 
+                      borderRadius: '0.75rem', 
+                      padding: '0.75rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.625rem'
+                    }}>
+                      <div style={{ width: '2rem', height: '2rem', borderRadius: '0.5rem', backgroundColor: 'rgba(99, 102, 241, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Stethoscope style={{ width: '1.125rem', height: '1.125rem', color: '#818cf8' }} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#f8fafc' }}>Doctors</div>
+                        <div style={{ fontSize: '0.6875rem', color: '#94a3b8' }}>AI & Clinical Records</div>
+                      </div>
+                    </div>
+
+                    {/* Node 2: Service Provider */}
+                    <div style={{ 
+                      backgroundColor: 'rgba(15, 23, 42, 0.75)', 
+                      border: '1px solid rgba(251, 191, 36, 0.25)', 
+                      borderRadius: '0.75rem', 
+                      padding: '0.75rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.625rem'
+                    }}>
+                      <div style={{ width: '2rem', height: '2rem', borderRadius: '0.5rem', backgroundColor: 'rgba(245, 158, 11, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Building2 style={{ width: '1.125rem', height: '1.125rem', color: '#fbbf24' }} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#f8fafc' }}>Care Providers</div>
+                        <div style={{ fontSize: '0.6875rem', color: '#94a3b8' }}>Hospitals & Labs</div>
+                      </div>
+                    </div>
+
+                    {/* Node 3: Patient */}
+                    <div style={{ 
+                      backgroundColor: 'rgba(15, 23, 42, 0.75)', 
+                      border: '1px solid rgba(52, 211, 153, 0.25)', 
+                      borderRadius: '0.75rem', 
+                      padding: '0.75rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.625rem'
+                    }}>
+                      <div style={{ width: '2rem', height: '2rem', borderRadius: '0.5rem', backgroundColor: 'rgba(16, 185, 129, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Users style={{ width: '1.125rem', height: '1.125rem', color: '#34d399' }} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#f8fafc' }}>Patients</div>
+                        <div style={{ fontSize: '0.6875rem', color: '#94a3b8' }}>Care Journey Access</div>
+                      </div>
+                    </div>
+
+                    {/* Node 4: Healthcare Data & IoT */}
+                    <div style={{ 
+                      backgroundColor: 'rgba(15, 23, 42, 0.75)', 
+                      border: '1px solid rgba(168, 85, 247, 0.25)', 
+                      borderRadius: '0.75rem', 
+                      padding: '0.75rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.625rem'
+                    }}>
+                      <div style={{ width: '2rem', height: '2rem', borderRadius: '0.5rem', backgroundColor: 'rgba(168, 85, 247, 0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <Activity style={{ width: '1.125rem', height: '1.125rem', color: '#c084fc' }} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#f8fafc' }}>IoT Sensors</div>
+                        <div style={{ fontSize: '0.6875rem', color: '#94a3b8' }}>Vital Sign Telemetry</div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Synchronized Status Bar */}
+                  <div style={{ 
+                    fontSize: '0.6875rem', 
+                    fontFamily: 'monospace', 
+                    color: '#64748b', 
+                    display: 'flex', 
+                    justify: 'space-between', 
+                    alignItems: 'center',
+                    marginTop: '0.875rem', 
+                    paddingTop: '0.625rem', 
+                    borderTop: '1px solid rgba(255,255,255,0.08)' 
+                  }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', color: '#38bdf8' }}>
+                      <Server style={{ width: '0.875rem', height: '0.875rem' }} />
+                      <span>Connected Healthcare Architecture</span>
+                    </span>
+                    <span style={{ color: '#34d399', backgroundColor: 'rgba(6, 78, 59, 0.6)', padding: '0.125rem 0.5rem', borderRadius: '0.25rem', fontSize: '0.625rem' }}>
                       SYNCHRONIZED
                     </span>
                   </div>
 
-                  {/* DICOM Chest Scan Visual Simulation */}
-                  <div className="dicom-grid">
-                    <div className="dicom-image-box">
-                      
-                      {/* Active DICOM Medical Laser Beam Scanner Line */}
-                      <div className="animate-laser-scan" />
-
-                      <img 
-                        src={dicomScanImg} 
-                        alt="DICOM Clinical AI Scan" 
-                        className="dicom-img"
-                      />
-
-                      <div className="dicom-overlay-tag">
-                        <span style={{ width: '0.375rem', height: '0.375rem', borderRadius: '9999px', backgroundColor: '#38BDF8' }} />
-                        <span>Targeting Anomaly #01</span>
-                      </div>
-                    </div>
-
-                    <div className="dicom-stats-box">
-                      <div className="stat-item">
-                        <div style={{ color: '#94a3b8' }}>Risk Assessment</div>
-                        <div style={{ color: '#38BDF8', fontWeight: 'bold', fontSize: '0.75rem', marginTop: '0.125rem' }}>High Sensitivity</div>
-                      </div>
-                      <div className="stat-item">
-                        <div style={{ color: '#94a3b8' }}>Model Confidence</div>
-                        <div style={{ color: '#34d399', fontWeight: 'bold', fontSize: '0.75rem', marginTop: '0.125rem' }}>99.2%</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div style={{ fontSize: '0.625rem', fontFamily: 'monospace', color: '#64748b', display: 'flex', justifyContent: 'space-between', paddingTop: '0.25rem', borderTop: '1px solid #1e293b' }}>
-                    <span>EHR Sync: PT-88492-X</span>
-                    <span>Modality: DICOM 3.0</span>
-                  </div>
-
                 </div>
               </div>
-
-              {/* Floating Accuracy Badge (Bottom Right) */}
-              <motion.div 
-                className="hero-floating-accuracy"
-                animate={{ y: [0, 6, 0] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 0.8 }}
-              >
-                <div style={{ padding: '0.625rem', borderRadius: '0.75rem', backgroundColor: '#ecfdf5', color: '#059669' }}>
-                  <TrendingUp style={{ width: '1.25rem', height: '1.25rem' }} />
-                </div>
-                <div>
-                  <div style={{ fontSize: '0.6875rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    ICU Alert Accuracy
-                  </div>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a', fontFamily: 'var(--font-heading)' }}>
-                    99.2%
-                  </div>
-                </div>
-              </motion.div>
 
             </motion.div>
           </motion.div>

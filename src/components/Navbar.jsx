@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, ArrowUp, ChevronRight } from 'lucide-react';
+import { Menu, X, ArrowUp, ChevronRight, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import './Navbar.css';
@@ -8,6 +8,9 @@ export default function Navbar({ openModal }) {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [hexaDropdownOpen, setHexaDropdownOpen] = useState(false);
+  const [solutionsDropdownOpen, setSolutionsDropdownOpen] = useState(false);
+  
   const isNavClicking = useRef(false);
   const scrollTimeout = useRef(null);
 
@@ -20,10 +23,34 @@ export default function Navbar({ openModal }) {
 
   const navLinks = [
     { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About Us', href: '#about', id: 'about' },
-    { name: 'Products', href: '#products', id: 'products' },
-    { name: 'Ecosystem', href: '#who-are-we-with', id: 'who-are-we-with' },
-    { name: 'Our Team', href: '#our-team', id: 'our-team' },
+    { name: 'About', href: '#about', id: 'about' },
+    { 
+      name: 'Hexa', 
+      href: '#hexa', 
+      id: 'hexa',
+      hasDropdown: true,
+      subItems: [
+        { name: 'Hexa Overview', id: 'hexa' },
+        { name: 'Hexa Doctor', id: 'hexa-doctor' },
+        { name: 'Hexa Service', id: 'hexa-service' },
+        { name: 'Hexa Pharmacy', id: 'hexa-pharmacy' },
+        { name: 'Hexa for Patients', id: 'hexa-patients' },
+      ]
+    },
+    { 
+      name: 'Solutions', 
+      href: '#solutions', 
+      id: 'solutions',
+      hasDropdown: true,
+      subItems: [
+        { name: 'Geriatric Care', id: 'geriatric-care' },
+        { name: 'Dementia Care', id: 'dementia-care' },
+        { name: 'Rehabilitation', id: 'rehabilitation' },
+      ]
+    },
+    { name: 'Technology', href: '#technology', id: 'technology' },
+    { name: 'Who We Serve', href: '#who-we-serve', id: 'who-we-serve' },
+    { name: 'Insights', href: '#insights', id: 'insights' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
@@ -33,7 +60,6 @@ export default function Navbar({ openModal }) {
 
       if (isNavClicking.current) return;
 
-      // Bottom of page detection -> activate 'contact'
       const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60);
       if (isAtBottom) {
         setActiveSection('contact');
@@ -66,23 +92,37 @@ export default function Navbar({ openModal }) {
     };
   }, []);
 
-  const handleNavClick = (e, href, id) => {
+  const handleNavClick = (e, id) => {
     if (e) e.preventDefault();
 
-    setMobileMenuOpen(false);
     isNavClicking.current = true;
     setActiveSection(id);
 
+    // Close all menus immediately
+    setMobileMenuOpen(false);
+    setHexaDropdownOpen(false);
+    setSolutionsDropdownOpen(false);
+
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
 
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Execute smooth scroll after a brief delay so layout settles post-drawer close
+    setTimeout(() => {
+      if (id === 'home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const el = document.getElementById(id);
+        if (el) {
+          const navHeight = 84; // Fixed header height offset
+          const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - navHeight;
+
+          window.scrollTo({
+            top: Math.max(0, offsetPosition),
+            behavior: 'smooth'
+          });
+        }
       }
-    }
+    }, 60);
 
     scrollTimeout.current = setTimeout(() => {
       isNavClicking.current = false;
@@ -106,7 +146,7 @@ export default function Navbar({ openModal }) {
         <div className="navbar-inner-container">
           
           {/* Brand Logo */}
-          <a href="#home" onClick={(e) => handleNavClick(e, '#home', 'home')} className="navbar-brand-link">
+          <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className="navbar-brand-link">
             <Logo showText={true} size="normal" />
           </a>
 
@@ -114,11 +154,160 @@ export default function Navbar({ openModal }) {
           <nav className="navbar-desktop-nav">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
+              
+              if (link.name === 'Hexa') {
+                return (
+                  <div 
+                    key={link.name} 
+                    className="nav-dropdown-wrapper"
+                    onMouseEnter={() => setHexaDropdownOpen(true)}
+                    onMouseLeave={() => setHexaDropdownOpen(false)}
+                    style={{ position: 'relative' }}
+                  >
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.id)}
+                      className={`navbar-nav-link ${isActive ? 'active' : ''}`}
+                      style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown style={{ width: '0.875rem', height: '0.875rem' }} />
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeTabUnderline"
+                          className="navbar-active-underline"
+                          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        />
+                      )}
+                    </a>
+
+                    <AnimatePresence>
+                      {hexaDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.2 }}
+                          style={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            backgroundColor: '#ffffff',
+                            borderRadius: '0.875rem',
+                            padding: '0.5rem',
+                            minWidth: '11rem',
+                            boxShadow: '0 10px 25px rgba(0,0,0,0.12)',
+                            border: '1px solid var(--color-slate-200, #e2e8f0)',
+                            zIndex: 100
+                          }}
+                        >
+                          {link.subItems.map(sub => (
+                            <a
+                              key={sub.id}
+                              href={`#${sub.id}`}
+                              onClick={(e) => handleNavClick(e, sub.id)}
+                              style={{
+                                display: 'block',
+                                padding: '0.5rem 0.75rem',
+                                borderRadius: '0.5rem',
+                                fontSize: '0.8125rem',
+                                fontWeight: 600,
+                                color: 'var(--color-slate-800, #1e293b)',
+                                textDecoration: 'none',
+                                transition: 'background-color 0.15s'
+                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f1f5f9'}
+                              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                            >
+                              {sub.name}
+                            </a>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              }
+
+              if (link.name === 'Solutions') {
+                return (
+                  <div 
+                    key={link.name} 
+                    className="nav-dropdown-wrapper"
+                    onMouseEnter={() => setSolutionsDropdownOpen(true)}
+                    onMouseLeave={() => setSolutionsDropdownOpen(false)}
+                    style={{ position: 'relative' }}
+                  >
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.id)}
+                      className={`navbar-nav-link ${isActive ? 'active' : ''}`}
+                      style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown style={{ width: '0.875rem', height: '0.875rem' }} />
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeTabUnderline"
+                          className="navbar-active-underline"
+                          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        />
+                      )}
+                    </a>
+
+                    <AnimatePresence>
+                      {solutionsDropdownOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.2 }}
+                          style={{
+                            position: 'absolute',
+                            top: '100%',
+                            left: 0,
+                            backgroundColor: '#ffffff',
+                            borderRadius: '0.875rem',
+                            padding: '0.5rem',
+                            minWidth: '11rem',
+                            boxShadow: '0 10px 25px rgba(0,0,0,0.12)',
+                            border: '1px solid var(--color-slate-200, #e2e8f0)',
+                            zIndex: 100
+                          }}
+                        >
+                          {link.subItems.map(sub => (
+                            <a
+                              key={sub.id}
+                              href={`#${sub.id}`}
+                              onClick={(e) => handleNavClick(e, sub.id)}
+                              style={{
+                                display: 'block',
+                                padding: '0.5rem 0.75rem',
+                                borderRadius: '0.5rem',
+                                fontSize: '0.8125rem',
+                                fontWeight: 600,
+                                color: 'var(--color-slate-800, #1e293b)',
+                                textDecoration: 'none',
+                                transition: 'background-color 0.15s'
+                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f1f5f9'}
+                              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                            >
+                              {sub.name}
+                            </a>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              }
+
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href, link.id)}
+                  onClick={(e) => handleNavClick(e, link.id)}
                   className={`navbar-nav-link ${isActive ? 'active' : ''}`}
                 >
                   {link.name}
@@ -137,12 +326,12 @@ export default function Navbar({ openModal }) {
           {/* Actions */}
           <div className="navbar-actions">
             <motion.button
-              onClick={() => openModal('book-demo')}
+              onClick={() => openModal && openModal('book-demo')}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               className="navbar-demo-btn"
             >
-              Book a Demo
+              Request a Demo
             </motion.button>
 
             {/* Mobile Menu Toggle Button */}
@@ -170,15 +359,31 @@ export default function Navbar({ openModal }) {
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
                 return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href, link.id)}
-                    className={`navbar-mobile-link ${isActive ? 'active' : ''}`}
-                  >
-                    <span>{link.name}</span>
-                    <ChevronRight style={{ width: '1rem', height: '1rem', opacity: isActive ? 1 : 0.4 }} />
-                  </a>
+                  <React.Fragment key={link.name}>
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.id)}
+                      className={`navbar-mobile-link ${isActive ? 'active' : ''}`}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronRight style={{ width: '1rem', height: '1rem', opacity: isActive ? 1 : 0.4 }} />
+                    </a>
+
+                    {link.subItems && (
+                      <div style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.375rem', marginBottom: '0.5rem' }}>
+                        {link.subItems.map(sub => (
+                          <a
+                            key={sub.id}
+                            href={`#${sub.id}`}
+                            onClick={(e) => handleNavClick(e, sub.id)}
+                            style={{ fontSize: '0.8125rem', color: '#64748b', textDecoration: 'none', padding: '0.375rem 0.5rem', display: 'block' }}
+                          >
+                            • {sub.name}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </React.Fragment>
                 );
               })}
 
@@ -186,11 +391,11 @@ export default function Navbar({ openModal }) {
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
-                    openModal('book-demo');
+                    if (openModal) openModal('book-demo');
                   }}
                   className="navbar-mobile-contact-btn"
                 >
-                  Book a Demo
+                  Request a Demo
                 </button>
               </div>
             </motion.div>

@@ -18,37 +18,34 @@ import './WhoAreWeWith.css';
 export default function WhoAreWeWith({ openModal }) {
   const pillars = [
     {
-      id: 'providers',
-      icon: Building2,
-      title: 'Healthcare Providers',
-      desc: 'Collaborating with hospitals, clinics, and healthcare organizations to understand real-world clinical needs and develop solutions that fit existing workflows.',
-      tags: ['Hospitals', 'Clinics', 'Diagnostic Centers']
+      id: 'geriatric',
+      icon: Users,
+      title: 'Geriatric Care',
+      desc: 'Technology-enabled care designed around the evolving healthcare needs of older adults.',
+      tags: ['Older Adults', 'Specialised Care', 'Monitoring']
     },
     {
-      id: 'clinical',
+      id: 'dementia',
       icon: Stethoscope,
-      title: 'Clinical & Research Partners',
-      desc: 'Working with clinical and research communities to support validation, continuous improvement, and evidence-based development of healthcare technologies.',
-      tags: ['Clinicians', 'Researchers', 'Medical Institutions']
+      title: 'Dementia Care',
+      desc: 'Connected care solutions supporting individuals, caregivers and healthcare professionals throughout the dementia care journey.',
+      tags: ['Individuals', 'Caregivers', 'Clinical Support']
     },
     {
-      id: 'standards',
+      id: 'rehab',
+      icon: Building2,
+      title: 'Rehabilitation',
+      desc: 'AI-integrated rehabilitation solutions designed to monitor recovery, support therapy and provide greater visibility into patient progress.',
+      tags: ['Recovery Tracking', 'Therapy Support', 'Progress Visibility']
+    },
+    {
+      id: 'trust',
       icon: ShieldCheck,
-      title: 'Healthcare Standards',
-      desc: 'Designed with established healthcare interoperability standards to support secure and consistent exchange of medical and clinical data across systems.',
+      title: 'Trust & Responsibility',
+      desc: 'Built with trust at the core — secure information handling, privacy protection, and clinically validated connected healthcare data.',
       subItems: [
-        { name: 'DICOM', detail: 'Medical imaging and diagnostic data interoperability.' },
-        { name: 'HL7 / FHIR', detail: 'Structured exchange of healthcare and patient information.' }
-      ]
-    },
-    {
-      id: 'infrastructure',
-      icon: Cpu,
-      title: 'AI & Cloud Infrastructure',
-      desc: 'Leveraging modern AI, cloud, and data technologies to build scalable healthcare applications capable of supporting complex clinical and operational workloads.',
-      subItems: [
-        { name: 'AI & Machine Learning', detail: 'Intelligent analysis, prediction, and decision-support capabilities.' },
-        { name: 'Cloud Infrastructure', detail: 'Scalable infrastructure for secure data processing, storage, and application delivery.' }
+        { name: 'Data Security & Privacy', detail: 'Protected health data handling and access control.' },
+        { name: 'Clinical Validation', detail: 'Responsible technology designed for real healthcare environments.' }
       ]
     }
   ];
@@ -97,15 +94,12 @@ export default function WhoAreWeWith({ openModal }) {
           </div> */}
 
           <h2 className="ecosystem-main-title">
-            Connected Healthcare.{' '}
-            <span className="gradient-text">Built for Better Outcomes.</span>
+            Built for every{' '}
+            <span className="gradient-text">point of care.</span>
           </h2>
 
           <p className="ecosystem-intro-text">
-            We bring together healthcare providers, technology partners, clinical experts, and industry standards to create secure, interoperable, and scalable healthcare solutions.
-          </p>
-          <p className="ecosystem-intro-text" style={{ marginTop: '-0.5rem' }}>
-            Our ecosystem enables seamless data exchange, intelligent clinical workflows, and reliable integration across modern healthcare environments.
+            Healthcare is an ecosystem. Our technologies are designed to support the people, organisations and environments that contribute to the healthcare journey.
           </p>
         </motion.div>
 
@@ -216,10 +210,10 @@ export default function WhoAreWeWith({ openModal }) {
           transition={{ duration: 0.5 }}
         >
           <h3 className="callout-title">
-            Built to Connect. <span className="gradient-text">Designed to Scale.</span>
+            Technology with <span className="gradient-text">healthcare purpose.</span>
           </h3>
           <p className="callout-text">
-            Our ecosystem approach helps healthcare organizations adopt innovative technology while maintaining interoperability, scalability, and a strong focus on clinical needs.
+            Healthcare technology should be intelligent — but it should also be relevant, connected and practical.
           </p>
 
           {openModal && (

@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle2, ShieldCheck, Mail, Phone, Building, User, Calendar, MessageSquare, Send, Play } from 'lucide-react';
+import { X, CheckCircle2, Send, ArrowRight } from 'lucide-react';
 import Logo from './Logo';
 import './Modals.css';
 
 export default function Modals({ activeModal, closeModal, modalData }) {
   const [demoForm, setDemoForm] = useState({
     name: '',
-    company: '',
+    organisation: '',
     email: '',
     phone: '',
-    businessType: 'Hospital Network',
+    areaOfInterest: 'Hexa Doctor',
     date: '',
-    notes: ''
+    message: ''
   });
 
   const [demoSubmitted, setDemoSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (modalData && modalData.name) {
+      setDemoForm(prev => ({
+        ...prev,
+        areaOfInterest: modalData.name.includes('Doctor') ? 'Hexa Doctor' :
+                         modalData.name.includes('Service') ? 'Hexa Service' :
+                         modalData.name.includes('Pharmacy') ? 'Hexa Pharmacy' :
+                         modalData.name.includes('Geriatric') ? 'Geriatric Care' :
+                         modalData.name.includes('Dementia') ? 'Dementia Care' :
+                         modalData.name.includes('Rehab') ? 'Rehabilitation' : 'General Enquiry'
+      }));
+    }
+  }, [modalData]);
 
   const handleDemoSubmit = (e) => {
     e.preventDefault();
@@ -24,16 +38,17 @@ export default function Modals({ activeModal, closeModal, modalData }) {
     setTimeout(() => {
       setIsSubmitting(false);
       setDemoSubmitted(true);
-    }, 800);
+    }, 700);
   };
 
   if (!activeModal) return null;
 
   return (
     <AnimatePresence>
-      <div className="modal-overlay">
+      <div className="modal-overlay" onClick={closeModal}>
         <motion.div
           className="modal-dialog"
+          onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.93, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.93, y: 15 }}
@@ -48,184 +63,150 @@ export default function Modals({ activeModal, closeModal, modalData }) {
             <X style={{ width: '1.25rem', height: '1.25rem' }} />
           </button>
 
-          {/* 1. WE ARE MODAL */}
-          {activeModal === 'we-are' && (
+          {/* 1. PRODUCT DETAILS MODAL */}
+          {activeModal === 'product-details' && modalData && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <Logo showText={false} size="small" />
+              <div className="modal-header">
+                <span className="modal-category-badge">{modalData.category || 'HEXA PRODUCT'}</span>
+                <h3 className="modal-title" style={{ fontSize: '1.75rem' }}>{modalData.name}</h3>
+                <p style={{ color: 'var(--color-primary)', fontWeight: 600, fontSize: '0.9375rem', marginTop: '0.25rem' }}>
+                  {modalData.tagline}
+                </p>
+              </div>
+
+              <div style={{ borderTop: '1px solid var(--color-slate-100)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
-                  <span className="modal-category-badge">Company Profile</span>
-                  <h3 className="modal-title">
-                    Neuerung HealthTech Private Limited
-                  </h3>
+                  <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.375rem' }}>
+                    Solution Overview
+                  </h4>
+                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-slate-700)', lineHeight: 1.6 }}>
+                    {modalData.description}
+                  </p>
                 </div>
-              </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', color: '#334155', fontSize: '0.875rem', lineHeight: 1.625, borderTop: '1px solid var(--color-slate-100)', paddingTop: '1rem' }}>
-                <p style={{ fontSize: '1rem', fontWeight: 500, color: '#1e293b' }}>
-                  Neuerung HealthTech Private Limited is a healthcare technology company focused on developing intelligent, connected, and clinically relevant solutions for modern healthcare.
-                </p>
-                <p>
-                  We combine artificial intelligence, medical imaging, IoT, and digital health platforms to support healthcare professionals, improve operational efficiency, enhance clinical decision-making, and contribute to better patient care.
-                </p>
-              </div>
-
-              <div className="modal-grid-2" style={{ backgroundColor: '#f8fafc', padding: '1.25rem', borderRadius: '1rem', border: '1px solid #e2e8f0' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                  <ShieldCheck style={{ width: '1.25rem', height: '1.25rem', color: 'var(--color-primary)', marginTop: '0.125rem' }} />
-                  <div>
-                    <h4 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#0f172a', textTransform: 'uppercase' }}>Headquarters</h4>
-                    <p style={{ fontSize: '0.75rem', color: '#475569' }}>Madurai, Tamil Nadu, India</p>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                  <ShieldCheck style={{ width: '1.25rem', height: '1.25rem', color: 'var(--color-primary)', marginTop: '0.125rem' }} />
-                  <div>
-                    <h4 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#0f172a', textTransform: 'uppercase' }}>Official Domain</h4>
-                    <p style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-accent)' }}>neuerung.in</p>
+                <div>
+                  <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
+                    Core Capabilities
+                  </h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem' }}>
+                    {modalData.features && modalData.features.map((feat, idx) => (
+                      <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#f8fafc', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', fontSize: '0.8125rem', color: '#1e293b' }}>
+                        <CheckCircle2 style={{ width: '1rem', height: '1rem', color: '#10b981', flexShrink: 0 }} />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', paddingTop: '0.5rem', borderTop: '1px solid var(--color-slate-100)' }}>
+                <button onClick={closeModal} className="modal-secondary-btn" style={{ padding: '0.625rem 1.25rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', backgroundColor: '#f8fafc', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}>
+                  Close
+                </button>
                 <button
-                  onClick={closeModal}
+                  onClick={() => {
+                    closeModal();
+                    const el = document.getElementById('contact');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
                   className="modal-primary-btn"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
                 >
-                  Close Overview
+                  <span>Request Demo for {modalData.name}</span>
+                  <ArrowRight style={{ width: '1rem', height: '1rem' }} />
                 </button>
               </div>
             </div>
           )}
 
-          {/* 2. CLINICAL AI MODAL */}
-          {activeModal === 'clinical-ai' && (
+          {/* 2. SPECIALISED SOLUTION DETAILS MODAL */}
+          {activeModal === 'solution-details' && modalData && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div className="modal-header">
-                <span className="modal-category-badge">Clinical AI Suite</span>
-                <h3 className="modal-title">
-                  AI-Powered Clinical Decision Support
-                </h3>
+                <span className="modal-category-badge" style={{ color: '#0d9488', backgroundColor: '#ccfbf1' }}>SPECIALISED CARE</span>
+                <h3 className="modal-title" style={{ fontSize: '1.75rem' }}>{modalData.title}</h3>
+                <p style={{ color: '#0d9488', fontWeight: 600, fontSize: '0.9375rem', marginTop: '0.25rem' }}>
+                  {modalData.tagline}
+                </p>
               </div>
 
-              <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.625 }}>
-                Our proprietary AI algorithms evaluate multi-parameter patient data streams in real time, delivering proactive diagnostic assistance and automated risk triage directly into clinician workflows.
+              <div style={{ borderTop: '1px solid var(--color-slate-100)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div>
+                  <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.375rem' }}>
+                    Care Architecture
+                  </h4>
+                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-slate-700)', lineHeight: 1.6 }}>
+                    {modalData.description}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
+                    Key Focus Areas
+                  </h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem' }}>
+                    {modalData.features && modalData.features.map((feat, idx) => (
+                      <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#f0fdf4', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #bbf7d0', fontSize: '0.8125rem', color: '#166534' }}>
+                        <CheckCircle2 style={{ width: '1rem', height: '1rem', color: '#16a34a', flexShrink: 0 }} />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', paddingTop: '0.5rem', borderTop: '1px solid var(--color-slate-100)' }}>
+                <button onClick={closeModal} className="modal-secondary-btn" style={{ padding: '0.625rem 1.25rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', backgroundColor: '#f8fafc', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}>
+                  Close
+                </button>
+                <button
+                  onClick={() => {
+                    closeModal();
+                    const el = document.getElementById('contact');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="modal-primary-btn"
+                  style={{ backgroundColor: '#0d9488', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+                >
+                  <span>Inquire About {modalData.title}</span>
+                  <ArrowRight style={{ width: '1rem', height: '1rem' }} />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* 3. INSIGHTS MODAL */}
+          {activeModal === 'insights-modal' && modalData && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div className="modal-header">
+                <span className="modal-category-badge">{modalData.tag || 'INSIGHTS'}</span>
+                <h3 className="modal-title">{modalData.title}</h3>
+              </div>
+
+              <p style={{ fontSize: '0.9375rem', color: 'var(--color-slate-700)', lineHeight: 1.6 }}>
+                {modalData.desc}
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                <h4 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Core Functional Modules</h4>
-                {[
-                  "Real-time ICU & ward patient risk scoring algorithms",
-                  "Automated clinical guideline compliance triggers",
-                  "Early warning anomaly flags for cardiac & vital instability",
-                  "EHR-interoperable decision recommendation engine"
-                ].map((item, idx) => (
-                  <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.75rem', borderRadius: '0.75rem', backgroundColor: '#f8fafc', border: '1px solid #f1f5f9', fontSize: '0.875rem', color: '#1e293b' }}>
-                    <CheckCircle2 style={{ width: '1rem', height: '1rem', color: '#10b981', flexShrink: 0 }} />
-                    <span>{item}</span>
-                  </div>
-                ))}
+              <div style={{ padding: '1rem', borderRadius: '0.75rem', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', fontSize: '0.8125rem', color: '#475569', lineHeight: 1.6 }}>
+                Neuerung HealthTech publishes research perspectives and technological insights on connected healthcare, medical imaging standards, and digital healthcare transformation.
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
-                <button
-                  onClick={closeModal}
-                  className="modal-primary-btn"
-                >
-                  Close Details
+                <button onClick={closeModal} className="modal-primary-btn">
+                  Close Insights
                 </button>
               </div>
             </div>
           )}
 
-          {/* 3. MEDICAL IMAGING & IOT MODAL */}
-          {activeModal === 'medical-imaging' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div className="modal-header">
-                <span className="modal-category-badge">Connected Infrastructure</span>
-                <h3 className="modal-title">
-                  Medical Imaging & IoT Device Ecosystem
-                </h3>
-              </div>
-
-              <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.625 }}>
-                Seamlessly connects high-speed DICOM processing pipelines with continuous wireless telemetry hardware to deliver instant diagnostic clarity and bedside monitoring.
-              </p>
-
-              <div className="modal-grid-2">
-                <div style={{ padding: '1rem', borderRadius: '1rem', backgroundColor: '#eff6ff', border: '1px solid #dbeafe', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <h4 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--color-primary)', textTransform: 'uppercase' }}>Medical Imaging PACS</h4>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.375rem', fontSize: '0.75rem', color: '#334155' }}>
-                    <li>• DICOM Web Viewer with AI scan overlay</li>
-                    <li>• Lesion & nodule computer vision highlighting</li>
-                    <li>• Rapid multi-modal image rendering</li>
-                  </ul>
-                </div>
-
-                <div style={{ padding: '1rem', borderRadius: '1rem', backgroundColor: '#f0f9ff', border: '1px solid #e0f2fe', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <h4 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#075985', textTransform: 'uppercase' }}>IoT Hardware Telemetry</h4>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.375rem', fontSize: '0.75rem', color: '#334155' }}>
-                    <li>• Continuous vital sign streaming (&lt; 15ms)</li>
-                    <li>• Wireless bedside sensor hubs</li>
-                    <li>• Centralized nurse station monitor sync</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
-                <button
-                  onClick={closeModal}
-                  className="modal-primary-btn"
-                >
-                  Close Details
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* 4. WHY US MODAL */}
-          {activeModal === 'why-us' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div className="modal-header">
-                <span className="modal-category-badge">Value Proposition</span>
-                <h3 className="modal-title">
-                  Why Partner with Neuerung HealthTech
-                </h3>
-              </div>
-
-              <div className="modal-grid-2">
-                {[
-                  { title: "Clinical Relevance", desc: "Co-designed with practicing clinicians for seamless hospital workflow fit." },
-                  { title: "Operational Efficiency", desc: "Dramatically reduces turnaround time and eliminates manual data entry." },
-                  { title: "Scalable AI/IoT", desc: "Modular architecture ready to scale from clinics to multi-specialty hospital chains." },
-                  { title: "India-Based Support", desc: "Dedicated engineering and technical team operating directly from Madurai, India." },
-                ].map((item, idx) => (
-                  <div key={idx} style={{ padding: '1rem', borderRadius: '1rem', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
-                    <h4 style={{ fontSize: '0.875rem', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.25rem', fontFamily: 'var(--font-heading)' }}>{item.title}</h4>
-                    <p style={{ fontSize: '0.75rem', color: '#475569', lineHeight: 1.625 }}>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
-                <button
-                  onClick={closeModal}
-                  className="modal-primary-btn"
-                >
-                  Close Overview
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* 5. BOOK A DEMO FORM MODAL */}
+          {/* 4. BOOK A DEMO FORM MODAL */}
           {activeModal === 'book-demo' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div className="modal-header" style={{ display: 'flex', alignItems: 'center', justifyBetween: 'space-between' }}>
+              <div className="modal-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <span className="modal-category-badge">Schedule Demonstration</span>
                   <h3 className="modal-title">
-                    Book a Live Demo
+                    Request a Demo
                   </h3>
                 </div>
                 <Logo showText={false} size="small" />
@@ -236,12 +217,15 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                   <div style={{ width: '3.5rem', height: '3.5rem', borderRadius: '9999px', backgroundColor: '#d1fae5', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
                     <CheckCircle2 style={{ width: '2rem', height: '2rem' }} />
                   </div>
-                  <h4 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>Demo Scheduled!</h4>
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>Request Submitted</h4>
                   <p style={{ fontSize: '0.875rem', color: '#475569' }}>
-                    Thank you, <span style={{ fontWeight: 600, color: '#0f172a' }}>{demoForm.name}</span>. Our clinical technology team will reach out to <span style={{ fontWeight: 600, color: '#0f172a' }}>{demoForm.email}</span> to confirm your session.
+                    Thank you, <span style={{ fontWeight: 600, color: '#0f172a' }}>{demoForm.name}</span>. Our team will contact you at <span style={{ fontWeight: 600, color: '#0f172a' }}>{demoForm.email}</span> to confirm your session.
                   </p>
                   <button
-                    onClick={closeModal}
+                    onClick={() => {
+                      setDemoSubmitted(false);
+                      closeModal();
+                    }}
                     className="modal-primary-btn"
                     style={{ background: '#059669', width: 'fit-content', margin: '0 auto' }}
                   >
@@ -252,24 +236,24 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                 <form onSubmit={handleDemoSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   <div className="modal-grid-2">
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Full Name *</label>
+                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Name *</label>
                       <input
                         type="text"
                         required
-                        placeholder="Dr. Rajesh Kumar"
+                        placeholder="Dr. Jane Doe"
                         value={demoForm.name}
                         onChange={(e) => setDemoForm({ ...demoForm, name: e.target.value })}
                         style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
                       />
                     </div>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Organization Name *</label>
+                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Organisation *</label>
                       <input
                         type="text"
                         required
-                        placeholder="Apollo / City Hospital"
-                        value={demoForm.company}
-                        onChange={(e) => setDemoForm({ ...demoForm, company: e.target.value })}
+                        placeholder="Hospital / Medical Center"
+                        value={demoForm.organisation}
+                        onChange={(e) => setDemoForm({ ...demoForm, organisation: e.target.value })}
                         style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
                       />
                     </div>
@@ -277,18 +261,18 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
                   <div className="modal-grid-2">
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Email Address *</label>
+                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Email *</label>
                       <input
                         type="email"
                         required
-                        placeholder="name@hospital.com"
+                        placeholder="name@hospital.org"
                         value={demoForm.email}
                         onChange={(e) => setDemoForm({ ...demoForm, email: e.target.value })}
                         style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
                       />
                     </div>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Phone Number</label>
+                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Phone</label>
                       <input
                         type="tel"
                         placeholder="+91 98765 43210"
@@ -299,36 +283,29 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                     </div>
                   </div>
 
-                  <div className="modal-grid-2">
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Nature of Business</label>
-                      <select
-                        value={demoForm.businessType}
-                        onChange={(e) => setDemoForm({ ...demoForm, businessType: e.target.value })}
-                        style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
-                      >
-                        <option>Hospital Network</option>
-                        <option>Diagnostic Imaging Lab</option>
-                        <option>Clinic / Healthcare Provider</option>
-                        <option>Medical Device OEM</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Preferred Demo Date</label>
-                      <input
-                        type="date"
-                        value={demoForm.date}
-                        onChange={(e) => setDemoForm({ ...demoForm, date: e.target.value })}
-                        style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
-                      />
-                    </div>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Area of Interest *</label>
+                    <select
+                      value={demoForm.areaOfInterest}
+                      onChange={(e) => setDemoForm({ ...demoForm, areaOfInterest: e.target.value })}
+                      style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
+                    >
+                      <option value="Hexa Doctor">Hexa Doctor</option>
+                      <option value="Hexa Service">Hexa Service</option>
+                      <option value="Hexa Pharmacy">Hexa Pharmacy</option>
+                      <option value="Geriatric Care">Geriatric Care</option>
+                      <option value="Dementia Care">Dementia Care</option>
+                      <option value="Rehabilitation">Rehabilitation</option>
+                      <option value="Technology Partnership">Technology Partnership</option>
+                      <option value="General Enquiry">General Enquiry</option>
+                    </select>
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="modal-primary-btn"
-                    style={{ width: '100%', borderRadius: '0.75rem', padding: '0.875rem', display: 'flex', alignItems: 'center', justifyCenter: 'center', gap: '0.5rem', marginTop: '0.5rem' }}
+                    style={{ width: '100%', borderRadius: '0.75rem', padding: '0.875rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginTop: '0.5rem' }}
                   >
                     {isSubmitting ? (
                       <div style={{ width: '1.25rem', height: '1.25rem', border: '2px solid #ffffff', borderTopColor: 'transparent', borderRadius: '9999px', animation: 'spin 1s linear infinite' }} />
@@ -341,116 +318,6 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                   </button>
                 </form>
               )}
-            </div>
-          )}
-
-          {/* 8. TECHNICAL SPECS MODAL */}
-          {activeModal === 'tech-specs' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div className="modal-header" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <Logo showText={false} size="small" />
-                <div>
-                  <span className="modal-category-badge">Engine Specifications</span>
-                  <h3 className="modal-title">
-                    Clinical AI & Telemetry Specs
-                  </h3>
-                </div>
-              </div>
-
-              <p style={{ fontSize: '0.875rem', color: '#475569', lineHeight: 1.625 }}>
-                Hardware, protocol, and algorithmic benchmarks powering Neuerung's real-time clinical diagnostic engine.
-              </p>
-
-              <div className="modal-grid-2">
-                <div style={{ padding: '1rem', borderRadius: '1rem', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
-                  <span style={{ fontSize: '0.625rem', fontWeight: 'bold', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Model Accuracy</span>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', fontFamily: 'var(--font-heading)' }}>99.2% ICU Triage</div>
-                  <p style={{ fontSize: '0.75rem', color: '#64748b' }}>Cross-validated against 100K+ DICOM scans</p>
-                </div>
-
-                <div style={{ padding: '1rem', borderRadius: '1rem', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
-                  <span style={{ fontSize: '0.625rem', fontWeight: 'bold', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Inference Latency</span>
-                  <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', fontFamily: 'var(--font-heading)' }}>&lt; 15ms Bedside</div>
-                  <p style={{ fontSize: '0.75rem', color: '#64748b' }}>GPU-accelerated edge & cloud compute</p>
-                </div>
-
-                <div style={{ padding: '1rem', borderRadius: '1rem', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
-                  <span style={{ fontSize: '0.625rem', fontWeight: 'bold', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Protocols & Standards</span>
-                  <div style={{ fontSize: '0.875rem', fontWeight: 'bold', color: '#0f172a', fontFamily: 'var(--font-heading)' }}>DICOM 3.0 • HL7 FHIR v4</div>
-                  <p style={{ fontSize: '0.75rem', color: '#64748b' }}>Native EHR bi-directional synchronization</p>
-                </div>
-
-                <div style={{ padding: '1rem', borderRadius: '1rem', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}>
-                  <span style={{ fontSize: '0.625rem', fontWeight: 'bold', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Compliance & Security</span>
-                  <div style={{ fontSize: '0.875rem', fontWeight: 'bold', color: '#0f172a', fontFamily: 'var(--font-heading)' }}>HIPAA • ISO 27001 • ABHA</div>
-                  <p style={{ fontSize: '0.75rem', color: '#64748b' }}>AES-256 encrypted end-to-end telemetry</p>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
-                <button
-                  onClick={closeModal}
-                  className="modal-primary-btn"
-                >
-                  Close Specs
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* 6. TEAM BIO MODAL */}
-          {activeModal === 'team-bio' && modalData && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div className="modal-header" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: '4rem', height: '4rem', borderRadius: '9999px', backgroundColor: 'var(--color-primary)', color: '#ffffff', fontWeight: 'bold', fontSize: '1.25rem', display: 'flex', alignItems: 'center', justifyCenter: 'center', flexShrink: 0, fontFamily: 'var(--font-heading)' }}>
-                  {modalData.initials || modalData.name.split(' ').map(n => n[0]).join('')}
-                </div>
-                <div>
-                  <h3 className="modal-title">{modalData.name}</h3>
-                  <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-accent)' }}>{modalData.role}</span>
-                </div>
-              </div>
-
-              <p style={{ fontSize: '0.875rem', color: '#334155', lineHeight: 1.625, fontFamily: 'var(--font-body)' }}>{modalData.bio}</p>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
-                <button
-                  onClick={closeModal}
-                  className="modal-primary-btn"
-                >
-                  Close Bio
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* 7. VIDEO DEMO PLAYER MODAL */}
-          {activeModal === 'video-demo' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <h3 className="modal-title">
-                Clinical Workflow Interactive Showcase
-              </h3>
-              <div style={{ position: 'relative', aspectRatio: '16 / 9', backgroundColor: '#020617', borderRadius: '1rem', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyCenter: 'center', border: '1px solid #1e293b' }}>
-                <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.75rem', padding: '1.5rem' }}>
-                  <div style={{ width: '4rem', height: '4rem', borderRadius: '9999px', backgroundColor: 'rgba(37, 99, 235, 0.9)', color: '#ffffff', display: 'flex', alignItems: 'center', justifyCenter: 'center', margin: '0 auto', boxShadow: '0 10px 25px rgba(37, 99, 235, 0.5)' }}>
-                    <Play style={{ width: '2rem', height: '2rem', marginLeft: '0.25rem' }} />
-                  </div>
-                  <div style={{ color: '#e2e8f0', fontWeight: 600, fontSize: '0.875rem', fontFamily: 'var(--font-heading)' }}>
-                    Neuerung AI & Connected Telemetry Platform Pipeline Demo
-                  </div>
-                  <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontFamily: 'var(--font-body)' }}>
-                    Real-Time DICOM Ingestion → Edge AI Risk Triage → Bedside Monitor Sync
-                  </div>
-                </div>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
-                <button
-                  onClick={closeModal}
-                  className="modal-primary-btn"
-                >
-                  Close Video
-                </button>
-              </div>
             </div>
           )}
 

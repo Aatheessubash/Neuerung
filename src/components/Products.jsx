@@ -6,33 +6,11 @@ import {
   Wrench, 
   Pill, 
   Check, 
-  ArrowRight, 
-  Hexagon, 
-  Activity, 
-  ShieldCheck, 
-  Cpu, 
-  PackageCheck 
+  ArrowRight
 } from 'lucide-react';
 import './Products.css';
 
-// Custom SVG Hexagon Logo Badge for HEXA Care
-const HexaCareLogo = () => (
-  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="careGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#38bdf8" />
-          <stop offset="100%" stopColor="#0284c7" />
-        </linearGradient>
-      </defs>
-      <path d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z" fill="url(#careGrad)" stroke="#ffffff" strokeWidth="3" />
-      <path d="M50 15 L78 31 L78 69 L50 85 L22 69 L22 31 Z" fill="rgba(255,255,255,0.15)" />
-    </svg>
-    <Heart style={{ position: 'absolute', width: '22px', height: '22px', color: '#ffffff' }} />
-  </div>
-);
-
-// Custom SVG Hexagon Logo Badge for HEXA Doctor
+// SVG Logos for Hexa Products
 const HexaDoctorLogo = () => (
   <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
     <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +27,6 @@ const HexaDoctorLogo = () => (
   </div>
 );
 
-// Custom SVG Hexagon Logo Badge for HEXA Service
 const HexaServiceLogo = () => (
   <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
     <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +43,6 @@ const HexaServiceLogo = () => (
   </div>
 );
 
-// Custom SVG Hexagon Logo Badge for HEXA Pharmacy
 const HexaPharmacyLogo = () => (
   <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
     <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,78 +59,100 @@ const HexaPharmacyLogo = () => (
   </div>
 );
 
+const HexaCareLogo = () => (
+  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="careGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#38bdf8" />
+          <stop offset="100%" stopColor="#0284c7" />
+        </linearGradient>
+      </defs>
+      <path d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z" fill="url(#careGrad)" stroke="#ffffff" strokeWidth="3" />
+      <path d="M50 15 L78 31 L78 69 L50 85 L22 69 L22 31 Z" fill="rgba(255,255,255,0.15)" />
+    </svg>
+    <Heart style={{ position: 'absolute', width: '22px', height: '22px', color: '#ffffff' }} />
+  </div>
+);
+
 export default function Products({ openModal }) {
   const products = [
     {
-      id: 'hexa-care',
-      name: 'HEXA Care',
-      tagline: 'Patient Care & Tele-Health Suite',
-      category: 'Patient Centric',
-      theme: 'theme-care',
-      logo: HexaCareLogo,
-      description: 'Intelligent patient management, continuous remote vital tracking, and automated caregiver alerts to ensure seamless, end-to-end patient care.',
-      features: [
-        'Real-time vital signs monitoring & early warnings',
-        'Patient engagement portal & tele-consultations',
-        'Personalized care pathways & discharge tracking',
-        '24/7 ICU & ward patient status dashboards'
-      ]
-    },
-    {
       id: 'hexa-doctor',
-      name: 'HEXA Doctor',
-      tagline: 'Clinical Decision Support & EHR',
-      category: 'Physicians & Labs',
+      name: 'Hexa Doctor',
+      tagline: 'Intelligent support for modern clinical practice.',
+      category: 'CLINICAL',
       theme: 'theme-doctor',
       logo: HexaDoctorLogo,
-      description: 'Empowers clinicians with AI-driven diagnostic insights, seamless DICOM radiological image viewing, and instant EHR synchronization.',
+      description: 'Hexa Doctor brings intelligent digital capabilities into clinical practice, helping healthcare professionals work with connected patient information and AI-integrated workflows.',
       features: [
-        'AI-assisted diagnostic recommendations',
-        'Cloud-native DICOM image viewer & analysis',
-        'HL7 & FHIR compliant EHR integration',
-        'Fast e-prescribing and clinical documentation'
-      ]
+        'AI-assisted clinical workflows',
+        'Digital clinical records',
+        'Patient information management',
+        'Clinical decision support',
+        'Connected healthcare data',
+        'Workflow optimisation'
+      ],
+      ctaText: 'Explore Hexa Doctor'
     },
     {
       id: 'hexa-service',
-      name: 'HEXA Service',
-      tagline: 'Operations & IoT Asset Management',
-      category: 'Hospital Ops',
+      name: 'Hexa Service',
+      tagline: 'Connected healthcare services.',
+      category: 'SERVICES',
       theme: 'theme-service',
       logo: HexaServiceLogo,
-      description: 'Streamlines hospital facility management, biomedical equipment tracking, and automated maintenance ticketing via smart IoT sensors.',
+      description: 'Hexa Service brings healthcare service providers and users together through a connected digital ecosystem.',
       features: [
-        'Real-time IoT medical equipment tracking',
-        'Automated preventive maintenance alerts',
-        'Hospital facility & bed capacity management',
-        'Operational efficiency & uptime analytics'
-      ]
+        'Nursing Care',
+        'Physiotherapy',
+        'Diagnostic Services',
+        'Pharmacy'
+      ],
+      ctaText: 'Explore Hexa Service'
     },
     {
       id: 'hexa-pharmacy',
-      name: 'HEXA Pharmacy',
-      tagline: 'Smart Pharmacy & Inventory Intelligence',
-      category: 'Pharmacy & Supply',
+      name: 'Hexa Pharmacy',
+      tagline: 'Healthcare access, simplified.',
+      category: 'ACCESS',
       theme: 'theme-pharmacy',
       logo: HexaPharmacyLogo,
-      description: 'End-to-end digital pharmacy platform for e-prescription fulfillment, smart batch tracking, drug interaction checking, and automated restocking.',
+      description: 'Connecting pharmacy services with the wider digital healthcare ecosystem for simplified access.',
       features: [
-        'Instant e-prescription processing & dispensing',
-        'Automated low-stock & expiry notifications',
-        'Drug interaction & allergy safety checks',
-        'Multi-branch inventory synchronization'
-      ]
+        'Digital pharmacy access',
+        'Connected healthcare',
+        'Patient experience',
+        'Service integration'
+      ],
+      ctaText: 'Explore Hexa Pharmacy'
+    },
+    {
+      id: 'hexa-patients',
+      name: 'Hexa for Patients',
+      tagline: 'A connected patient healthcare experience.',
+      category: 'PATIENT',
+      theme: 'theme-care',
+      logo: HexaCareLogo,
+      description: 'Designed to connect patients with relevant healthcare information, services and experiences throughout their care journey.',
+      features: [
+        'Connected experience',
+        'Healthcare information',
+        'Service access',
+        'Digital care journey'
+      ],
+      ctaText: 'Explore Hexa for Patients'
     }
   ];
 
   return (
-    <section id="products" className="products-section">
+    <section id="hexa" className="products-section">
       <div className="products-bg-orb-1" />
       <div className="products-bg-orb-2" />
 
       <div className="products-container">
         
-        {/* Section Header */}
+        {/* Section 05: Hexa Introduction Header */}
         <motion.div 
           className="products-header"
           initial={{ opacity: 0, y: 20 }}
@@ -162,27 +160,42 @@ export default function Products({ openModal }) {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          {/* <div className="products-badge">
-            <Hexagon style={{ width: '1rem', height: '1rem' }} />
-            <span>Product Suite</span>
-          </div> */}
+          <div style={{ 
+            display: 'inline-block', 
+            fontFamily: 'var(--font-heading)', 
+            fontSize: '0.75rem', 
+            fontWeight: 800, 
+            letterSpacing: '0.08em', 
+            color: '#1d4ed8', 
+            backgroundColor: '#dbeafe', 
+            padding: '0.35rem 0.85rem', 
+            borderRadius: '9999px', 
+            marginBottom: '1rem' 
+          }}>
+            HEXA ECOSYSTEM
+          </div>
 
           <h2 className="products-title">
-             Our<span className="gradient-text"> Products</span>
+             One Healthcare Ecosystem.<br /><span className="gradient-text">Multiple Connected Solutions.</span>
           </h2>
 
+          <p style={{ fontSize: '1rem', fontWeight: 600, color: '#1d4ed8', marginTop: '0.5rem', fontFamily: 'var(--font-heading)' }}>
+            A comprehensive healthcare platform built to enhance healthcare delivery.
+          </p>
+
           <p className="products-subtext">
-            Hexa connects patients, doctors, and healthcare providers through integrated digital solutions, enabling personalized care, seamless appointments, efficient workflows, and specialized support for geriatric care, dementia, and rehabilitation.
+            Hexa brings together healthcare professionals, service providers and patients through a connected digital healthcare ecosystem.
           </p>
         </motion.div>
 
-        {/* 4 Products Grid */}
+        {/* 4 Hexa Product Cards */}
         <div className="products-grid">
           {products.map((prod, idx) => {
             const LogoComp = prod.logo;
             return (
               <motion.div
                 key={prod.id}
+                id={prod.id}
                 className={`product-card ${prod.theme}`}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -223,10 +236,10 @@ export default function Products({ openModal }) {
                 {/* CTA Button */}
                 <div>
                   <button
-                    onClick={() => openModal && openModal('book-demo', { product: prod.name })}
+                    onClick={() => openModal && openModal('product-details', prod)}
                     className="product-action-btn"
                   >
-                    <span>Request Demo for {prod.name}</span>
+                    <span>{prod.ctaText}</span>
                     <ArrowRight style={{ width: '1rem', height: '1rem' }} />
                   </button>
                 </div>

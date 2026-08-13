@@ -1,46 +1,72 @@
 import React, { useState } from 'react';
 import Logo from './Logo';
-import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2, Navigation } from 'lucide-react';
+import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2, Navigation, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ContactFooter.css';
 import { COMPANY } from '../constants/company';
 
 export default function ContactFooter({ openModal }) {
   const [form, setForm] = useState({
-    fullName: '',
+    name: '',
+    organisation: '',
+    phone: '',
     email: '',
-    organization: '',
-    businessType: '',
-    demoDate: '',
+    areaOfInterest: '',
     message: ''
   });
 
+  const [errors, setErrors] = useState({});
   const [showToast, setShowToast] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const validate = () => {
+    const newErrors = {};
+    if (!form.name.trim()) newErrors.name = 'Full Name is required';
+    if (!form.organisation.trim()) newErrors.organisation = 'Organisation is required';
+    if (!form.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    if (!form.areaOfInterest) newErrors.areaOfInterest = 'Please select an area of interest';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validate()) return;
+
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
       setShowToast(true);
       setForm({
-        fullName: '',
+        name: '',
+        organisation: '',
+        phone: '',
         email: '',
-        organization: '',
-        businessType: '',
-        demoDate: '',
+        areaOfInterest: '',
         message: ''
       });
+      setErrors({});
       setTimeout(() => {
         setShowToast(false);
       }, 4500);
     }, 600);
   };
 
+  const handleNavScroll = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <section id="contact" className="contact-footer-section">
-      {/* Experience the Neuerung Advantage Header */}
+      {/* Header */}
       <motion.div 
         className="contact-header-container"
         initial={{ opacity: 0, y: 25 }}
@@ -49,10 +75,10 @@ export default function ContactFooter({ openModal }) {
         transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
       >
         <h2 className="contact-section-title">
-          Experience the Neuerung Advantage.
+          Let's build <span className="gradient-text">better healthcare together.</span>
         </h2>
         <p className="contact-section-subtext">
-          Schedule a personalized demonstration of our clinical precision tools. See firsthand how our intuitive interfaces and robust analytics can elevate your medical practice.
+          Whether you are a hospital, clinic, healthcare professional, service provider or technology partner, we'd like to understand how Neuerung can support your healthcare ecosystem.
         </p>
       </motion.div>
 
@@ -72,135 +98,187 @@ export default function ContactFooter({ openModal }) {
 
             <div style={{ marginBottom: '2rem', position: 'relative', zIndex: 10 }}>
               <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-primary)', fontFamily: 'var(--font-heading)', marginBottom: '0.5rem' }}>
-                Clinical Inquiry
+                Start a Conversation
               </h3>
               <p style={{ fontSize: '0.875rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)' }}>
-                Please provide your details, and our technical integration team will reach out shortly.
+                Please fill in your details below, and our clinical team will reach out promptly.
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', zIndex: 10, fontFamily: 'var(--font-body)' }}>
+            <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', zIndex: 10, fontFamily: 'var(--font-body)' }}>
+              
+              {/* Name & Organisation */}
               <div className="form-grid-2">
                 <div className="form-field-group">
-                  <label className="form-field-label" htmlFor="fullName">
-                    Full Name <span style={{ color: '#ba1a1a' }}>*</span>
+                  <label className="form-field-label" htmlFor="contact-name">
+                    Full Name <span className="required-asterisk">*</span>
                   </label>
                   <input
-                    id="fullName"
+                    id="contact-name"
+                    name="name"
                     type="text"
                     required
                     placeholder="Dr. Jane Doe"
-                    value={form.fullName}
-                    onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                    className="form-input"
+                    value={form.name}
+                    onChange={(e) => {
+                      setForm({ ...form, name: e.target.value });
+                      if (errors.name) setErrors({ ...errors, name: null });
+                    }}
+                    className={`form-input ${errors.name ? 'input-error' : ''}`}
+                    aria-invalid={errors.name ? "true" : "false"}
                   />
+                  {errors.name && (
+                    <span className="field-error-text">
+                      <AlertCircle size={12} /> {errors.name}
+                    </span>
+                  )}
                 </div>
 
                 <div className="form-field-group">
-                  <label className="form-field-label" htmlFor="email">
-                    Professional Email <span style={{ color: '#ba1a1a' }}>*</span>
+                  <label className="form-field-label" htmlFor="contact-organisation">
+                    Organisation <span className="required-asterisk">*</span>
                   </label>
                   <input
-                    id="email"
+                    id="contact-organisation"
+                    name="organisation"
+                    type="text"
+                    required
+                    placeholder="General Hospital / Medical Center"
+                    value={form.organisation}
+                    onChange={(e) => {
+                      setForm({ ...form, organisation: e.target.value });
+                      if (errors.organisation) setErrors({ ...errors, organisation: null });
+                    }}
+                    className={`form-input ${errors.organisation ? 'input-error' : ''}`}
+                    aria-invalid={errors.organisation ? "true" : "false"}
+                  />
+                  {errors.organisation && (
+                    <span className="field-error-text">
+                      <AlertCircle size={12} /> {errors.organisation}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Email & Phone */}
+              <div className="form-grid-2">
+                <div className="form-field-group">
+                  <label className="form-field-label" htmlFor="contact-email">
+                    Professional Email <span className="required-asterisk">*</span>
+                  </label>
+                  <input
+                    id="contact-email"
+                    name="email"
                     type="email"
                     required
                     placeholder="jane.doe@hospital.org"
                     value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    onChange={(e) => {
+                      setForm({ ...form, email: e.target.value });
+                      if (errors.email) setErrors({ ...errors, email: null });
+                    }}
+                    className={`form-input ${errors.email ? 'input-error' : ''}`}
+                    aria-invalid={errors.email ? "true" : "false"}
+                  />
+                  {errors.email && (
+                    <span className="field-error-text">
+                      <AlertCircle size={12} /> {errors.email}
+                    </span>
+                  )}
+                </div>
+
+                <div className="form-field-group">
+                  <label className="form-field-label" htmlFor="contact-phone">
+                    Phone Number
+                  </label>
+                  <input
+                    id="contact-phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+91 98765 43210"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     className="form-input"
                   />
+                  <span className="field-hint-text">Format: +91 98765 43210</span>
                 </div>
               </div>
 
+              {/* Area of Interest */}
               <div className="form-field-group">
-                <label className="form-field-label" htmlFor="organization">
-                  Hospital or Organization <span style={{ color: '#ba1a1a' }}>*</span>
+                <label className="form-field-label" htmlFor="contact-area">
+                  Area of Interest <span className="required-asterisk">*</span>
                 </label>
-                <div style={{ position: 'relative' }}>
-                  <Building2 style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', width: '1.25rem', height: '1.25rem', color: '#94a3b8' }} />
-                  <input
-                    id="organization"
-                    type="text"
-                    required
-                    placeholder="General Medical Center"
-                    value={form.organization}
-                    onChange={(e) => setForm({ ...form, organization: e.target.value })}
-                    className="form-input"
-                    style={{ paddingLeft: '3rem' }}
-                  />
-                </div>
+                <select
+                  id="contact-area"
+                  name="areaOfInterest"
+                  required
+                  value={form.areaOfInterest}
+                  onChange={(e) => {
+                    setForm({ ...form, areaOfInterest: e.target.value });
+                    if (errors.areaOfInterest) setErrors({ ...errors, areaOfInterest: null });
+                  }}
+                  className={`form-input ${errors.areaOfInterest ? 'input-error' : ''}`}
+                  aria-invalid={errors.areaOfInterest ? "true" : "false"}
+                >
+                  <option value="" disabled>Select an area of interest...</option>
+                  <option value="Hexa Doctor">Hexa Doctor</option>
+                  <option value="Hexa Service">Hexa Service</option>
+                  <option value="Hexa Pharmacy">Hexa Pharmacy</option>
+                  <option value="Geriatric Care">Geriatric Care</option>
+                  <option value="Dementia Care">Dementia Care</option>
+                  <option value="Rehabilitation">Rehabilitation</option>
+                  <option value="Technology Partnership">Technology Partnership</option>
+                  <option value="General Enquiry">General Enquiry</option>
+                </select>
+                {errors.areaOfInterest && (
+                  <span className="field-error-text">
+                    <AlertCircle size={12} /> {errors.areaOfInterest}
+                  </span>
+                )}
               </div>
 
-              <div className="form-grid-2">
-                <div className="form-field-group">
-                  <label className="form-field-label" htmlFor="businessType">
-                    Business Type
-                  </label>
-                  <select
-                    id="businessType"
-                    value={form.businessType}
-                    onChange={(e) => setForm({ ...form, businessType: e.target.value })}
-                    className="form-input"
-                  >
-                    <option value="" disabled>Select facility type...</option>
-                    <option value="hospital">Hospital / Medical Center</option>
-                    <option value="clinic">Private Clinic</option>
-                    <option value="diagnostic">Diagnostic Laboratory</option>
-                    <option value="other">Other Healthcare Provider</option>
-                  </select>
-                </div>
-
-                <div className="form-field-group">
-                  <label className="form-field-label" htmlFor="demoDate">
-                    Preferred Demo Date
-                  </label>
-                  <input
-                    id="demoDate"
-                    type="date"
-                    value={form.demoDate}
-                    onChange={(e) => setForm({ ...form, demoDate: e.target.value })}
-                    className="form-input"
-                  />
-                </div>
-              </div>
-
+              {/* Message Textarea */}
               <div className="form-field-group">
-                <label className="form-field-label" htmlFor="message">
-                  Specific Requirements or Focus Areas
+                <label className="form-field-label" htmlFor="contact-message">
+                  Message
                 </label>
                 <textarea
-                  id="message"
+                  id="contact-message"
+                  name="message"
                   rows="4"
-                  placeholder="We are particularly interested in seeing your diagnostic imaging module..."
+                  placeholder="How can Neuerung support your healthcare goals?"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   className="form-textarea"
                 ></textarea>
               </div>
 
-              <div style={{ paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.75rem' }}>
-                  <Lock style={{ width: '1rem', height: '1rem', color: '#059669' }} />
-                  <span>Secure & HIPAA Compliant Inquiry</span>
+              {/* Privacy Consent & Submit Action */}
+              <div className="form-action-container">
+                <div className="privacy-consent-row">
+                  <Lock style={{ width: '1rem', height: '1rem', color: '#059669', flexShrink: 0 }} />
+                  <span>By submitting this inquiry, you agree to our clinical data handling guidelines.</span>
                 </div>
 
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   className="form-submit-btn"
                 >
                   {isSubmitting ? (
                     <div style={{ width: '1.25rem', height: '1.25rem', border: '2px solid #ffffff', borderTopColor: 'transparent', borderRadius: '9999px', animation: 'spin 1s linear infinite' }} />
                   ) : (
                     <>
-                      <span>Submit Request</span>
+                      <span>Talk to Neuerung</span>
                       <ArrowRight style={{ width: '1rem', height: '1rem' }} />
                     </>
                   )}
                 </motion.button>
               </div>
+
             </form>
           </motion.div>
 
@@ -214,10 +292,10 @@ export default function ContactFooter({ openModal }) {
           >
             {/* Headquarters Contact Card */}
             <div className="hq-card">
-              <h4 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-primary)', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-primary)', fontFamily: 'var(--font-heading)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Building2 style={{ width: '1.25rem', height: '1.25rem', color: 'var(--color-accent)' }} />
                 Our Headquarters
-              </h4>
+              </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.875rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                   <MapPin style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)', marginTop: '0.25rem', flexShrink: 0 }} />
@@ -235,15 +313,15 @@ export default function ContactFooter({ openModal }) {
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <Phone style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)', flexShrink: 0 }} />
-                  <a href="tel:+918005550199" style={{ fontWeight: 500 }}>
-                    +91 800 555 0199
+                  <a href={`tel:${COMPANY.contact.phone}`} style={{ fontWeight: 500 }}>
+                    {COMPANY.contact.phone}
                   </a>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <Mail style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)', flexShrink: 0 }} />
-                  <a href="mailto:demo@neuerung.health" style={{ fontWeight: 500 }}>
-                    demo@neuerung.health
+                  <a href={`mailto:${COMPANY.contact.email1}`} style={{ fontWeight: 500 }}>
+                    {COMPANY.contact.email1}
                   </a>
                 </div>
               </div>
@@ -256,13 +334,12 @@ export default function ContactFooter({ openModal }) {
                 src={COMPANY.mapEmbedUrl}
                 width="100%"
                 height="100%"
-                style={{ border: 0, filter: 'grayscale(0.5) contrast(1.2)' }}
+                style={{ border: 0, filter: 'grayscale(0.3) contrast(1.1)' }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
 
-              {/* Navigate Button — bottom-right corner */}
               <a
                 href={COMPANY.directionsUrl}
                 target="_blank"
@@ -278,18 +355,15 @@ export default function ContactFooter({ openModal }) {
                   gap: '6px',
                   backgroundColor: '#1d4ed8',
                   color: '#ffffff',
-                  padding: '7px 12px',
+                  padding: '8px 14px',
                   borderRadius: '999px',
                   fontSize: '12px',
                   fontWeight: 700,
                   fontFamily: 'var(--font-heading, Poppins, sans-serif)',
                   textDecoration: 'none',
                   boxShadow: '0 4px 14px rgba(29,78,216,0.45)',
-                  transition: 'background-color 0.2s, transform 0.15s',
                   whiteSpace: 'nowrap'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#1e40af'; e.currentTarget.style.transform = 'scale(1.05)'; }}
-                onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'scale(1)'; }}
               >
                 <Navigation size={13} style={{ flexShrink: 0 }} />
                 Get Directions
@@ -305,20 +379,9 @@ export default function ContactFooter({ openModal }) {
         <div className="site-footer-inner">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <Logo showText={true} />
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: '#424751', marginTop: '1rem', leading: 1.625 }}>
-              Intelligent healthcare solutions for a connected world.
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', color: '#424751', marginTop: '1rem', lineHeight: 1.625 }}>
+              Healthcare, Reimagined.<br />Intelligent, connected and clinically relevant technology.
             </p>
-          </div>
-
-          <div>
-            <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#191c1e', marginBottom: '1rem' }}>
-              Platform
-            </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#products">Products</a></li>
-              <li><a href="#who-are-we-with">Ecosystem</a></li>
-            </ul>
           </div>
 
           <div>
@@ -326,25 +389,42 @@ export default function ContactFooter({ openModal }) {
               Company
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
-              <li><a href="#our-team">Our Team</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="#about" onClick={(e) => { e.preventDefault(); handleNavScroll('about'); }}>About Neuerung</a></li>
+              <li><a href="#technology" onClick={(e) => { e.preventDefault(); handleNavScroll('technology'); }}>Technology</a></li>
+              <li><a href="#who-we-serve" onClick={(e) => { e.preventDefault(); handleNavScroll('who-we-serve'); }}>Who We Serve</a></li>
+              <li><a href="#contact" onClick={(e) => { e.preventDefault(); handleNavScroll('contact'); }}>Contact Us</a></li>
             </ul>
           </div>
 
           <div>
             <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#191c1e', marginBottom: '1rem' }}>
-              Legal
+              Hexa Ecosystem
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#hexa" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa'); }}>Hexa Overview</a></li>
+              <li><a href="#hexa-doctor" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-doctor'); }}>Hexa Doctor</a></li>
+              <li><a href="#hexa-service" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-service'); }}>Hexa Service</a></li>
+              <li><a href="#hexa-pharmacy" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-pharmacy'); }}>Hexa Pharmacy</a></li>
+              <li><a href="#hexa-patients" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-patients'); }}>Hexa for Patients</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#191c1e', marginBottom: '1rem' }}>
+              Specialised Solutions
+            </h4>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
+              <li><a href="#geriatric-care" onClick={(e) => { e.preventDefault(); handleNavScroll('geriatric-care'); }}>Geriatric Care</a></li>
+              <li><a href="#dementia-care" onClick={(e) => { e.preventDefault(); handleNavScroll('dementia-care'); }}>Dementia Care</a></li>
+              <li><a href="#rehabilitation" onClick={(e) => { e.preventDefault(); handleNavScroll('rehabilitation'); }}>Rehabilitation</a></li>
+              <li><a href="#insights" onClick={(e) => { e.preventDefault(); handleNavScroll('insights'); }}>Insights</a></li>
             </ul>
           </div>
         </div>
 
         <div style={{ width: '100%', borderTop: '1px solid rgba(194, 198, 211, 0.6)', padding: '1.5rem 1rem', textAlignment: 'center' }}>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: '#424751', textAlign: 'center' }}>
-            © 2026 Neuerung HealthTech Private Limited. Madurai, Tamil Nadu.
+            © {new Date().getFullYear()} Neuerung HealthTech Private Limited. All rights reserved.
           </p>
         </div>
       </footer>
@@ -358,6 +438,7 @@ export default function ContactFooter({ openModal }) {
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 350, damping: 25 }}
             className="toast-notification"
+            role="alert"
           >
             <div style={{ width: '2.5rem', height: '2.5rem', borderRadius: '9999px', backgroundColor: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <CheckCircle2 style={{ width: '1.5rem', height: '1.5rem', color: 'var(--color-primary)' }} />
@@ -367,7 +448,7 @@ export default function ContactFooter({ openModal }) {
                 Inquiry Received
               </h4>
               <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: 'var(--color-slate-600)', lineHeight: 1.625 }}>
-                Thank you. Our integration team will contact you shortly to confirm your demo schedule.
+                Thank you for contacting Neuerung HealthTech. Our team will get back to you shortly.
               </p>
             </div>
           </motion.div>

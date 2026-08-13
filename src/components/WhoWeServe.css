@@ -1,0 +1,115 @@
+.serve-section {
+  padding: 5.5rem 1.5rem;
+  background-color: var(--color-slate-50, #f8fafc);
+  position: relative;
+  border-bottom: 1px solid var(--color-slate-200, #e2e8f0);
+}
+
+.serve-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.serve-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3.5rem auto;
+}
+
+.serve-badge {
+  display: inline-block;
+  font-family: var(--font-heading, 'Poppins', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #1d4ed8;
+  background-color: #dbeafe;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+.serve-title {
+  font-family: var(--font-heading, 'Poppins', sans-serif);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-slate-900, #0f172a);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .serve-title {
+    font-size: 3rem;
+  }
+}
+
+.serve-intro {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.125rem;
+  color: var(--color-slate-600, #475569);
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+.serve-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .serve-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .serve-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.serve-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-slate-200, #e2e8f0);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s ease;
+}
+
+.serve-card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.1);
+}
+
+.serve-icon-box {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.serve-card-title {
+  font-family: var(--font-heading, 'Poppins', sans-serif);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-slate-900, #0f172a);
+  margin-bottom: 0.375rem;
+}
+
+.serve-card-desc {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.8125rem;
+  color: var(--color-slate-600, #475569);
+  line-height: 1.5;
+}

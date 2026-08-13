@@ -20,7 +20,7 @@
 
 .modal-dialog {
   background-color: #ffffff;
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   max-width: 48rem;
   width: 100%;
   padding: 1.5rem;
@@ -44,13 +44,17 @@
   z-index: 10;
   width: 2.25rem;
   height: 2.25rem;
-  border-radius: 9999px;
+  min-height: 44px;
+  min-width: 44px;
+  border-radius: 0.5rem;
   background-color: var(--color-slate-100);
   color: var(--color-slate-500);
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .modal-close-btn:hover {
@@ -74,9 +78,15 @@
 .modal-category-badge {
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--color-accent);
+  color: #1d4ed8;
+  background-color: #dbeafe;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  display: inline-block;
+  margin-bottom: 0.375rem;
+  border: none;
 }
 
 .modal-grid-2 {
@@ -91,17 +101,50 @@
   }
 }
 
+/* Primary Modal Button with Text Brand Gradient and No Border */
 .modal-primary-btn {
-  padding: 0.625rem 1.5rem;
-  border-radius: 9999px;
+  padding: 0.875rem 1.5rem;
+  min-height: 44px;
+  border-radius: 0.625rem;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
   background: var(--brand-gradient);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(94, 129, 255, 0.25);
-  transition: all 0.2s ease;
+  border: none;
+  box-shadow: 0 4px 14px rgba(94, 129, 255, 0.35);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 
 .modal-primary-btn:hover {
-  opacity: 0.9;
+  opacity: 0.94;
+  box-shadow: 0 8px 20px rgba(94, 129, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+.modal-primary-btn:active {
+  transform: translateY(1px);
+}
+
+/* Secondary Modal Button with Light Tint and No Border */
+.modal-secondary-btn {
+  padding: 0.875rem 1.25rem;
+  min-height: 44px;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  background-color: #f1f5f9;
+  color: #1e293b;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.modal-secondary-btn:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
 }
