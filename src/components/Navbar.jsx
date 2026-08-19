@@ -144,7 +144,7 @@ export default function Navbar({ openModal }) {
         />
 
         <div className="navbar-inner-container">
-          
+
           {/* Brand Logo */}
           <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className="navbar-brand-link">
             <Logo showText={true} size="normal" />

@@ -1,78 +1,50 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Heart, 
-  Stethoscope, 
-  Wrench, 
-  Pill, 
-  Check, 
+import {
+  Heart,
+  Stethoscope,
+  Wrench,
+  Pill,
+  Check,
   ArrowRight
 } from 'lucide-react';
 import './Products.css';
+import HexaDoctorLogoImage from "../assets/Hexa Doctor.png";
+import HexaServiceLogoImage from "../assets/Hexa Service.png";
+import HexaPharmacyLogoImage from "../assets/Hexa Pharmacy.png";
+import HexaCareLogoImage from "../assets/Hexa Care.jpg";
 
 // SVG Logos for Hexa Products
 const HexaDoctorLogo = () => (
-  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="docGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#818cf8" />
-          <stop offset="100%" stopColor="#4f46e5" />
-        </linearGradient>
-      </defs>
-      <path d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z" fill="url(#docGrad)" stroke="#ffffff" strokeWidth="3" />
-      <path d="M50 15 L78 31 L78 69 L50 85 L22 69 L22 31 Z" fill="rgba(255,255,255,0.15)" />
-    </svg>
-    <Stethoscope style={{ position: 'absolute', width: '22px', height: '22px', color: '#ffffff' }} />
-  </div>
+  <img
+    src={HexaDoctorLogoImage}
+    alt="Hexa Doctor"
+    style={{ width: "80px", height: "80px", objectFit: "contain" }}
+  />
 );
 
 const HexaServiceLogo = () => (
-  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="serviceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#fbbf24" />
-          <stop offset="100%" stopColor="#d97706" />
-        </linearGradient>
-      </defs>
-      <path d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z" fill="url(#serviceGrad)" stroke="#ffffff" strokeWidth="3" />
-      <path d="M50 15 L78 31 L78 69 L50 85 L22 69 L22 31 Z" fill="rgba(255,255,255,0.15)" />
-    </svg>
-    <Wrench style={{ position: 'absolute', width: '22px', height: '22px', color: '#ffffff' }} />
-  </div>
+  <img
+    src={HexaServiceLogoImage}
+    alt="Hexa Service"
+    style={{ width: "80px", height: "80px", objectFit: "contain" }}
+  />
 );
 
 const HexaPharmacyLogo = () => (
-  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="pharmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#34d399" />
-          <stop offset="100%" stopColor="#059669" />
-        </linearGradient>
-      </defs>
-      <path d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z" fill="url(#pharmGrad)" stroke="#ffffff" strokeWidth="3" />
-      <path d="M50 15 L78 31 L78 69 L50 85 L22 69 L22 31 Z" fill="rgba(255,255,255,0.15)" />
-    </svg>
-    <Pill style={{ position: 'absolute', width: '22px', height: '22px', color: '#ffffff' }} />
-  </div>
+  <img
+    src={HexaPharmacyLogoImage}
+    alt="Hexa Pharmacy"
+    style={{ width: "80px", height: "80px", objectFit: "contain" }}
+  />
 );
 
 const HexaCareLogo = () => (
-  <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="careGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#38bdf8" />
-          <stop offset="100%" stopColor="#0284c7" />
-        </linearGradient>
-      </defs>
-      <path d="M50 5 L89 27.5 L89 72.5 L50 95 L11 72.5 L11 27.5 Z" fill="url(#careGrad)" stroke="#ffffff" strokeWidth="3" />
-      <path d="M50 15 L78 31 L78 69 L50 85 L22 69 L22 31 Z" fill="rgba(255,255,255,0.15)" />
-    </svg>
-    <Heart style={{ position: 'absolute', width: '22px', height: '22px', color: '#ffffff' }} />
-  </div>
+  <img
+    src={HexaCareLogoImage}
+    alt="Hexa Pharmacy"
+    style={{ width: "80px", height: "80px", objectFit: "contain" }}
+  />
 );
 
 export default function Products({ openModal }) {
@@ -151,32 +123,32 @@ export default function Products({ openModal }) {
       <div className="products-bg-orb-2" />
 
       <div className="products-container">
-        
+
         {/* Section 05: Hexa Introduction Header */}
-        <motion.div 
+        <motion.div
           className="products-header"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <div style={{ 
-            display: 'inline-block', 
-            fontFamily: 'var(--font-heading)', 
-            fontSize: '0.75rem', 
-            fontWeight: 800, 
-            letterSpacing: '0.08em', 
-            color: '#1d4ed8', 
-            backgroundColor: '#dbeafe', 
-            padding: '0.35rem 0.85rem', 
-            borderRadius: '9999px', 
-            marginBottom: '1rem' 
+          <div style={{
+            display: 'inline-block',
+            fontFamily: 'var(--font-heading)',
+            fontSize: '0.75rem',
+            fontWeight: 800,
+            letterSpacing: '0.08em',
+            color: '#1d4ed8',
+            backgroundColor: '#dbeafe',
+            padding: '0.35rem 0.85rem',
+            borderRadius: '9999px',
+            marginBottom: '1rem'
           }}>
             HEXA ECOSYSTEM
           </div>
 
           <h2 className="products-title">
-             One Healthcare Ecosystem.<br /><span className="gradient-text">Multiple Connected Solutions.</span>
+            One Healthcare Ecosystem.<br /><span className="gradient-text">Multiple Connected Solutions.</span>
           </h2>
 
           <p style={{ fontSize: '1rem', fontWeight: 600, color: '#1d4ed8', marginTop: '0.5rem', fontFamily: 'var(--font-heading)' }}>

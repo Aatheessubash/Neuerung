@@ -44,7 +44,7 @@ export const COMPANY = {
   contact: {
     email1: 'healthtech@neuerung.in',
     email2: 'neuerunghealthtech@gmail.com',
-    phone: '+91 800 555 0199',
+    phone: '+91 638 155 7889',
     website: 'https://neuerung.in',
   },
 };

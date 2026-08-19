@@ -1,6 +1,6 @@
 import React from 'react';
 import './Logo.css';
-import logoImg from '../assets/logo-removebg-preview.png';
+import logoImg from '../assets/New_Logo.png';
 
 export default function Logo({ className = "", showText = true, size = "normal" }) {
   return (
