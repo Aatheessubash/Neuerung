@@ -4,7 +4,7 @@
  */
 
 export const COMPANY = {
-  name: 'Neuerung HealthTech Innovations Private Limited',
+  name: 'Neuerung HealthTech Private Limited',
   shortName: 'Neuerung HealthTech',
 
   address: {
@@ -45,6 +45,7 @@ export const COMPANY = {
     email1: 'healthtech@neuerung.in',
     email2: 'neuerunghealthtech@gmail.com',
     phone: '+91 638 155 7889',
+    gstin:'33AALCN3327R1ZY',
     website: 'https://neuerung.in',
   },
 };

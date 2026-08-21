@@ -3,6 +3,7 @@ import Logo from './Logo';
 import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2, Navigation, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ContactFooter.css';
+import gst from '../assets/gst.png'
 import { COMPANY } from '../constants/company';
 
 export default function ContactFooter({ openModal }) {
@@ -67,7 +68,7 @@ export default function ContactFooter({ openModal }) {
   return (
     <section id="contact" className="contact-footer-section">
       {/* Header */}
-      <motion.div 
+      <motion.div
         className="contact-header-container"
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +86,7 @@ export default function ContactFooter({ openModal }) {
       {/* Main Grid: Form + Headquarters */}
       <div className="contact-main-container">
         <div className="contact-grid">
-          
+
           {/* Clinical Inquiry Form (8 Cols) */}
           <motion.div
             className="inquiry-form-card"
@@ -106,7 +107,7 @@ export default function ContactFooter({ openModal }) {
             </div>
 
             <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', zIndex: 10, fontFamily: 'var(--font-body)' }}>
-              
+
               {/* Name & Organisation */}
               <div className="form-grid-2">
                 <div className="form-field-group">
@@ -310,6 +311,22 @@ export default function ContactFooter({ openModal }) {
                 </div>
 
                 <div style={{ width: '100%', height: '1px', backgroundColor: 'var(--color-slate-200)', margin: '0.5rem 0' }} />
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <img
+                      src={gst}
+                      alt="GST"
+                      style={{
+                        width: '1.5rem',
+                        height: '1.5rem',
+                        objectFit: 'contain',
+                        flexShrink: 0
+                      }}
+                    />
+                    {COMPANY.contact.gstin}
+                  </div>
+                </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <Phone style={{ width: '1rem', height: '1rem', color: 'var(--color-primary)', flexShrink: 0 }} />

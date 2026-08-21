@@ -11,8 +11,8 @@ import {
 import './Products.css';
 import HexaDoctorLogoImage from "../assets/Hexa Doctor.png";
 import HexaServiceLogoImage from "../assets/Hexa Service.png";
-import HexaPharmacyLogoImage from "../assets/Hexa Pharmacy.png";
-import HexaCareLogoImage from "../assets/Hexa Care.jpg";
+import HexaPharmacyLogoImage from "../assets/Hexa_Pharmacy.png";
+import HexaCareLogoImage from "../assets/Hexa Pharmacy.png";
 
 // SVG Logos for Hexa Products
 const HexaDoctorLogo = () => (
@@ -33,7 +33,7 @@ const HexaServiceLogo = () => (
 
 const HexaPharmacyLogo = () => (
   <img
-    src={HexaPharmacyLogoImage}
+    src={HexaCareLogoImage}
     alt="Hexa Pharmacy"
     style={{ width: "80px", height: "80px", objectFit: "contain" }}
   />
@@ -41,7 +41,7 @@ const HexaPharmacyLogo = () => (
 
 const HexaCareLogo = () => (
   <img
-    src={HexaCareLogoImage}
+    src={HexaPharmacyLogoImage}
     alt="Hexa Pharmacy"
     style={{ width: "80px", height: "80px", objectFit: "contain" }}
   />
@@ -184,7 +184,7 @@ export default function Products({ openModal }) {
                         <span className="product-brand-tag">{prod.tagline}</span>
                       </div>
                     </div>
-                    <span className="product-category-pill">{prod.category}</span>
+                    {/* <span className="product-category-pill">{prod.category}</span> */}
                   </div>
 
                   {/* Description */}
