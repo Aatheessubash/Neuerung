@@ -112,6 +112,51 @@
   }
 }
 
+/* Navbar WhatsApp CTA Button */
+.navbar-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  padding: 0.55rem 1.1rem;
+  min-height: 40px;
+  border: none;
+  border-radius: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navbar-whatsapp-btn:hover {
+  color: #ffffff;
+  opacity: 0.95;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.48);
+  transform: translateY(-1px);
+}
+
+.navbar-whatsapp-btn:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 420px) {
+  .navbar-whatsapp-btn span {
+    display: none;
+  }
+  .navbar-whatsapp-btn {
+    padding: 0.55rem;
+    min-width: 40px;
+  }
+}
+
 /* Navbar Demo CTA Button with Brand Gradient and No Border */
 .navbar-demo-btn {
   display: none;
@@ -243,7 +288,33 @@
   border-top: 1px solid var(--color-slate-100);
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Mobile Drawer WhatsApp Button */
+.navbar-mobile-whatsapp-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  min-height: 44px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navbar-mobile-whatsapp-btn:hover {
+  opacity: 0.95;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
 }
 
 .navbar-mobile-contact-btn {
@@ -259,40 +330,4 @@
   border: none;
   box-shadow: 0 4px 14px rgba(94, 129, 255, 0.35);
   cursor: pointer;
-}
-
-/* Scroll To Top Floating Button with Brand Gradient and No Border */
-.navbar-scroll-top-btn {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 90;
-  width: 2.75rem;
-  height: 2.75rem;
-  min-height: 44px;
-  min-width: 44px;
-  border-radius: 0.625rem;
-  background: var(--brand-gradient);
-  color: #ffffff;
-  box-shadow: 0 8px 20px rgba(94, 129, 255, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-@media (min-width: 640px) {
-  .navbar-scroll-top-btn {
-    bottom: 2rem;
-    right: 2rem;
-    width: 3rem;
-    height: 3rem;
-  }
-}
-
-.navbar-scroll-top-btn:hover {
-  opacity: 0.92;
-  transform: translateY(-2px);
 }

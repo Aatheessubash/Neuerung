@@ -11,6 +11,7 @@ import WhoWeServe from './components/WhoWeServe';
 import InsightsSection from './components/InsightsSection';
 import ContactFooter from './components/ContactFooter';
 import Modals from './components/Modals';
+import FloatingContact from './components/FloatingContact';
 
 export default function App() {
   const [activeModal, setActiveModal] = useState(null);
@@ -39,13 +40,13 @@ export default function App() {
       {/* Main Content Flow */}
       <main id="main-content" style={{ paddingTop: '5.5rem' }}>
         {/* Section 01: Hero */}
-        <Hero openModal={openModal} />
+        <Hero />
 
         {/* Section 02: Healthcare Context */}
         <HealthcareContext />
 
         {/* Section 03: About Neuerung */}
-        <About openModal={openModal} />
+        <About />
 
         {/* Section 04: Technology */}
         <Technology />
@@ -60,14 +61,17 @@ export default function App() {
         <HowHexaWorks />
 
         {/* Section 11: Who We Serve */}
-        <WhoWeServe openModal={openModal} />
+        <WhoWeServe />
 
         {/* Section 12: Insights */}
         <InsightsSection openModal={openModal} />
       </main>
 
       {/* Section 13 & Footer: Contact / Request Demo */}
-      <ContactFooter openModal={openModal} />
+      <ContactFooter />
+
+      {/* Floating Quick Actions Widget (WhatsApp, Call, Scroll-to-Top at bottom-right) */}
+      <FloatingContact />
 
       {/* Interactive Modals Manager */}
       <Modals

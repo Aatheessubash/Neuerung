@@ -1,18 +1,58 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, ArrowUp, ChevronRight, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronRight, ChevronDown } from 'lucide-react';
 import Logo from './Logo';
+import { WhatsAppIcon } from './FloatingContact';
+import { COMPANY } from '../constants/company';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import './Navbar.css';
+
+const NAV_LINKS = [
+  { name: 'Home', href: '#home', id: 'home' },
+  { name: 'About', href: '#about', id: 'about' },
+  { 
+    name: 'Hexa', 
+    href: '#hexa', 
+    id: 'hexa',
+    hasDropdown: true,
+    subItems: [
+      { name: 'Hexa Overview', id: 'hexa' },
+      { name: 'Hexa Doctor', id: 'hexa-doctor' },
+      { name: 'Hexa Service', id: 'hexa-service' },
+      { name: 'Hexa Pharmacy', id: 'hexa-pharmacy' },
+      { name: 'Hexa for Patients', id: 'hexa-patients' },
+    ]
+  },
+  { 
+    name: 'Solutions', 
+    href: '#solutions', 
+    id: 'solutions',
+    hasDropdown: true,
+    subItems: [
+      { name: 'Geriatric Care', id: 'geriatric-care' },
+      { name: 'Dementia Care', id: 'dementia-care' },
+      { name: 'Rehabilitation', id: 'rehabilitation' },
+    ]
+  },
+  { name: 'Technology', href: '#technology', id: 'technology' },
+  { name: 'Who We Serve', href: '#who-we-serve', id: 'who-we-serve' },
+  { name: 'Insights', href: '#insights', id: 'insights' },
+  { name: 'Contact', href: '#contact', id: 'contact' },
+];
 
 export default function Navbar({ openModal }) {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showScrollTop, setShowScrollTop] = useState(false);
   const [hexaDropdownOpen, setHexaDropdownOpen] = useState(false);
   const [solutionsDropdownOpen, setSolutionsDropdownOpen] = useState(false);
   
   const isNavClicking = useRef(false);
   const scrollTimeout = useRef(null);
+
+  const waNumber = COMPANY.contact.phone.replace(/\D/g, '');
+  const waMessage = encodeURIComponent(
+    'Hello Neuerung Team, I would like to know more about your healthcare solutions and services.'
+  );
+  const waUrl = `https://wa.me/${waNumber}?text=${waMessage}`;
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -21,43 +61,8 @@ export default function Navbar({ openModal }) {
     restDelta: 0.001
   });
 
-  const navLinks = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About', href: '#about', id: 'about' },
-    { 
-      name: 'Hexa', 
-      href: '#hexa', 
-      id: 'hexa',
-      hasDropdown: true,
-      subItems: [
-        { name: 'Hexa Overview', id: 'hexa' },
-        { name: 'Hexa Doctor', id: 'hexa-doctor' },
-        { name: 'Hexa Service', id: 'hexa-service' },
-        { name: 'Hexa Pharmacy', id: 'hexa-pharmacy' },
-        { name: 'Hexa for Patients', id: 'hexa-patients' },
-      ]
-    },
-    { 
-      name: 'Solutions', 
-      href: '#solutions', 
-      id: 'solutions',
-      hasDropdown: true,
-      subItems: [
-        { name: 'Geriatric Care', id: 'geriatric-care' },
-        { name: 'Dementia Care', id: 'dementia-care' },
-        { name: 'Rehabilitation', id: 'rehabilitation' },
-      ]
-    },
-    { name: 'Technology', href: '#technology', id: 'technology' },
-    { name: 'Who We Serve', href: '#who-we-serve', id: 'who-we-serve' },
-    { name: 'Insights', href: '#insights', id: 'insights' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
-  ];
-
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
-
       if (isNavClicking.current) return;
 
       const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60);
@@ -69,7 +74,7 @@ export default function Navbar({ openModal }) {
       const scrollPosition = window.scrollY + 140;
       let current = 'home';
 
-      for (const link of navLinks) {
+      for (const link of NAV_LINKS) {
         const el = document.getElementById(link.id);
         if (el) {
           const top = el.getBoundingClientRect().top + window.scrollY;
@@ -129,10 +134,6 @@ export default function Navbar({ openModal }) {
     }, 1000);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <>
       <header className="navbar-header">
@@ -152,7 +153,7 @@ export default function Navbar({ openModal }) {
 
           {/* Navigation Links (Desktop) */}
           <nav className="navbar-desktop-nav">
-            {navLinks.map((link) => {
+            {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.id;
               
               if (link.name === 'Hexa') {
@@ -325,6 +326,20 @@ export default function Navbar({ openModal }) {
 
           {/* Actions */}
           <div className="navbar-actions">
+            <motion.a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="navbar-whatsapp-btn"
+              aria-label="Chat with us on WhatsApp"
+              title="Chat with us on WhatsApp"
+            >
+              <WhatsAppIcon size={18} />
+              <span>WhatsApp</span>
+            </motion.a>
+
             <motion.button
               onClick={() => openModal && openModal('book-demo')}
               whileHover={{ scale: 1.04 }}
@@ -356,7 +371,7 @@ export default function Navbar({ openModal }) {
               transition={{ duration: 0.2, ease: "easeInOut" }}
               className="navbar-mobile-drawer"
             >
-              {navLinks.map((link) => {
+              {NAV_LINKS.map((link) => {
                 const isActive = activeSection === link.id;
                 return (
                   <React.Fragment key={link.name}>
@@ -388,6 +403,17 @@ export default function Navbar({ openModal }) {
               })}
 
               <div className="navbar-mobile-contact">
+                <a
+                  href={waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="navbar-mobile-whatsapp-btn"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <WhatsAppIcon size={18} />
+                  <span>Chat on WhatsApp</span>
+                </a>
+
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
@@ -413,24 +439,6 @@ export default function Navbar({ openModal }) {
             onClick={() => setMobileMenuOpen(false)}
             className="navbar-mobile-overlay"
           />
-        )}
-      </AnimatePresence>
-
-      {/* Floating Scroll-to-Top Button */}
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.5, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.5, y: 20 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={scrollToTop}
-            className="navbar-scroll-top-btn"
-            title="Scroll to Top"
-          >
-            <ArrowUp style={{ width: '1.25rem', height: '1.25rem' }} />
-          </motion.button>
         )}
       </AnimatePresence>
     </>

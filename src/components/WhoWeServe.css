@@ -1,19 +1,42 @@
 .serve-section {
-  padding: 5.5rem 1.5rem;
+  width: 100%;
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
   background-color: var(--color-slate-50, #f8fafc);
   position: relative;
   border-bottom: 1px solid var(--color-slate-200, #e2e8f0);
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .serve-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
 }
 
 .serve-container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .serve-container {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .serve-container {
+    padding: 0 3rem;
+  }
 }
 
 .serve-header {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 3.5rem auto;
+  margin: 0 auto 1.75rem auto;
 }
 
 .serve-badge {
@@ -24,14 +47,14 @@
   letter-spacing: 0.08em;
   color: #1d4ed8;
   background-color: #dbeafe;
-  padding: 0.35rem 0.85rem;
+  padding: 0.3rem 0.75rem;
   border-radius: 9999px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .serve-title {
   font-family: var(--font-heading, 'Poppins', sans-serif);
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 800;
   color: var(--color-slate-900, #0f172a);
   line-height: 1.25;
@@ -40,22 +63,22 @@
 
 @media (min-width: 768px) {
   .serve-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 
 .serve-intro {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--color-slate-600, #475569);
-  margin-top: 1rem;
-  line-height: 1.6;
+  margin-top: 0.5rem;
+  line-height: 1.5;
 }
 
 .serve-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 @media (min-width: 640px) {
@@ -73,24 +96,24 @@
 .serve-card {
   background-color: #ffffff;
   border: 1px solid var(--color-slate-200, #e2e8f0);
-  border-radius: 1.25rem;
-  padding: 1.5rem;
+  border-radius: 1rem;
+  padding: 1.25rem 1.1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  gap: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
   transition: all 0.25s ease;
 }
 
 .serve-card:hover {
   border-color: #3b82f6;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 8px 18px rgba(59, 130, 246, 0.1);
 }
 
 .serve-icon-box {
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 0.75rem;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.625rem;
   background-color: #dbeafe;
   color: #1d4ed8;
   display: flex;
@@ -101,10 +124,10 @@
 
 .serve-card-title {
   font-family: var(--font-heading, 'Poppins', sans-serif);
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--color-slate-900, #0f172a);
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.25rem;
 }
 
 .serve-card-desc {

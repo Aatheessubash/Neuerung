@@ -1,7 +1,7 @@
 .products-section {
   width: 100%;
-  padding-top: 3.5rem;
-  padding-bottom: 3.5rem;
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
   background-color: var(--color-slate-50);
   position: relative;
   overflow: hidden;
@@ -10,8 +10,8 @@
 
 @media (min-width: 768px) {
   .products-section {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 }
 
@@ -63,23 +63,23 @@
 .products-header {
   text-align: center;
   max-width: 48rem;
-  margin: 0 auto 3.5rem auto;
+  margin: 0 auto 1.75rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .products-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 1rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 0.5rem;
   background: rgba(94, 129, 255, 0.1);
   border: none;
   color: var(--color-primary);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -96,44 +96,44 @@
 
 @media (min-width: 640px) {
   .products-title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
 }
 
 @media (min-width: 1024px) {
   .products-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 
 .products-subtext {
-  font-size: 1rem;
+  font-size: 0.9375rem;
   color: var(--color-slate-600);
   font-family: var(--font-body);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* Grid Layout for Products */
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.75rem;
+  gap: 1.25rem;
 }
 
 @media (min-width: 768px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1.25rem;
   }
 }
 
 /* Product Card */
 .product-card {
   background: #ffffff;
-  border-radius: 1.25rem;
-  padding: 2rem;
+  border-radius: 1rem;
+  padding: 1.5rem 1.35rem;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -144,7 +144,7 @@
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 78, 156, 0.08);
+  box-shadow: 0 16px 32px rgba(0, 78, 156, 0.08);
   border-color: rgba(94, 129, 255, 0.3);
 }
 

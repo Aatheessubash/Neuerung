@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Stethoscope, Users, Building2, Activity, Server, Network } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 import './Hero.css';
 import homeVideo from '../assets/homeVideo.mp4';
 
-export default function Hero({ openModal }) {
+export default function Hero() {
   const handleScroll = (id) => {
     const el = document.getElementById(id);
     if (el) {

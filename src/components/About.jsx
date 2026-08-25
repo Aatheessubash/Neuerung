@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Brain, Scan, Radio, Network, ArrowRight } from 'lucide-react';
 import './About.css';
 
-export default function About({ openModal }) {
+export default function About() {
   const pillars = [
     {
       icon: Brain,

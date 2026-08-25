@@ -5,12 +5,10 @@ import {
   Stethoscope, 
   ShieldCheck, 
   Cpu, 
-  Cloud, 
   FileCode, 
   Network, 
   CheckCircle2, 
   ArrowRight,
-  Radio,
   Users
 } from 'lucide-react';
 import './WhoAreWeWith.css';

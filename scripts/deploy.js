@@ -4,7 +4,7 @@ import { execSync } from 'child_process';
 function run(cmd) {
   try {
     return execSync(cmd, { encoding: 'utf8', stdio: 'inherit' });
-  } catch (err) {
+  } catch {
     console.error(`❌ Command failed: ${cmd}`);
     process.exit(1);
   }
@@ -83,7 +83,7 @@ async function main() {
       run('git add -A');
       run(`git commit -m "${commitMsg.replace(/"/g, '\\"')}"`);
     }
-  } catch (e) {
+  } catch {
     // Continue if no changes to commit
   }
 

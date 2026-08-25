@@ -6,7 +6,7 @@ import './ContactFooter.css';
 import gst from '../assets/gst.png'
 import { COMPANY } from '../constants/company';
 
-export default function ContactFooter({ openModal }) {
+export default function ContactFooter() {
   const [form, setForm] = useState({
     name: '',
     organisation: '',

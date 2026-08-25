@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Scan, Cpu, LayoutGrid, ArrowRight, CheckCircle2, X, Sparkles, Activity, Layers } from 'lucide-react';
+import { Brain, Scan, Cpu, LayoutGrid, ArrowRight, CheckCircle2, X, Sparkles, Layers } from 'lucide-react';
 
 export default function Solutions() {
   const [selectedSolution, setSelectedSolution] = useState(null);

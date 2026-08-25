@@ -1,0 +1,198 @@
+/* Floating Quick Actions Widget - Bottom Right */
+.floating-contact-container {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  pointer-events: none; /* Let empty background space pass through */
+}
+
+@media (min-width: 640px) {
+  .floating-contact-container {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    gap: 0.5rem;
+  }
+}
+
+.floating-btn-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto; /* Re-enable clicks on buttons */
+}
+
+/* Base Floating Action Button */
+.floating-contact-btn {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  min-width: 38px;
+  min-height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16), 0 2px 5px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .floating-contact-btn {
+    width: 2.625rem;
+    height: 2.625rem;
+  }
+}
+
+.floating-contact-btn:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+
+/* WhatsApp Floating Button Style */
+.floating-whatsapp-btn {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.floating-whatsapp-btn:hover {
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55), 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Call Floating Button Style */
+.floating-call-btn {
+  background: linear-gradient(135deg, #003772 0%, #0066cc 100%);
+  box-shadow: 0 8px 24px rgba(0, 55, 114, 0.35), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.floating-call-btn:hover {
+  box-shadow: 0 12px 30px rgba(0, 55, 114, 0.5), 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Scroll To Top Floating Button Style */
+.floating-scroll-btn {
+  background: var(--brand-gradient, linear-gradient(90deg, #5E81FF 0%, #65CAFF 100%));
+  box-shadow: 0 8px 20px rgba(94, 129, 255, 0.35), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.floating-scroll-btn:hover {
+  box-shadow: 0 12px 28px rgba(94, 129, 255, 0.5), 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.floating-btn-icon {
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.floating-contact-btn:hover .floating-btn-icon {
+  transform: scale(1.08);
+}
+
+/* Pulse Wave Rings */
+.floating-pulse-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+  animation: floatPulse 2.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+.floating-pulse-whatsapp {
+  border: 2px solid #25D366;
+}
+
+.floating-pulse-call {
+  border: 2px solid #5E81FF;
+  animation-delay: 1.4s;
+}
+
+@keyframes floatPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+/* Desktop Tooltips (Positioned to the left of the button) */
+.floating-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  left: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff;
+  color: #0f172a;
+  padding: 0.45rem 0.85rem;
+  border-radius: 0.625rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-slate-200, #e2e8f0);
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.floating-tooltip::before {
+  content: '';
+  position: absolute;
+  right: -5px;
+  left: auto;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border-right: 1px solid var(--color-slate-200, #e2e8f0);
+  border-top: 1px solid var(--color-slate-200, #e2e8f0);
+}
+
+.tooltip-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.tooltip-sub {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #64748b;
+  margin-top: 0.15rem;
+}
+
+.floating-tooltip-whatsapp .tooltip-title {
+  color: #128C7E;
+}
+
+@media (max-width: 768px) {
+  /* On mobile / small touch screens, hide the hover tooltip so it doesn't obstruct view */
+  .floating-tooltip {
+    display: none;
+  }
+}
