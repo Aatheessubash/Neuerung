@@ -17,6 +17,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
   const [demoSubmitted, setDemoSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   useEffect(() => {
     if (modalData && modalData.name) {
@@ -30,15 +31,47 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                          modalData.name.includes('Rehab') ? 'Rehabilitation' : 'General Enquiry'
       }));
     }
-  }, [modalData]);
+    setSubmitError(null);
+  }, [modalData, activeModal]);
 
-  const handleDemoSubmit = (e) => {
+  const handleDemoSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+
+    try {
+      const baseUrl = import.meta.env.VITE_API_URL || '';
+      const endpoint = baseUrl ? `${baseUrl}/api/contact` : '/api/contact';
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: demoForm.name,
+          organisation: demoForm.organisation,
+          email: demoForm.email,
+          phone: demoForm.phone,
+          areaOfInterest: demoForm.areaOfInterest,
+          message: demoForm.message || `Demo requested for ${demoForm.areaOfInterest}`,
+          formType: 'Demo Request',
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || `Request failed (status ${res.status})`);
+      }
+
       setDemoSubmitted(true);
-    }, 700);
+    } catch (err) {
+      console.error('Demo request error:', err);
+      setSubmitError(err.message || 'Failed to submit demo request. Please contact healthtech@neuerung.in directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!activeModal) return null;
@@ -300,6 +333,12 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                       <option value="General Enquiry">General Enquiry</option>
                     </select>
                   </div>
+
+                  {submitError && (
+                    <div style={{ padding: '0.625rem 0.875rem', borderRadius: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', color: '#b91c1c', fontSize: '0.75rem', lineHeight: 1.4 }}>
+                      {submitError}
+                    </div>
+                  )}
 
                   <button
                     type="submit"

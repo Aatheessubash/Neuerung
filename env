@@ -1,15 +1,15 @@
-# Admin Credentials
+﻿# Admin Credentials
 ADMIN_USERNAME=divinecode01
 ADMIN_PASSWORD=782274
 
 # SMTP Email Configuration
 SMTP_USER=aatheessubash48@gmail.com
-SMTP_PASS=lmct pcee nwpj hryc
+SMTP_PASS=vniw hijj ygxq clri
 SMTP_SERVICE=gmail
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=465
 SMTP_SECURE=true
-MAIL_FROM="DeCode InfoTech" <aatheessubash48@gmail.com>
+MAIL_FROM="Neuerung HealthTech" <aatheessubash48@gmail.com>
 CONTACT_RECEIVER_EMAIL=aatheessubash48@gmail.com
 
 # Server Port

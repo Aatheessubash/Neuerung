@@ -19,6 +19,7 @@ export default function ContactFooter() {
   const [errors, setErrors] = useState({});
   const [showToast, setShowToast] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   const validate = () => {
     const newErrors = {};
@@ -35,13 +36,39 @@ export default function ContactFooter() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+
+    try {
+      const baseUrl = import.meta.env.VITE_API_URL || '';
+      const endpoint = baseUrl ? `${baseUrl}/api/contact` : '/api/contact';
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          organisation: form.organisation,
+          email: form.email,
+          phone: form.phone,
+          areaOfInterest: form.areaOfInterest,
+          message: form.message,
+          formType: 'Clinical Inquiry',
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || `Submission failed (status ${res.status})`);
+      }
+
       setShowToast(true);
       setForm({
         name: '',
@@ -49,13 +76,18 @@ export default function ContactFooter() {
         phone: '',
         email: '',
         areaOfInterest: '',
-        message: ''
+        message: '',
       });
       setErrors({});
       setTimeout(() => {
         setShowToast(false);
-      }, 4500);
-    }, 600);
+      }, 5000);
+    } catch (err) {
+      console.error('Contact form submission error:', err);
+      setSubmitError(err.message || 'Unable to submit inquiry right now. Please email us directly at healthtech@neuerung.in');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleNavScroll = (id) => {
@@ -257,6 +289,13 @@ export default function ContactFooter() {
 
               {/* Privacy Consent & Submit Action */}
               <div className="form-action-container">
+                {submitError && (
+                  <div style={{ padding: '0.75rem 1rem', borderRadius: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', color: '#b91c1c', fontSize: '0.8125rem', display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
+                    <AlertCircle size={16} style={{ flexShrink: 0 }} />
+                    <span>{submitError}</span>
+                  </div>
+                )}
+
                 <div className="privacy-consent-row">
                   <Lock style={{ width: '1rem', height: '1rem', color: '#059669', flexShrink: 0 }} />
                   <span>By submitting this inquiry, you agree to our clinical data handling guidelines.</span>

@@ -7,10 +7,10 @@ import {
 import './Products.css';
 import HexaDoctorLogoImage from "../assets/Hexa Doctor.png";
 import HexaServiceLogoImage from "../assets/Hexa Service.png";
-import HexaPharmacyLogoImage from "../assets/Hexa_Pharmacy.png";
-import HexaCareLogoImage from "../assets/Hexa Pharmacy.png";
+import HexaPharmacyLogoImage from "../assets/Hexa Pharmacy.png";
+import HexaPatientsLogoImage from "../assets/Hexa Patients F.png";
 
-// SVG Logos for Hexa Products
+// Logos for Hexa Products
 const HexaDoctorLogo = () => (
   <img
     src={HexaDoctorLogoImage}
@@ -29,16 +29,16 @@ const HexaServiceLogo = () => (
 
 const HexaPharmacyLogo = () => (
   <img
-    src={HexaCareLogoImage}
+    src={HexaPharmacyLogoImage}
     alt="Hexa Pharmacy"
     style={{ width: "80px", height: "80px", objectFit: "contain" }}
   />
 );
 
-const HexaCareLogo = () => (
+const HexaPatientsLogo = () => (
   <img
-    src={HexaPharmacyLogoImage}
-    alt="Hexa Pharmacy"
+    src={HexaPatientsLogoImage}
+    alt="Hexa for Patients"
     style={{ width: "80px", height: "80px", objectFit: "contain" }}
   />
 );
@@ -101,7 +101,7 @@ export default function Products({ openModal }) {
       tagline: 'A connected patient healthcare experience.',
       category: 'PATIENT',
       theme: 'theme-care',
-      logo: HexaCareLogo,
+      logo: HexaPatientsLogo,
       description: 'Designed to connect patients with relevant healthcare information, services and experiences throughout their care journey.',
       features: [
         'Connected experience',

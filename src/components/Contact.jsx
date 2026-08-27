@@ -14,19 +14,49 @@ export default function Contact() {
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmitError(null);
+
+    try {
+      const baseUrl = import.meta.env.VITE_API_URL || '';
+      const endpoint = baseUrl ? `${baseUrl}/api/contact` : '/api/contact';
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          organisation: formData.organization,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          formType: 'Contact Form',
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || `Submission failed (status ${res.status})`);
+      }
+
       setSubmitted(true);
-    }, 1000);
+    } catch (err) {
+      console.error('Contact submission error:', err);
+      setSubmitError(err.message || 'Failed to send message. Please contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -332,6 +362,12 @@ export default function Contact() {
                       ></textarea>
                     </div>
                   </div>
+
+                  {submitError && (
+                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-medium">
+                      {submitError}
+                    </div>
+                  )}
 
                   {/* Submit Button */}
                   <button

@@ -8,6 +8,8 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
+    "server": "node server.js",
+    "start": "node server.js",
     "deploy": "node scripts/deploy.js"
   },
   "dependencies": {
@@ -17,8 +19,12 @@
     "@mui/material": "^9.3.1",
     "@mui/x-data-grid": "^9.11.0",
     "@tailwindcss/vite": "^4.3.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "framer-motion": "^13.0.0",
     "lucide-react": "^1.30.0",
+    "nodemailer": "^9.0.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tailwindcss": "^4.3.3"

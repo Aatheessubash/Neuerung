@@ -24,38 +24,38 @@
 }
 
 .logo-img.size-normal {
-  height: 64px;
+  height: 48px;
 }
 
 @media (min-width: 640px) {
   .logo-img.size-normal {
-    height: 74px;
+    height: 56px;
   }
 }
 
 @media (min-width: 768px) {
   .logo-img.size-normal {
-    height: 82px;
+    height: 60px;
   }
 }
 
 .logo-img.size-small {
-  height: 50px;
+  height: 38px;
 }
 
 @media (min-width: 640px) {
   .logo-img.size-small {
-    height: 58px;
+    height: 44px;
   }
 }
 
 .logo-img.size-large {
-  height: 80px;
+  height: 64px;
 }
 
 @media (min-width: 640px) {
   .logo-img.size-large {
-    height: 96px;
+    height: 76px;
   }
 }
 
