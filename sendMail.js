@@ -1,4 +1,4 @@
-﻿import nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
@@ -50,8 +50,8 @@ const getLogoAttachments = () => {
 
 /** Create a Nodemailer transporter from environment variables. */
 export const createTransporter = () => {
-  const user = process.env.SMTP_USER || 'aatheessubash48@gmail.com';
-  const pass = (process.env.SMTP_PASS || 'vniw hijj ygxq clri').replace(/\s+/g, '');
+  const user = process.env.SMTP_USER || 'neuerunghealthtech@gmail.com';
+  const pass = (process.env.SMTP_PASS || 'zqpu gikh gjqd tlsk').replace(/\s+/g, '');
 
   return nodemailer.createTransport({
     service: 'gmail',
@@ -67,13 +67,13 @@ export const createTransporter = () => {
 
 /** Shared MAIL_FROM string — consistent across all functions. */
 const getMailFrom = () => {
-  const user = process.env.SMTP_USER || 'aatheessubash48@gmail.com';
+  const user = process.env.SMTP_USER || 'neuerunghealthtech@gmail.com';
   return process.env.MAIL_FROM?.trim() || `"Neuerung HealthTech" <${user}>`;
 };
 
 /** Admin/company receiver email. */
 const getReceiverEmail = () => {
-  return process.env.CONTACT_RECEIVER_EMAIL?.trim() || process.env.SMTP_USER || 'aatheessubash48@gmail.com';
+  return process.env.CONTACT_RECEIVER_EMAIL?.trim() || process.env.SMTP_USER || 'aatheessubash48@gmail.com, neuerunghealthtech@gmail.com';
 };
 
 // ─── sendContactEmail ─────────────────────────────────────────────────────────
