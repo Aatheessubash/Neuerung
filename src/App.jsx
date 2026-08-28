@@ -38,7 +38,7 @@ export default function App() {
       <Navbar openModal={openModal} />
 
       {/* Main Content Flow */}
-      <main id="main-content" style={{ paddingTop: '5.5rem' }}>
+      <main id="main-content">
         {/* Section 01: Hero */}
         <Hero />
 
@@ -51,7 +51,7 @@ export default function App() {
         {/* Section 04: Technology */}
         <Technology />
 
-        {/* Section 05 - 08: Hexa Ecosystem & Hexa Products (Doctor, Service, Pharmacy, Patients) */}
+        {/* Section 05 - 08: Products (Hexa Doctor, Hexa Service, Hexa Pharmacy, Hexa for Patients) */}
         <Products openModal={openModal} />
 
         {/* Section 09: Specialised Healthcare Solutions (Geriatric, Dementia, Rehabilitation) */}

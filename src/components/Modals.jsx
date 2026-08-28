@@ -100,7 +100,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
           {activeModal === 'product-details' && modalData && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div className="modal-header">
-                <span className="modal-category-badge">{modalData.category || 'HEXA PRODUCT'}</span>
+                <span className="modal-category-badge">{modalData.category || 'PRODUCT'}</span>
                 <h3 className="modal-title" style={{ fontSize: '1.75rem' }}>{modalData.name}</h3>
                 <p style={{ color: 'var(--color-primary)', fontWeight: 600, fontSize: '0.9375rem', marginTop: '0.25rem' }}>
                   {modalData.tagline}

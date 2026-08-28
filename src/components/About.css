@@ -154,7 +154,7 @@
 
 @media (min-width: 1024px) {
   .about-content-left {
-    grid-column: span 12 / span 12;
+    grid-column: span 7 / span 7;
   }
 }
 

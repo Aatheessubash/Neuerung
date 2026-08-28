@@ -114,7 +114,7 @@ export default function Products({ openModal }) {
   ];
 
   return (
-    <section id="hexa" className="products-section">
+    <section id="products" className="products-section">
       <div className="products-bg-orb-1" />
       <div className="products-bg-orb-2" />
 
@@ -140,11 +140,11 @@ export default function Products({ openModal }) {
             borderRadius: '9999px',
             marginBottom: '1rem'
           }}>
-            HEXA ECOSYSTEM
+            PRODUCTS
           </div>
 
           <h2 className="products-title">
-            One Healthcare Ecosystem.<br /><span className="gradient-text">Multiple Connected Solutions.</span>
+            Our Connected Healthcare Platform.<br /><span className="gradient-text">Multiple Integrated Solutions.</span>
           </h2>
 
           <p style={{ fontSize: '1rem', fontWeight: 600, color: '#1d4ed8', marginTop: '0.5rem', fontFamily: 'var(--font-heading)' }}>
@@ -152,7 +152,7 @@ export default function Products({ openModal }) {
           </p>
 
           <p className="products-subtext">
-            Hexa brings together healthcare professionals, service providers and patients through a connected digital healthcare ecosystem.
+            Our products connect healthcare professionals, service providers and patients through a unified digital healthcare ecosystem.
           </p>
         </motion.div>
 

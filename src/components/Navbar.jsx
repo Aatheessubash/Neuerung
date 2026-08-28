@@ -10,12 +10,12 @@ const NAV_LINKS = [
   { name: 'Home', href: '#home', id: 'home' },
   { name: 'About', href: '#about', id: 'about' },
   { 
-    name: 'Hexa', 
-    href: '#hexa', 
-    id: 'hexa',
+    name: 'Products', 
+    href: '#products', 
+    id: 'products',
     hasDropdown: true,
     subItems: [
-      { name: 'Hexa Overview', id: 'hexa' },
+      { name: 'Products Overview', id: 'products' },
       { name: 'Hexa Doctor', id: 'hexa-doctor' },
       { name: 'Hexa Service', id: 'hexa-service' },
       { name: 'Hexa Pharmacy', id: 'hexa-pharmacy' },
@@ -42,7 +42,7 @@ const NAV_LINKS = [
 export default function Navbar({ openModal }) {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [hexaDropdownOpen, setHexaDropdownOpen] = useState(false);
+  const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const [solutionsDropdownOpen, setSolutionsDropdownOpen] = useState(false);
   
   const isNavClicking = useRef(false);
@@ -105,7 +105,7 @@ export default function Navbar({ openModal }) {
 
     // Close all menus immediately
     setMobileMenuOpen(false);
-    setHexaDropdownOpen(false);
+    setProductsDropdownOpen(false);
     setSolutionsDropdownOpen(false);
 
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
@@ -156,13 +156,13 @@ export default function Navbar({ openModal }) {
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.id;
               
-              if (link.name === 'Hexa') {
+              if (link.name === 'Products') {
                 return (
                   <div 
                     key={link.name} 
                     className="nav-dropdown-wrapper"
-                    onMouseEnter={() => setHexaDropdownOpen(true)}
-                    onMouseLeave={() => setHexaDropdownOpen(false)}
+                    onMouseEnter={() => setProductsDropdownOpen(true)}
+                    onMouseLeave={() => setProductsDropdownOpen(false)}
                     style={{ position: 'relative' }}
                   >
                     <a
@@ -183,7 +183,7 @@ export default function Navbar({ openModal }) {
                     </a>
 
                     <AnimatePresence>
-                      {hexaDropdownOpen && (
+                      {productsDropdownOpen && (
                         <motion.div
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
