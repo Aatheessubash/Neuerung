@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from './Logo';
-import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2, Navigation, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ContactFooter.css';
 import gst from '../assets/gst.png'
@@ -24,7 +24,6 @@ export default function ContactFooter() {
   const validate = () => {
     const newErrors = {};
     if (!form.name.trim()) newErrors.name = 'Full Name is required';
-    if (!form.organisation.trim()) newErrors.organisation = 'Organisation is required';
     if (!form.email.trim()) {
       newErrors.email = 'Email address is required';
     } else if (!/\S+@\S+\.\S+/.test(form.email)) {
@@ -93,7 +92,13 @@ export default function ContactFooter() {
   const handleNavScroll = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const navHeight = window.innerWidth >= 1024 ? 90 : 76;
+      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navHeight;
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -107,6 +112,20 @@ export default function ContactFooter() {
         viewport={{ once: true, margin: "-50px" }}
         transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
       >
+        <div style={{
+          display: 'inline-block',
+          fontFamily: 'var(--font-heading)',
+          fontSize: '0.75rem',
+          fontWeight: 800,
+          letterSpacing: '0.08em',
+          color: '#1d4ed8',
+          backgroundColor: '#dbeafe',
+          padding: '0.35rem 0.85rem',
+          borderRadius: '9999px',
+          marginBottom: '1rem'
+        }}>
+          CONNECT WITH US
+        </div>
         <h2 className="contact-section-title">
           Let's build <span className="gradient-text">better healthcare together.</span>
         </h2>
@@ -169,27 +188,17 @@ export default function ContactFooter() {
 
                 <div className="form-field-group">
                   <label className="form-field-label" htmlFor="contact-organisation">
-                    Organisation <span className="required-asterisk">*</span>
+                    Organisation
                   </label>
                   <input
                     id="contact-organisation"
                     name="organisation"
                     type="text"
-                    required
                     placeholder="General Hospital / Medical Center"
                     value={form.organisation}
-                    onChange={(e) => {
-                      setForm({ ...form, organisation: e.target.value });
-                      if (errors.organisation) setErrors({ ...errors, organisation: null });
-                    }}
-                    className={`form-input ${errors.organisation ? 'input-error' : ''}`}
-                    aria-invalid={errors.organisation ? "true" : "false"}
+                    onChange={(e) => setForm({ ...form, organisation: e.target.value })}
+                    className="form-input"
                   />
-                  {errors.organisation && (
-                    <span className="field-error-text">
-                      <AlertCircle size={12} /> {errors.organisation}
-                    </span>
-                  )}
                 </div>
               </div>
 
@@ -197,7 +206,7 @@ export default function ContactFooter() {
               <div className="form-grid-2">
                 <div className="form-field-group">
                   <label className="form-field-label" htmlFor="contact-email">
-                    Professional Email <span className="required-asterisk">*</span>
+                    Email Address <span className="required-asterisk">*</span>
                   </label>
                   <input
                     id="contact-email"
@@ -395,35 +404,6 @@ export default function ContactFooter() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-
-              <a
-                href={COMPANY.directionsUrl}
-                target="_blank"
-                rel="noreferrer"
-                title={`Get Directions to ${COMPANY.shortName}`}
-                style={{
-                  position: 'absolute',
-                  bottom: '10px',
-                  right: '10px',
-                  zIndex: 20,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  backgroundColor: '#1d4ed8',
-                  color: '#ffffff',
-                  padding: '8px 14px',
-                  borderRadius: '999px',
-                  fontSize: '12px',
-                  fontWeight: 700,
-                  fontFamily: 'var(--font-heading, Poppins, sans-serif)',
-                  textDecoration: 'none',
-                  boxShadow: '0 4px 14px rgba(29,78,216,0.45)',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                <Navigation size={13} style={{ flexShrink: 0 }} />
-                Get Directions
-              </a>
             </div>
           </motion.div>
 
@@ -457,11 +437,11 @@ export default function ContactFooter() {
               Hexa Ecosystem
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
-              <li><a href="#hexa" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa'); }}>Hexa Overview</a></li>
+              <li><a href="#products" onClick={(e) => { e.preventDefault(); handleNavScroll('products'); }}>Hexa Overview</a></li>
               <li><a href="#hexa-doctor" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-doctor'); }}>Hexa Doctor</a></li>
               <li><a href="#hexa-service" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-service'); }}>Hexa Service</a></li>
               <li><a href="#hexa-pharmacy" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-pharmacy'); }}>Hexa Pharmacy</a></li>
-              <li><a href="#hexa-patients" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-patients'); }}>Hexa for Patients</a></li>
+              <li><a href="#hexa-patients" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-patients'); }}>Hexa Patients</a></li>
             </ul>
           </div>
 

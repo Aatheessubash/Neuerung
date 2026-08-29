@@ -19,7 +19,7 @@ const NAV_LINKS = [
       { name: 'Hexa Doctor', id: 'hexa-doctor' },
       { name: 'Hexa Service', id: 'hexa-service' },
       { name: 'Hexa Pharmacy', id: 'hexa-pharmacy' },
-      { name: 'Hexa for Patients', id: 'hexa-patients' },
+      { name: 'Hexa Patients', id: 'hexa-patients' },
     ]
   },
   { 
@@ -117,7 +117,7 @@ export default function Navbar({ openModal }) {
       } else {
         const el = document.getElementById(id);
         if (el) {
-          const navHeight = 84; // Fixed header height offset
+          const navHeight = window.innerWidth >= 1024 ? 90 : 76; // Dynamic header height offset
           const elementPosition = el.getBoundingClientRect().top + window.scrollY;
           const offsetPosition = elementPosition - navHeight;
 

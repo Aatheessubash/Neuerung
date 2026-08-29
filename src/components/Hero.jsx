@@ -8,7 +8,13 @@ export default function Hero() {
   const handleScroll = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const navHeight = window.innerWidth >= 1024 ? 90 : 76;
+      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navHeight;
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -53,7 +59,7 @@ export default function Hero() {
             {/* Dual CTAs - Primary Conversion Journey */}
             <div className="hero-cta-group">
               <motion.button
-                onClick={() => handleScroll('hexa')}
+                onClick={() => handleScroll('products')}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="hero-btn-primary"

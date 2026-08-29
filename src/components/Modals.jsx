@@ -98,7 +98,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
           {/* 1. PRODUCT DETAILS MODAL */}
           {activeModal === 'product-details' && modalData && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div className="modal-header">
                 <span className="modal-category-badge">{modalData.category || 'PRODUCT'}</span>
                 <h3 className="modal-title" style={{ fontSize: '1.75rem' }}>{modalData.name}</h3>
@@ -107,7 +107,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                 </p>
               </div>
 
-              <div style={{ borderTop: '1px solid var(--color-slate-100)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
                   <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.375rem' }}>
                     Solution Overview
@@ -132,7 +132,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', paddingTop: '0.5rem', borderTop: '1px solid var(--color-slate-100)' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid var(--color-slate-100)' }}>
                 <button onClick={closeModal} className="modal-secondary-btn" style={{ padding: '0.625rem 1.25rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', backgroundColor: '#f8fafc', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}>
                   Close
                 </button>
@@ -140,7 +140,12 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                   onClick={() => {
                     closeModal();
                     const el = document.getElementById('contact');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    if (el) {
+                      const navHeight = window.innerWidth >= 1024 ? 90 : 76;
+                      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+                      const offsetPosition = elementPosition - navHeight;
+                      window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
+                    }
                   }}
                   className="modal-primary-btn"
                   style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
@@ -154,7 +159,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
           {/* 2. SPECIALISED SOLUTION DETAILS MODAL */}
           {activeModal === 'solution-details' && modalData && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div className="modal-header">
                 <span className="modal-category-badge" style={{ color: '#0d9488', backgroundColor: '#ccfbf1' }}>SPECIALISED CARE</span>
                 <h3 className="modal-title" style={{ fontSize: '1.75rem' }}>{modalData.title}</h3>
@@ -163,7 +168,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                 </p>
               </div>
 
-              <div style={{ borderTop: '1px solid var(--color-slate-100)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
                   <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.375rem' }}>
                     Care Architecture
@@ -188,7 +193,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', paddingTop: '0.5rem', borderTop: '1px solid var(--color-slate-100)' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid var(--color-slate-100)' }}>
                 <button onClick={closeModal} className="modal-secondary-btn" style={{ padding: '0.625rem 1.25rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', backgroundColor: '#f8fafc', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}>
                   Close
                 </button>
@@ -196,7 +201,12 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                   onClick={() => {
                     closeModal();
                     const el = document.getElementById('contact');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    if (el) {
+                      const navHeight = window.innerWidth >= 1024 ? 90 : 76;
+                      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+                      const offsetPosition = elementPosition - navHeight;
+                      window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
+                    }
                   }}
                   className="modal-primary-btn"
                   style={{ backgroundColor: '#0d9488', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
@@ -210,7 +220,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
           {/* 3. INSIGHTS MODAL */}
           {activeModal === 'insights-modal' && modalData && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div className="modal-header">
                 <span className="modal-category-badge">{modalData.tag || 'INSIGHTS'}</span>
                 <h3 className="modal-title">{modalData.title}</h3>
@@ -234,7 +244,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
           {/* 4. BOOK A DEMO FORM MODAL */}
           {activeModal === 'book-demo' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div className="modal-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <span className="modal-category-badge">Schedule Demonstration</span>
@@ -280,10 +290,9 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                       />
                     </div>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Organisation *</label>
+                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Organisation</label>
                       <input
                         type="text"
-                        required
                         placeholder="Hospital / Medical Center"
                         value={demoForm.organisation}
                         onChange={(e) => setDemoForm({ ...demoForm, organisation: e.target.value })}

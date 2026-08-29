@@ -1,14 +1,16 @@
 .contact-footer-section {
   width: 100%;
   position: relative;
-  padding-top: 2.25rem;
+  padding-top: 2.5rem;
   overflow: hidden;
   box-sizing: border-box;
+  scroll-margin-top: 5.5rem;
 }
 
 @media (min-width: 768px) {
   .contact-footer-section {
-    padding-top: 3rem;
+    padding-top: 3.5rem;
+    scroll-margin-top: 6rem;
   }
 }
 

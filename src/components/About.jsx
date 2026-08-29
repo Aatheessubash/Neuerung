@@ -30,7 +30,13 @@ export default function About() {
   const handleScrollToTech = () => {
     const el = document.getElementById('technology');
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const navHeight = window.innerWidth >= 1024 ? 90 : 76;
+      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navHeight;
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth'
+      });
     }
   };
 

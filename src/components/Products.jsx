@@ -38,7 +38,7 @@ const HexaPharmacyLogo = () => (
 const HexaPatientsLogo = () => (
   <img
     src={HexaPatientsLogoImage}
-    alt="Hexa for Patients"
+    alt="Hexa Patients"
     style={{ width: "80px", height: "80px", objectFit: "contain" }}
   />
 );
@@ -97,7 +97,7 @@ export default function Products({ openModal }) {
     },
     {
       id: 'hexa-patients',
-      name: 'Hexa for Patients',
+      name: 'Hexa Patients',
       tagline: 'A connected patient healthcare experience.',
       category: 'PATIENT',
       theme: 'theme-care',
@@ -109,7 +109,7 @@ export default function Products({ openModal }) {
         'Service access',
         'Digital care journey'
       ],
-      ctaText: 'Explore Hexa for Patients'
+      ctaText: 'Explore Hexa Patients'
     }
   ];
 
