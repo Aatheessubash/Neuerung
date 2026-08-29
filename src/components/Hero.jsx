@@ -6,10 +6,12 @@ import homeVideo from '../assets/homeVideo.mp4';
 
 export default function Hero() {
   const handleScroll = (id) => {
-    const el = document.getElementById(id);
+    const targetId = id === 'hexa' ? 'products' : id;
+    const el = document.getElementById(targetId);
     if (el) {
       const navHeight = window.innerWidth >= 1024 ? 90 : 76;
-      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+      const elementPosition = el.getBoundingClientRect().top + scrollTop;
       const offsetPosition = elementPosition - navHeight;
       window.scrollTo({
         top: Math.max(0, offsetPosition),

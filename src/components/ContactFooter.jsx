@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from './Logo';
-import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Lock, ArrowRight, CheckCircle2, Building2, Navigation, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ContactFooter.css';
 import gst from '../assets/gst.png'
@@ -25,9 +25,12 @@ export default function ContactFooter() {
     const newErrors = {};
     if (!form.name.trim()) newErrors.name = 'Full Name is required';
     if (!form.email.trim()) {
-      newErrors.email = 'Email address is required';
+      newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(form.email)) {
       newErrors.email = 'Please enter a valid email address';
+    }
+    if (!form.phone.trim()) {
+      newErrors.phone = 'Phone Number is required';
     }
     if (!form.areaOfInterest) newErrors.areaOfInterest = 'Please select an area of interest';
 
@@ -93,7 +96,8 @@ export default function ContactFooter() {
     const el = document.getElementById(id);
     if (el) {
       const navHeight = window.innerWidth >= 1024 ? 90 : 76;
-      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+      const elementPosition = el.getBoundingClientRect().top + scrollTop;
       const offsetPosition = elementPosition - navHeight;
       window.scrollTo({
         top: Math.max(0, offsetPosition),
@@ -143,18 +147,22 @@ export default function ContactFooter() {
             className="inquiry-form-card"
             initial={{ opacity: 0, x: -30, scale: 0.98 }}
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
           >
-            <div style={{ position: 'absolute', top: '-6rem', right: '-6rem', width: '16rem', height: '16rem', backgroundColor: '#d6e3ff', borderRadius: '9999px', filter: 'blur(40px)', opacity: 0.3, pointerEvents: 'none' }} />
+            {/* Background Ambient Glow */}
+            <div className="form-card-glow" />
 
-            <div style={{ marginBottom: '2rem', position: 'relative', zIndex: 10 }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-primary)', fontFamily: 'var(--font-heading)', marginBottom: '0.5rem' }}>
-                Start a Conversation
-              </h3>
-              <p style={{ fontSize: '0.875rem', color: 'var(--color-slate-600)', fontFamily: 'var(--font-body)' }}>
-                Please fill in your details below, and our clinical team will reach out promptly.
-              </p>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', borderBottom: '1px solid rgba(226, 232, 240, 0.8)', paddingBottom: '1.25rem', position: 'relative', zIndex: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ width: '2.5rem', height: '2.5rem', borderRadius: '0.75rem', backgroundColor: '#eff6ff', border: '1px solid #bfdbfe', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Building2 style={{ width: '1.25rem', height: '1.25rem', color: '#1d4ed8' }} />
+                </div>
+                <div>
+                  <h3 className="form-card-title">Clinical & Institutional Inquiry</h3>
+                  <p className="form-card-subtitle">Connect directly with our healthcare technology team</p>
+                </div>
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative', zIndex: 10, fontFamily: 'var(--font-body)' }}>
@@ -206,7 +214,7 @@ export default function ContactFooter() {
               <div className="form-grid-2">
                 <div className="form-field-group">
                   <label className="form-field-label" htmlFor="contact-email">
-                    Email Address <span className="required-asterisk">*</span>
+                    Email <span className="required-asterisk">*</span>
                   </label>
                   <input
                     id="contact-email"
@@ -231,18 +239,29 @@ export default function ContactFooter() {
 
                 <div className="form-field-group">
                   <label className="form-field-label" htmlFor="contact-phone">
-                    Phone Number
+                    Phone Number <span className="required-asterisk">*</span>
                   </label>
                   <input
                     id="contact-phone"
                     name="phone"
                     type="tel"
+                    required
                     placeholder="+91 98765 43210"
                     value={form.phone}
-                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className="form-input"
+                    onChange={(e) => {
+                      setForm({ ...form, phone: e.target.value });
+                      if (errors.phone) setErrors({ ...errors, phone: null });
+                    }}
+                    className={`form-input ${errors.phone ? 'input-error' : ''}`}
+                    aria-invalid={errors.phone ? "true" : "false"}
                   />
-                  <span className="field-hint-text">Format: +91 98765 43210</span>
+                  {errors.phone ? (
+                    <span className="field-error-text">
+                      <AlertCircle size={12} /> {errors.phone}
+                    </span>
+                  ) : (
+                    <span className="field-hint-text">Format: +91 98765 43210</span>
+                  )}
                 </div>
               </div>
 
@@ -321,7 +340,8 @@ export default function ContactFooter() {
                     <div style={{ width: '1.25rem', height: '1.25rem', border: '2px solid #ffffff', borderTopColor: 'transparent', borderRadius: '9999px', animation: 'spin 1s linear infinite' }} />
                   ) : (
                     <>
-                      <span>Talk to Neuerung</span>
+                    
+                      <span>Connect With Us</span>
                       <ArrowRight style={{ width: '1rem', height: '1rem' }} />
                     </>
                   )}
@@ -399,11 +419,48 @@ export default function ContactFooter() {
                 src={COMPANY.mapEmbedUrl}
                 width="100%"
                 height="100%"
-                style={{ border: 0, filter: 'grayscale(0.3) contrast(1.1)' }}
+                style={{
+                  border: 0,
+                  filter: 'grayscale(0.3) contrast(1.1)',
+                  position: 'absolute',
+                  top: '-50px',
+                  left: 0,
+                  width: '100%',
+                  height: 'calc(100% + 50px)'
+                }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
+
+              <a
+                href={COMPANY.directionsUrl}
+                target="_blank"
+                rel="noreferrer"
+                title={`Get Directions to ${COMPANY.shortName}`}
+                style={{
+                  position: 'absolute',
+                  bottom: '10px',
+                  right: '10px',
+                  zIndex: 20,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  backgroundColor: '#1d4ed8',
+                  color: '#ffffff',
+                  padding: '8px 14px',
+                  borderRadius: '999px',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  fontFamily: 'var(--font-heading, Poppins, sans-serif)',
+                  textDecoration: 'none',
+                  boxShadow: '0 4px 14px rgba(29,78,216,0.45)',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                <Navigation size={13} style={{ flexShrink: 0 }} />
+                Get Directions
+              </a>
             </div>
           </motion.div>
 
@@ -437,11 +494,11 @@ export default function ContactFooter() {
               Hexa Ecosystem
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: '#424751' }}>
-              <li><a href="#products" onClick={(e) => { e.preventDefault(); handleNavScroll('products'); }}>Hexa Overview</a></li>
+              <li><a href="#hexa" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa'); }}>Hexa Overview</a></li>
               <li><a href="#hexa-doctor" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-doctor'); }}>Hexa Doctor</a></li>
               <li><a href="#hexa-service" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-service'); }}>Hexa Service</a></li>
               <li><a href="#hexa-pharmacy" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-pharmacy'); }}>Hexa Pharmacy</a></li>
-              <li><a href="#hexa-patients" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-patients'); }}>Hexa Patients</a></li>
+              <li><a href="#hexa-patients" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-patients'); }}>Hexa for Patients</a></li>
             </ul>
           </div>
 

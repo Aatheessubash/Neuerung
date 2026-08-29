@@ -98,42 +98,42 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
           {/* 1. PRODUCT DETAILS MODAL */}
           {activeModal === 'product-details' && modalData && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
               <div className="modal-header">
                 <span className="modal-category-badge">{modalData.category || 'PRODUCT'}</span>
-                <h3 className="modal-title" style={{ fontSize: '1.75rem' }}>{modalData.name}</h3>
-                <p style={{ color: 'var(--color-primary)', fontWeight: 600, fontSize: '0.9375rem', marginTop: '0.25rem' }}>
+                <h3 className="modal-title">{modalData.name}</h3>
+                <p style={{ color: 'var(--color-primary)', fontWeight: 600, fontSize: '0.875rem', marginTop: '0.2rem' }}>
                   {modalData.tagline}
                 </p>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <div>
-                  <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.375rem' }}>
+                  <h4 style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>
                     Solution Overview
                   </h4>
-                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-slate-700)', lineHeight: 1.6 }}>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--color-slate-700)', lineHeight: 1.5 }}>
                     {modalData.description}
                   </p>
                 </div>
 
                 <div>
-                  <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
+                  <h4 style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.375rem' }}>
                     Core Capabilities
                   </h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '0.375rem' }}>
                     {modalData.features && modalData.features.map((feat, idx) => (
-                      <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#f8fafc', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #e2e8f0', fontSize: '0.8125rem', color: '#1e293b' }}>
-                        <CheckCircle2 style={{ width: '1rem', height: '1rem', color: '#10b981', flexShrink: 0 }} />
-                        <span>{feat}</span>
+                      <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', backgroundColor: '#f8fafc', padding: '0.45rem 0.65rem', borderRadius: '0.625rem', border: '1px solid #e2e8f0', fontSize: '0.78125rem', color: '#1e293b' }}>
+                        <CheckCircle2 style={{ width: '0.875rem', height: '0.875rem', color: '#10b981', flexShrink: 0 }} />
+                        <span style={{ lineHeight: 1.3 }}>{feat}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid var(--color-slate-100)' }}>
-                <button onClick={closeModal} className="modal-secondary-btn" style={{ padding: '0.625rem 1.25rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', backgroundColor: '#f8fafc', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.625rem', paddingTop: '0.625rem', borderTop: '1px solid var(--color-slate-100)', marginTop: '0.25rem' }}>
+                <button onClick={closeModal} className="modal-secondary-btn" style={{ padding: '0.5rem 1rem', borderRadius: '0.625rem', border: '1px solid #cbd5e1', backgroundColor: '#f8fafc', fontWeight: 600, fontSize: '0.8125rem', cursor: 'pointer' }}>
                   Close
                 </button>
                 <button
@@ -142,16 +142,17 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                     const el = document.getElementById('contact');
                     if (el) {
                       const navHeight = window.innerWidth >= 1024 ? 90 : 76;
-                      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+                      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+                      const elementPosition = el.getBoundingClientRect().top + scrollTop;
                       const offsetPosition = elementPosition - navHeight;
                       window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
                     }
                   }}
                   className="modal-primary-btn"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem', padding: '0.5rem 1.125rem', fontSize: '0.8125rem' }}
                 >
                   <span>Request Demo for {modalData.name}</span>
-                  <ArrowRight style={{ width: '1rem', height: '1rem' }} />
+                  <ArrowRight style={{ width: '0.875rem', height: '0.875rem' }} />
                 </button>
               </div>
             </div>
@@ -159,42 +160,42 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
           {/* 2. SPECIALISED SOLUTION DETAILS MODAL */}
           {activeModal === 'solution-details' && modalData && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
               <div className="modal-header">
                 <span className="modal-category-badge" style={{ color: '#0d9488', backgroundColor: '#ccfbf1' }}>SPECIALISED CARE</span>
-                <h3 className="modal-title" style={{ fontSize: '1.75rem' }}>{modalData.title}</h3>
-                <p style={{ color: '#0d9488', fontWeight: 600, fontSize: '0.9375rem', marginTop: '0.25rem' }}>
+                <h3 className="modal-title">{modalData.title}</h3>
+                <p style={{ color: '#0d9488', fontWeight: 600, fontSize: '0.875rem', marginTop: '0.2rem' }}>
                   {modalData.tagline}
                 </p>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <div>
-                  <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.375rem' }}>
+                  <h4 style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>
                     Care Architecture
                   </h4>
-                  <p style={{ fontSize: '0.9375rem', color: 'var(--color-slate-700)', lineHeight: 1.6 }}>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--color-slate-700)', lineHeight: 1.5 }}>
                     {modalData.description}
                   </p>
                 </div>
 
                 <div>
-                  <h4 style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
+                  <h4 style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--color-slate-500)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.375rem' }}>
                     Key Focus Areas
                   </h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: '0.375rem' }}>
                     {modalData.features && modalData.features.map((feat, idx) => (
-                      <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#f0fdf4', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #bbf7d0', fontSize: '0.8125rem', color: '#166534' }}>
-                        <CheckCircle2 style={{ width: '1rem', height: '1rem', color: '#16a34a', flexShrink: 0 }} />
-                        <span>{feat}</span>
+                      <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', backgroundColor: '#f0fdf4', padding: '0.45rem 0.65rem', borderRadius: '0.625rem', border: '1px solid #bbf7d0', fontSize: '0.78125rem', color: '#166534' }}>
+                        <CheckCircle2 style={{ width: '0.875rem', height: '0.875rem', color: '#16a34a', flexShrink: 0 }} />
+                        <span style={{ lineHeight: 1.3 }}>{feat}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid var(--color-slate-100)' }}>
-                <button onClick={closeModal} className="modal-secondary-btn" style={{ padding: '0.625rem 1.25rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', backgroundColor: '#f8fafc', fontWeight: 600, fontSize: '0.875rem', cursor: 'pointer' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.625rem', paddingTop: '0.625rem', borderTop: '1px solid var(--color-slate-100)', marginTop: '0.25rem' }}>
+                <button onClick={closeModal} className="modal-secondary-btn" style={{ padding: '0.5rem 1rem', borderRadius: '0.625rem', border: '1px solid #cbd5e1', backgroundColor: '#f8fafc', fontWeight: 600, fontSize: '0.8125rem', cursor: 'pointer' }}>
                   Close
                 </button>
                 <button
@@ -203,16 +204,17 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                     const el = document.getElementById('contact');
                     if (el) {
                       const navHeight = window.innerWidth >= 1024 ? 90 : 76;
-                      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+                      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+                      const elementPosition = el.getBoundingClientRect().top + scrollTop;
                       const offsetPosition = elementPosition - navHeight;
                       window.scrollTo({ top: Math.max(0, offsetPosition), behavior: 'smooth' });
                     }
                   }}
                   className="modal-primary-btn"
-                  style={{ backgroundColor: '#0d9488', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+                  style={{ backgroundColor: '#0d9488', display: 'inline-flex', alignItems: 'center', gap: '0.375rem', padding: '0.5rem 1.125rem', fontSize: '0.8125rem' }}
                 >
                   <span>Inquire About {modalData.title}</span>
-                  <ArrowRight style={{ width: '1rem', height: '1rem' }} />
+                  <ArrowRight style={{ width: '0.875rem', height: '0.875rem' }} />
                 </button>
               </div>
             </div>
@@ -220,22 +222,22 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
           {/* 3. INSIGHTS MODAL */}
           {activeModal === 'insights-modal' && modalData && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div className="modal-header">
                 <span className="modal-category-badge">{modalData.tag || 'INSIGHTS'}</span>
                 <h3 className="modal-title">{modalData.title}</h3>
               </div>
 
-              <p style={{ fontSize: '0.9375rem', color: 'var(--color-slate-700)', lineHeight: 1.6 }}>
+              <p style={{ fontSize: '0.875rem', color: 'var(--color-slate-700)', lineHeight: 1.5 }}>
                 {modalData.desc}
               </p>
 
-              <div style={{ padding: '1rem', borderRadius: '0.75rem', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', fontSize: '0.8125rem', color: '#475569', lineHeight: 1.6 }}>
+              <div style={{ padding: '0.875rem', borderRadius: '0.75rem', backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', fontSize: '0.8125rem', color: '#475569', lineHeight: 1.5 }}>
                 Neuerung HealthTech publishes research perspectives and technological insights on connected healthcare, medical imaging standards, and digital healthcare transformation.
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0.5rem' }}>
-                <button onClick={closeModal} className="modal-primary-btn">
+                <button onClick={closeModal} className="modal-primary-btn" style={{ padding: '0.5rem 1.125rem', fontSize: '0.8125rem' }}>
                   Close Insights
                 </button>
               </div>
@@ -244,7 +246,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
 
           {/* 4. BOOK A DEMO FORM MODAL */}
           {activeModal === 'book-demo' && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div className="modal-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
                   <span className="modal-category-badge">Schedule Demonstration</span>
@@ -276,7 +278,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleDemoSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <form onSubmit={handleDemoSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
                   <div className="modal-grid-2">
                     <div>
                       <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Name *</label>
@@ -286,7 +288,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                         placeholder="Dr. Jane Doe"
                         value={demoForm.name}
                         onChange={(e) => setDemoForm({ ...demoForm, name: e.target.value })}
-                        style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
+                        style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '0.625rem', border: '1px solid #cbd5e1', fontSize: '0.8125rem' }}
                       />
                     </div>
                     <div>
@@ -296,7 +298,7 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                         placeholder="Hospital / Medical Center"
                         value={demoForm.organisation}
                         onChange={(e) => setDemoForm({ ...demoForm, organisation: e.target.value })}
-                        style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
+                        style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '0.625rem', border: '1px solid #cbd5e1', fontSize: '0.8125rem' }}
                       />
                     </div>
                   </div>
@@ -310,17 +312,18 @@ export default function Modals({ activeModal, closeModal, modalData }) {
                         placeholder="name@hospital.org"
                         value={demoForm.email}
                         onChange={(e) => setDemoForm({ ...demoForm, email: e.target.value })}
-                        style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
+                        style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '0.625rem', border: '1px solid #cbd5e1', fontSize: '0.8125rem' }}
                       />
                     </div>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Phone</label>
+                      <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#334155', textTransform: 'uppercase', marginBottom: '0.25rem' }}>Phone Number *</label>
                       <input
                         type="tel"
+                        required
                         placeholder="+91 98765 43210"
                         value={demoForm.phone}
                         onChange={(e) => setDemoForm({ ...demoForm, phone: e.target.value })}
-                        style={{ width: '100%', padding: '0.625rem 0.875rem', borderRadius: '0.75rem', border: '1px solid #cbd5e1', fontSize: '0.875rem' }}
+                        style={{ width: '100%', padding: '0.5rem 0.75rem', borderRadius: '0.625rem', border: '1px solid #cbd5e1', fontSize: '0.8125rem' }}
                       />
                     </div>
                   </div>
