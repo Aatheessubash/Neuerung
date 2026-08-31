@@ -64,31 +64,26 @@ export default function About() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <div className="about-hero-grid">
-            
-            {/* Left Content Column */}
-            <div className="about-content-left" style={{ width: '100%' }}>
-              <p className="about-main-text" style={{ fontSize: '1.0625rem', lineHeight: '1.75' }}>
-                <span className="about-company-highlight">Neuerung HealthTech Private Limited</span> is a healthcare technology company focused on developing intelligent, connected and clinically relevant solutions for modern healthcare.
-              </p>
-              <p className="about-main-text" style={{ fontSize: '1.0625rem', lineHeight: '1.75', marginTop: '1rem' }}>
-                We combine artificial intelligence, medical imaging, IoT and digital platforms to support healthcare professionals, improve operational efficiency, enhance clinical decision-making and contribute to better patient care.
-              </p>
+          <div className="about-hero-content">
+            <p className="about-main-text">
+              <span className="about-company-highlight">Neuerung HealthTech Private Limited</span> is a healthcare technology company focused on developing intelligent, connected and clinically relevant solutions for modern healthcare.
+            </p>
+            <p className="about-main-text" style={{ marginTop: '1.25rem' }}>
+              We combine artificial intelligence, medical imaging, IoT and digital platforms to support healthcare professionals, improve operational efficiency, enhance clinical decision-making and contribute to better patient care.
+            </p>
 
-              <div style={{ marginTop: '2rem' }}>
-                <motion.button
-                  onClick={handleScrollToTech}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="hero-btn-primary"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
-                >
-                  <span>Explore Our Technology</span>
-                  <ArrowRight style={{ width: '1rem', height: '1rem' }} />
-                </motion.button>
-              </div>
+            <div style={{ marginTop: '2rem' }}>
+              <motion.button
+                onClick={handleScrollToTech}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="hero-btn-primary"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}
+              >
+                <span>Explore Our Technology</span>
+                <ArrowRight style={{ width: '1rem', height: '1rem' }} />
+              </motion.button>
             </div>
-
           </div>
         </motion.div>
 

@@ -111,7 +111,7 @@
 .about-hero-card {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, rgba(239, 246, 255, 0.6) 100%);
   border-radius: 1.5rem;
-  padding: 1.5rem;
+  padding: 1.75rem;
   border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(0, 0, 0, 0.04);
   position: relative;
@@ -121,41 +121,21 @@
 
 @media (min-width: 768px) {
   .about-hero-card {
-    padding: 2rem;
+    padding: 2.25rem 2.5rem;
     border-radius: 1.75rem;
   }
 }
 
 @media (min-width: 1024px) {
   .about-hero-card {
-    padding: 2.25rem;
+    padding: 2.75rem 3.25rem;
   }
 }
 
-.about-hero-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  align-items: center;
-}
-
-@media (min-width: 1024px) {
-  .about-hero-grid {
-    grid-template-columns: repeat(12, 1fr);
-    gap: 3rem;
-  }
-}
-
-.about-content-left {
+.about-hero-content {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-}
-
-@media (min-width: 1024px) {
-  .about-content-left {
-    grid-column: span 7 / span 7;
-  }
 }
 
 .about-main-text {
@@ -164,12 +144,13 @@
   color: var(--color-slate-700);
   font-family: var(--font-body);
   font-weight: 400;
+  width: 100%;
 }
 
 @media (min-width: 640px) {
   .about-main-text {
     font-size: 1.1875rem;
-    line-height: 1.7;
+    line-height: 1.75;
   }
 }
 
@@ -181,176 +162,6 @@
   background: linear-gradient(120deg, rgba(94, 129, 255, 0.12) 0%, rgba(101, 202, 255, 0.12) 100%);
   padding: 0.1rem 0.4rem;
   border-radius: 0.375rem;
-}
-
-/* Feature Check Highlights */
-.about-features-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  padding-top: 0.5rem;
-}
-
-@media (min-width: 640px) {
-  .about-features-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .about-features-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.about-feature-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background-color: #ffffff;
-  border-radius: 0.875rem;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-  transition: all 0.25s ease;
-}
-
-.about-feature-item:hover {
-  transform: translateY(-2px);
-  border-color: rgba(94, 129, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(94, 129, 255, 0.08);
-}
-
-.about-feature-icon {
-  width: 1.75rem;
-  height: 1.75rem;
-  border-radius: 50%;
-  background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 0.125rem;
-}
-
-.about-feature-title {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--color-slate-900);
-  font-family: var(--font-heading);
-}
-
-.about-feature-desc {
-  font-size: 0.75rem;
-  color: var(--color-slate-500);
-  margin-top: 0.15rem;
-  line-height: 1.4;
-}
-
-/* Right Card: Entity & Meta Info Box */
-.about-entity-card {
-  background: #ffffff;
-  border-radius: 1.25rem;
-  padding: 1.5rem;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 10px 30px rgba(0, 55, 114, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-@media (min-width: 1024px) {
-  .about-entity-card {
-    grid-column: span 5 / span 5;
-    padding: 1.75rem;
-  }
-}
-
-.entity-header {
-  display: flex;
-  align-items: center;
-  gap: 0.875rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-slate-100);
-}
-
-.entity-icon-box {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.875rem;
-  background: var(--brand-gradient);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 16px rgba(94, 129, 255, 0.3);
-  flex-shrink: 0;
-}
-
-.entity-subtitle {
-  font-size: 0.6875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-slate-400);
-}
-
-.entity-name {
-  font-size: 0.9375rem;
-  font-weight: 800;
-  color: var(--color-slate-900);
-  font-family: var(--font-heading);
-}
-
-.entity-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.entity-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8125rem;
-  padding-bottom: 0.625rem;
-  border-bottom: 1px dashed var(--color-slate-200);
-}
-
-.entity-row:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.entity-label {
-  color: var(--color-slate-500);
-}
-
-.entity-value {
-  font-weight: 700;
-  color: var(--color-slate-800);
-}
-
-.entity-action-btn {
-  width: 100%;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.75rem;
-  background: var(--brand-gradient);
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 0.875rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 14px rgba(94, 129, 255, 0.35);
-  transition: all 0.3s ease;
-}
-
-.entity-action-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(94, 129, 255, 0.45);
 }
 
 /* 4 Pillar Cards Grid */
