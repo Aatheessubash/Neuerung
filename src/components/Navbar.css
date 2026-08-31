@@ -235,6 +235,7 @@
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 90;
+  overscroll-behavior: contain;
 }
 
 /* Mobile Navigation Drawer */
@@ -248,6 +249,7 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
   max-height: calc(100vh - 72px);
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 @media (min-width: 1024px) {

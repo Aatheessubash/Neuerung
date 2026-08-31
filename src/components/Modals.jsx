@@ -34,6 +34,34 @@ export default function Modals({ activeModal, closeModal, modalData }) {
     setSubmitError(null);
   }, [modalData, activeModal]);
 
+  // Lock background website scrolling when modal popup is open
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeModal, closeModal]);
+
   const handleDemoSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);

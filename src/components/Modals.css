@@ -12,6 +12,7 @@
   -webkit-backdrop-filter: blur(8px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 @media (min-width: 640px) {
@@ -41,6 +42,7 @@
   max-height: calc(100dvh - 1.5rem);
   max-height: calc(100vh - 1.5rem);
   overflow-y: auto;
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
 }

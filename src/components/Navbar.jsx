@@ -97,6 +97,16 @@ export default function Navbar({ openModal }) {
     };
   }, []);
 
+  // Lock background scrolling when mobile menu drawer is open
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [mobileMenuOpen]);
+
   const handleNavClick = (e, id) => {
     if (e) e.preventDefault();
 

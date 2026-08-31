@@ -440,8 +440,8 @@ export default function ContactFooter() {
                 title={`Get Directions to ${COMPANY.shortName}`}
                 style={{
                   position: 'absolute',
-                  top: '12px',
-                  left: '12px',
+                  bottom: '10px',
+                  right: '10px',
                   zIndex: 20,
                   display: 'flex',
                   alignItems: 'center',
@@ -455,8 +455,7 @@ export default function ContactFooter() {
                   fontFamily: 'var(--font-heading, Poppins, sans-serif)',
                   textDecoration: 'none',
                   boxShadow: '0 4px 14px rgba(29,78,216,0.45)',
-                  whiteSpace: 'nowrap',
-                  cursor: 'pointer'
+                  whiteSpace: 'nowrap'
                 }}
               >
                 <Navigation size={13} style={{ flexShrink: 0 }} />
