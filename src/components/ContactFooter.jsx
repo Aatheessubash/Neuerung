@@ -519,6 +519,9 @@ export default function ContactFooter() {
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: '#424751', textAlign: 'center' }}>
             © {new Date().getFullYear()} Neuerung HealthTech Private Limited. All rights reserved.
           </p>
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: '#6b7280', textAlign: 'center', marginTop: '0.5rem' }}>
+            Designed & Developed by <a href="https:/decodeinfotech.in" target="_blank" rel="noreferrer" style={{ color: '#1d4ed8', fontWeight: 600, textDecoration: 'none' }}>DeCode Infotech</a>
+          </p>
         </div>
       </footer>
 
