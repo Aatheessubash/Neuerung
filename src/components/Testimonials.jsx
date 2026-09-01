@@ -24,15 +24,33 @@ export default function Testimonials() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3 mb-16">
-          <span className="text-xs font-bold text-[#5E81FF] uppercase tracking-wider bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-200">
+          <motion.span
+            className="inline-block text-xs font-bold text-[#5E81FF] uppercase tracking-wider bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-200"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
+          >
             Clinical Endorsements
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold gradient-text tracking-tight font-['Poppins']">
+          </motion.span>
+          <motion.h2
+            className="text-3xl sm:text-4xl font-extrabold gradient-text tracking-tight font-['Poppins']"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
+          >
             WHAT OUR CLINICIANS SAY
-          </h2>
-          <p className="text-base text-slate-600">
+          </motion.h2>
+          <motion.p
+            className="text-base text-slate-600"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.25, 0.8, 0.25, 1] }}
+          >
             Real feedback from hospital directors and medical teams using Neuerung HealthTech solutions.
-          </p>
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -34,9 +34,15 @@ export default function NeuerungEdge() {
   return (
     <section id="neuerung-edge" className="bg-[#f2f4f6] py-24">
       <div className="max-w-[1280px] mx-auto px-6 sm:px-12 mb-16">
-        <h2 className="font-['Plus_Jakarta_Sans'] text-4xl sm:text-5xl font-bold gradient-text tracking-tight">
+        <motion.h2
+          className="font-['Plus_Jakarta_Sans'] text-4xl sm:text-5xl font-bold gradient-text tracking-tight"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6, ease: [0.25, 0.8, 0.25, 1] }}
+        >
           Neuerung Edge
-        </h2>
+        </motion.h2>
       </div>
 
       <div className="max-w-[1280px] mx-auto px-6 sm:px-12">

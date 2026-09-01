@@ -47,7 +47,13 @@ export default function Mission() {
             {/* Core Values / Commitments Grid */}
             <div className="pt-8 border-t border-slate-700/80 grid grid-cols-2 md:grid-cols-4 gap-4 text-left">
               
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 flex items-center gap-3">
+              <motion.div
+                className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 flex items-center gap-3"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
                 <div className="p-2 rounded-lg bg-blue-500/20 text-sky-400">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
@@ -55,9 +61,15 @@ export default function Mission() {
                   <div className="text-xs text-slate-400 font-medium">Reliability</div>
                   <div className="text-sm font-bold text-white">Clinical Grade</div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 flex items-center gap-3">
+              <motion.div
+                className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 flex items-center gap-3"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
                 <div className="p-2 rounded-lg bg-blue-500/20 text-sky-400">
                   <Zap className="w-5 h-5" />
                 </div>
@@ -65,9 +77,15 @@ export default function Mission() {
                   <div className="text-xs text-slate-400 font-medium">Efficiency</div>
                   <div className="text-sm font-bold text-white">Faster Outcomes</div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 flex items-center gap-3">
+              <motion.div
+                className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 flex items-center gap-3"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
                 <div className="p-2 rounded-lg bg-blue-500/20 text-sky-400">
                   <Award className="w-5 h-5" />
                 </div>
@@ -75,9 +93,15 @@ export default function Mission() {
                   <div className="text-xs text-slate-400 font-medium">Decision Support</div>
                   <div className="text-sm font-bold text-white">AI Driven</div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 flex items-center gap-3">
+              <motion.div
+                className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 flex items-center gap-3"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
                 <div className="p-2 rounded-lg bg-blue-500/20 text-sky-400">
                   <HeartHandshake className="w-5 h-5" />
                 </div>
@@ -85,7 +109,7 @@ export default function Mission() {
                   <div className="text-xs text-slate-400 font-medium">Patient Care</div>
                   <div className="text-sm font-bold text-white">Human Centric</div>
                 </div>
-              </div>
+              </motion.div>
 
             </div>
 

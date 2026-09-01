@@ -341,3 +341,35 @@
   gap: 1rem;
   max-width: 24rem;
 }
+
+/* DeCode Infotech Shimmer Link */
+.decode-shimmer-link {
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(
+    90deg,
+    #1d4ed8 0%,
+    #6366f1 25%,
+    #a78bfa 50%,
+    #6366f1 75%,
+    #1d4ed8 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-sweep 3s ease-in-out infinite;
+  position: relative;
+  padding: 0 2px;
+  transition: filter 0.3s ease;
+}
+
+.decode-shimmer-link:hover {
+  filter: drop-shadow(0 0 6px rgba(99, 102, 241, 0.5));
+  animation-duration: 1.2s;
+}
+
+@keyframes shimmer-sweep {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}

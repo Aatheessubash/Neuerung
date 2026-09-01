@@ -469,15 +469,32 @@ export default function ContactFooter() {
 
       {/* Clean Slate Footer */}
       <footer className="site-footer">
-        <div className="site-footer-inner">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <motion.div
+          className="site-footer-inner"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: [0.25, 0.8, 0.25, 1] }}
+        >
+          <motion.div
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0, ease: [0.25, 0.8, 0.25, 1] }}
+          >
             <Logo showText={true} />
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.8125rem', color: '#424751', marginTop: '1rem', lineHeight: 1.625 }}>
               Healthcare, Reimagined.<br />Intelligent, connected and clinically relevant technology.
             </p>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.8, 0.25, 1] }}
+          >
             <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#191c1e', marginBottom: '1rem' }}>
               Company
             </h4>
@@ -487,9 +504,14 @@ export default function ContactFooter() {
               <li><a href="#who-we-serve" onClick={(e) => { e.preventDefault(); handleNavScroll('who-we-serve'); }}>Who We Serve</a></li>
               <li><a href="#contact" onClick={(e) => { e.preventDefault(); handleNavScroll('contact'); }}>Contact Us</a></li>
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.8, 0.25, 1] }}
+          >
             <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#191c1e', marginBottom: '1rem' }}>
               Hexa Ecosystem
             </h4>
@@ -500,9 +522,14 @@ export default function ContactFooter() {
               <li><a href="#hexa-pharmacy" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-pharmacy'); }}>Hexa Pharmacy</a></li>
               <li><a href="#hexa-patients" onClick={(e) => { e.preventDefault(); handleNavScroll('hexa-patients'); }}>Hexa for Patients</a></li>
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.8, 0.25, 1] }}
+          >
             <h4 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#191c1e', marginBottom: '1rem' }}>
               Specialised Solutions
             </h4>
@@ -512,17 +539,48 @@ export default function ContactFooter() {
               <li><a href="#rehabilitation" onClick={(e) => { e.preventDefault(); handleNavScroll('rehabilitation'); }}>Rehabilitation</a></li>
               <li><a href="#insights" onClick={(e) => { e.preventDefault(); handleNavScroll('insights'); }}>Insights</a></li>
             </ul>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div style={{ width: '100%', borderTop: '1px solid rgba(194, 198, 211, 0.6)', padding: '1.5rem 1rem', textAlignment: 'center' }}>
+        <motion.div
+          style={{ width: '100%', borderTop: '1px solid rgba(194, 198, 211, 0.6)', padding: '1.5rem 1rem', textAlign: 'center', overflow: 'hidden' }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: '-20px' }}
+          transition={{ duration: 0.4 }}
+        >
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: '#424751', textAlign: 'center' }}>
             © {new Date().getFullYear()} Neuerung HealthTech Private Limited. All rights reserved.
           </p>
-          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: '#6b7280', textAlign: 'center', marginTop: '0.5rem' }}>
-            Designed & Developed by <a href="https:/decodeinfotech.in" target="_blank" rel="noreferrer" style={{ color: '#1d4ed8', fontWeight: 600, textDecoration: 'none' }}>DeCode Infotech</a>
+
+          {/* Letter-by-letter stagger reveal */}
+          <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: '#6b7280', textAlign: 'center', display: 'inline-flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+            {'Designed & Developed by '.split('').map((char, i) => (
+              <motion.span
+                key={`credit-${i}`}
+                initial={{ opacity: 0, y: 15, rotateX: 90 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: 0.7 + i * 0.03, ease: [0.22, 1, 0.36, 1] }}
+                style={{ display: 'inline-block', whiteSpace: 'pre' }}
+              >
+                {char}
+              </motion.span>
+            ))}
+            <motion.a
+              href="https://www.decodeinfotech.in/"
+              target="_blank"
+              rel="noreferrer"
+              className="decode-shimmer-link"
+              initial={{ opacity: 0, scale: 0.5, filter: 'blur(8px)' }}
+              whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 1.5, type: 'spring', stiffness: 150, damping: 15 }}
+            >
+              DeCode Infotech
+            </motion.a>
           </p>
-        </div>
+        </motion.div>
       </footer>
 
       {/* Floating Success Toast Notification */}
