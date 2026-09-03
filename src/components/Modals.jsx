@@ -34,31 +34,79 @@ export default function Modals({ activeModal, closeModal, modalData }) {
     setSubmitError(null);
   }, [modalData, activeModal]);
 
-  // Lock background website scrolling when modal popup is open
+  // Bulletproof background scroll lock for macOS / iOS Safari, Chrome, Firefox & Edge
   useEffect(() => {
     if (!activeModal) return;
 
-    const originalOverflow = document.body.style.overflow;
-    const originalPaddingRight = document.body.style.paddingRight;
+    const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevBodyPosition = document.body.style.position;
+    const prevBodyTop = document.body.style.top;
+    const prevBodyLeft = document.body.style.left;
+    const prevBodyWidth = document.body.style.width;
+    const prevBodyHeight = document.body.style.height;
+    const prevBodyPaddingRight = document.body.style.paddingRight;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevHtmlScrollBehavior = document.documentElement.style.scrollBehavior;
+
+    // 1. Lock HTML & Body to freeze background without jumping in WebKit/Safari
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.scrollBehavior = 'auto';
+
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.height = '100%';
     if (scrollbarWidth > 0) {
       document.body.style.paddingRight = `${scrollbarWidth}px`;
     }
-    document.body.style.overflow = 'hidden';
 
+    // 2. Keyboard ESC close listener
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         closeModal();
       }
     };
 
+    // 3. Prevent backdrop touchmove & wheel event propagation in Safari
+    const handleBackdropEvent = (e) => {
+      if (e.target && e.target.classList && e.target.classList.contains('modal-overlay')) {
+        e.preventDefault();
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('touchmove', handleBackdropEvent, { passive: false });
+    document.addEventListener('wheel', handleBackdropEvent, { passive: false });
 
     return () => {
-      document.body.style.overflow = originalOverflow;
-      document.body.style.paddingRight = originalPaddingRight;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.documentElement.style.scrollBehavior = prevHtmlScrollBehavior;
+
+      document.body.style.overflow = prevBodyOverflow;
+      document.body.style.position = prevBodyPosition;
+      document.body.style.top = prevBodyTop;
+      document.body.style.left = prevBodyLeft;
+      document.body.style.right = '';
+      document.body.style.width = prevBodyWidth;
+      document.body.style.height = prevBodyHeight;
+      document.body.style.paddingRight = prevBodyPaddingRight;
+
       window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('touchmove', handleBackdropEvent);
+      document.removeEventListener('wheel', handleBackdropEvent);
+
+      // Restore exact scroll position seamlessly
+      window.scrollTo({
+        top: scrollY,
+        left: 0,
+        behavior: 'instant'
+      });
     };
   }, [activeModal, closeModal]);
 

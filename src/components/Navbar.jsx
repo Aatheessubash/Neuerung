@@ -100,10 +100,41 @@ export default function Navbar({ openModal }) {
   // Lock background scrolling when mobile menu drawer is open
   useEffect(() => {
     if (!mobileMenuOpen) return;
-    const originalOverflow = document.body.style.overflow;
+
+    const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevBodyPosition = document.body.style.position;
+    const prevBodyTop = document.body.style.top;
+    const prevBodyWidth = document.body.style.width;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevHtmlScrollBehavior = document.documentElement.style.scrollBehavior;
+
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.scrollBehavior = 'auto';
+
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+
     return () => {
-      document.body.style.overflow = originalOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.documentElement.style.scrollBehavior = prevHtmlScrollBehavior;
+
+      document.body.style.overflow = prevBodyOverflow;
+      document.body.style.position = prevBodyPosition;
+      document.body.style.top = prevBodyTop;
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = prevBodyWidth;
+
+      window.scrollTo({
+        top: scrollY,
+        left: 0,
+        behavior: 'instant'
+      });
     };
   }, [mobileMenuOpen]);
 
