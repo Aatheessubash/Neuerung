@@ -7,13 +7,20 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.join(__dirname, '.env') });
+const envPath = path.join(__dirname, '.env');
+if (fs.existsSync(envPath)) {
+  dotenv.config({ path: envPath });
+} else {
+  dotenv.config();
+}
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 /** Validate an email address with a basic RFC-5322-like regex. */
 export const isValidEmail = (email) =>
-  typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  typeof email === 'string' &&
+  email.trim().length <= 254 &&
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
 /** Escape HTML special characters to prevent XSS in email bodies. */
 export const escapeHtml = (str = '') =>
@@ -48,32 +55,63 @@ const getLogoAttachments = () => {
 
 // ─── Transporter ─────────────────────────────────────────────────────────────
 
-/** Create a Nodemailer transporter from environment variables. */
-export const createTransporter = () => {
-  const user = process.env.SMTP_USER || 'neuerunghealthtech@gmail.com';
-  const pass = (process.env.SMTP_PASS || 'zqpu gikh gjqd tlsk').replace(/\s+/g, '');
+/** Validate and return SMTP transport configuration. */
+export const getSmtpConfig = () => {
+  const host = process.env.SMTP_HOST;
+  const rawPort = process.env.SMTP_PORT;
+  const port = rawPort !== undefined && rawPort !== '' ? Number(rawPort) : NaN;
+  const isSecure = process.env.SMTP_SECURE === 'true';
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
 
-  return nodemailer.createTransport({
-    service: 'gmail',
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+  if (
+    !host ||
+    typeof host !== 'string' ||
+    isNaN(port) ||
+    !user ||
+    typeof user !== 'string' ||
+    pass === undefined ||
+    pass === null ||
+    pass === '' ||
+    pass === 'your_cpanel_email_password_here'
+  ) {
+    throw new Error('Email service configuration is incomplete.');
+  }
+
+  return {
+    host,
+    port,
+    secure: isSecure,
     auth: {
-      user: user,
-      pass: pass,
+      user: user.trim(),
+      pass: pass, // Preserved exactly; do not trim or strip spaces
     },
-  });
+    tls: {
+      rejectUnauthorized: true,
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
+  };
+};
+
+/** Create a Nodemailer transporter from environment variables or custom options. */
+export const createTransporter = (customTransporter = null) => {
+  if (customTransporter) {
+    return customTransporter;
+  }
+  const config = getSmtpConfig();
+  return nodemailer.createTransport(config);
 };
 
 /** Shared MAIL_FROM string — consistent across all functions. */
-const getMailFrom = () => {
-  const user = process.env.SMTP_USER || 'neuerunghealthtech@gmail.com';
-  return process.env.MAIL_FROM?.trim() || `"Neuerung HealthTech" <${user}>`;
+export const getMailFrom = () => {
+  return process.env.MAIL_FROM?.trim() || `"Neuerung HealthTech" <healthtech@neuerung.in>`;
 };
 
 /** Admin/company receiver email. */
-const getReceiverEmail = () => {
-  return process.env.CONTACT_RECEIVER_EMAIL?.trim() || process.env.SMTP_USER || 'aatheessubash48@gmail.com, neuerunghealthtech@gmail.com';
+export const getReceiverEmail = () => {
+  return process.env.CONTACT_RECEIVER_EMAIL?.trim() || 'healthtech@neuerung.in';
 };
 
 // ─── sendContactEmail ─────────────────────────────────────────────────────────
@@ -85,46 +123,76 @@ const getReceiverEmail = () => {
  *
  * @param {Object} data
  * @param {string} data.name - Full name
- * @param {string} data.organisation - Organisation / Hospital / Clinic
+ * @param {string} [data.organisation] - Organisation / Hospital / Clinic
+ * @param {string} [data.company] - Fallback organisation name
  * @param {string} data.email - Client email address
  * @param {string} [data.phone] - Phone number
  * @param {string} [data.areaOfInterest] - Solution/Product interest
+ * @param {string} [data.projectType] - Fallback area of interest
  * @param {string} [data.message] - Message body / notes
  * @param {string} [data.formType] - 'Clinical Inquiry' | 'Demo Request' | 'Contact Form'
+ * @param {Object} [injectedTransporter] - Optional mock transporter for testing
  */
-export const sendContactEmail = async ({
-  name,
-  organisation = '',
-  company = '',
-  email,
-  phone = '',
-  areaOfInterest = 'General Enquiry',
-  projectType = '',
-  message = '',
-  formType = 'Clinical Inquiry',
-}) => {
-  // Input validation
-  if (!name || String(name).trim() === '') throw new Error('Full name is required.');
-  if (!isValidEmail(email)) throw new Error(`Invalid or missing email address: "${email}"`);
+export const sendContactEmail = async (
+  {
+    name,
+    organisation = '',
+    company = '',
+    email,
+    phone = '',
+    areaOfInterest = 'General Enquiry',
+    projectType = '',
+    message = '',
+    formType = 'Clinical Inquiry',
+  },
+  injectedTransporter = null
+) => {
+  // Input validation: type and length checks
+  if (typeof name !== 'string' || name.trim() === '') {
+    throw new Error('Full name is required.');
+  }
+  if (name.trim().length > 100) {
+    throw new Error('Full name must not exceed 100 characters.');
+  }
 
-  const clientOrg = organisation || company || 'Not specified';
-  const interestArea = areaOfInterest || projectType || 'General Enquiry';
-  const clientMessage = message?.trim() || 'No additional message provided.';
+  if (typeof email !== 'string' || !isValidEmail(email)) {
+    throw new Error('A valid email address is required.');
+  }
+
+  const rawOrg = typeof organisation === 'string' && organisation.trim()
+    ? organisation.trim()
+    : typeof company === 'string' && company.trim()
+      ? company.trim()
+      : 'Not specified';
+  const clientOrg = rawOrg.slice(0, 150);
+
+  const rawInterest = typeof areaOfInterest === 'string' && areaOfInterest.trim()
+    ? areaOfInterest.trim()
+    : typeof projectType === 'string' && projectType.trim()
+      ? projectType.trim()
+      : 'General Enquiry';
+  const interestArea = rawInterest.slice(0, 100);
+
+  const rawPhone = typeof phone === 'string' && phone.trim() ? phone.trim().slice(0, 50) : 'Not provided';
+  const rawFormType = typeof formType === 'string' && formType.trim() ? formType.trim().slice(0, 50) : 'Clinical Inquiry';
+  const clientMessage = typeof message === 'string' && message.trim()
+    ? message.trim().slice(0, 5000)
+    : 'No additional message provided.';
 
   const safeName = escapeHtml(name.trim());
-  const safeOrg = escapeHtml(clientOrg.trim());
+  const safeOrg = escapeHtml(clientOrg);
   const safeEmail = escapeHtml(email.trim());
-  const safePhone = escapeHtml(phone?.trim() || 'Not provided');
-  const safeInterest = escapeHtml(interestArea.trim());
+  const safePhone = escapeHtml(rawPhone);
+  const safeInterest = escapeHtml(interestArea);
   const safeMessage = escapeHtml(clientMessage);
-  const safeFormType = escapeHtml(formType);
+  const safeFormType = escapeHtml(rawFormType);
   const timestamp = new Date().toLocaleString('en-IN', {
     timeZone: 'Asia/Kolkata',
     dateStyle: 'full',
     timeStyle: 'medium',
   });
 
-  const transporter = createTransporter();
+  const transporter = createTransporter(injectedTransporter);
   const mailFrom = getMailFrom();
   const receiverEmail = getReceiverEmail();
   const logoAttachments = getLogoAttachments();
@@ -253,6 +321,7 @@ export const sendContactEmail = async ({
   const clientMailOptions = {
     from: mailFrom,
     to: email.trim(),
+    replyTo: 'healthtech@neuerung.in',
     subject: `Thank you for connecting with Neuerung HealthTech`,
     attachments: logoAttachments,
     text: [
@@ -355,8 +424,8 @@ export const sendContactEmail = async ({
   try {
     clientInfo = await transporter.sendMail(clientMailOptions);
   } catch (err) {
-    console.error('[sendMail] Auto-reply warning:', err.message);
-    clientError = err.message;
+    console.warn('[sendMail] Auto-reply warning:', err?.code || err?.name || 'Auto-reply dispatch failed');
+    clientError = 'Confirmation email could not be delivered.';
   }
 
   return {

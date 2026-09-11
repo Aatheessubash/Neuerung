@@ -1,4 +1,4 @@
-﻿import { createTransporter } from '../sendMail.js';
+import { createTransporter } from '../sendMail.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -18,10 +18,11 @@ export default async function handler(req, res) {
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
+    console.error('[api/health] Verification error:', error?.code || error?.name || 'SMTP connection failed');
     return res.status(500).json({
       status: 'error',
       smtpConnected: false,
-      error: error.message,
+      message: 'SMTP service is currently unavailable.',
     });
   }
 }

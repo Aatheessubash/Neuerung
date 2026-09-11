@@ -55,7 +55,7 @@ const rateLimit = (req, res, next) => {
 // ─── Routes ───────────────────────────────────────────────────────────────────
 
 /** Health check & live SMTP transporter verification */
-app.get('/api/health', async (_req, res) => {
+app.get(['/api/health', '/neuerung/api/health'], async (_req, res) => {
   try {
     const transporter = createTransporter();
     await transporter.verify();
@@ -66,16 +66,28 @@ app.get('/api/health', async (_req, res) => {
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
+    console.error('[/api/health] Verification error:', error?.code || error?.name || 'SMTP connection failed');
     res.status(500).json({
       status: 'error',
       smtpConnected: false,
-      error: error.message,
+      message: 'SMTP service is currently unavailable.',
     });
   }
 });
 
 /** Form Submission endpoint for Contact & Demo Requests */
-app.post('/api/contact', rateLimit, async (req, res) => {
+app.post(['/api/contact', '/neuerung/api/contact'], rateLimit, async (req, res) => {
+  let payload = {};
+  if (typeof req.body === 'string') {
+    try {
+      payload = JSON.parse(req.body);
+    } catch {
+      return res.status(400).json({ success: false, message: 'Invalid JSON payload.' });
+    }
+  } else if (req.body && typeof req.body === 'object') {
+    payload = req.body;
+  }
+
   const {
     name,
     organisation,
@@ -86,15 +98,26 @@ app.post('/api/contact', rateLimit, async (req, res) => {
     projectType,
     message,
     formType,
-  } = req.body || {};
+  } = payload;
 
-  // Validation
-  if (!name || !name.trim()) {
+  // Validation: type and length checks
+  if (typeof name !== 'string' || !name.trim()) {
     return res.status(400).json({ success: false, message: 'Full Name is required.' });
   }
+  if (name.trim().length > 100) {
+    return res.status(400).json({ success: false, message: 'Full Name must not exceed 100 characters.' });
+  }
 
-  if (!email || !isValidEmail(email)) {
+  if (typeof email !== 'string' || !isValidEmail(email)) {
     return res.status(400).json({ success: false, message: 'A valid email address is required.' });
+  }
+
+  if (phone && (typeof phone !== 'string' || phone.length > 50)) {
+    return res.status(400).json({ success: false, message: 'Phone number is invalid or too long.' });
+  }
+
+  if (message && (typeof message !== 'string' || message.length > 5000)) {
+    return res.status(400).json({ success: false, message: 'Message is invalid or too long (max 5000 characters).' });
   }
 
   try {
@@ -108,18 +131,22 @@ app.post('/api/contact', rateLimit, async (req, res) => {
       formType: formType || 'Clinical Inquiry',
     });
 
+    const autoReplySent = !result.clientError;
+    const responseMessage = autoReplySent
+      ? 'Thank you! Your message has been sent successfully. A confirmation email has been dispatched to your inbox.'
+      : 'Thank you! Your message has been received by our team. However, we could not deliver a confirmation email to your address.';
+
     return res.json({
       success: true,
-      message: 'Thank you! Your message has been sent successfully. A confirmation email has been dispatched to your inbox.',
+      message: responseMessage,
       adminMessageId: result.adminInfo?.messageId,
-      autoReplySent: !!result.clientInfo,
+      autoReplySent,
     });
   } catch (error) {
-    console.error('[/api/contact] Email delivery failed:', error);
+    console.error('[/api/contact] Email delivery failed:', error?.code || error?.name || 'Email delivery failure');
     return res.status(500).json({
       success: false,
       message: 'Failed to dispatch email. Please check your details or try again later.',
-      error: error.message,
     });
   }
 });
@@ -130,3 +157,4 @@ app.listen(PORT, () => {
   console.log(`📡 Health Check: http://localhost:${PORT}/api/health`);
   console.log(`✉️  POST Endpoint: http://localhost:${PORT}/api/contact\n`);
 });
+

@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "server": "node server.js",
     "start": "node server.js",
+    "test": "node --test tests/mail.test.js",
     "deploy": "node scripts/deploy.js"
   },
   "dependencies": {
