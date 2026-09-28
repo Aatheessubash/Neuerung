@@ -326,7 +326,7 @@ export default function ContactFooter() {
 
                 <div className="privacy-consent-row">
                   <Lock style={{ width: '1rem', height: '1rem', color: '#059669', flexShrink: 0 }} />
-                  <span>By submitting this inquiry, you agree to our clinical data handling guidelines.</span>
+                  <span>By submitting this inquiry, you agree to our <a href="#/terms-and-conditions" style={{ textDecoration: 'underline' }}>Terms &amp; Conditions</a> and acknowledge our <a href="#/privacy-policy" style={{ textDecoration: 'underline' }}>Privacy Policy</a>.</span>
                 </div>
 
                 <motion.button
@@ -552,6 +552,11 @@ export default function ContactFooter() {
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem', color: '#424751', textAlign: 'center' }}>
             © {new Date().getFullYear()} Neuerung HealthTech Private Limited. All rights reserved.
           </p>
+
+          <nav aria-label="Legal information" className="footer-legal-links" style={{ marginTop: '1rem' }}>
+            <a href="#/terms-and-conditions">Terms &amp; Conditions</a>
+            <a href="#/privacy-policy">Privacy Policy</a>
+          </nav>
 
           {/* Letter-by-letter stagger reveal */}
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.7rem', color: '#6b7280', textAlign: 'center', display: 'inline-flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>

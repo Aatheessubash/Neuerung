@@ -39,7 +39,7 @@ const NAV_LINKS = [
   { name: 'Contact', href: '#contact', id: 'contact' },
 ];
 
-export default function Navbar({ openModal }) {
+export default function Navbar({ openModal, isLegalPage = false }) {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
@@ -63,6 +63,10 @@ export default function Navbar({ openModal }) {
 
   useEffect(() => {
     const handleScroll = () => {
+      if (isLegalPage) {
+        setActiveSection(null);
+        return;
+      }
       if (isNavClicking.current) return;
 
       const isAtBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 60);
@@ -95,7 +99,7 @@ export default function Navbar({ openModal }) {
       window.removeEventListener('scroll', handleScroll);
       if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     };
-  }, []);
+  }, [isLegalPage]);
 
   // Lock background scrolling when mobile menu drawer is open
   useEffect(() => {
@@ -150,6 +154,12 @@ export default function Navbar({ openModal }) {
     setSolutionsDropdownOpen(false);
 
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+
+    if (isLegalPage) {
+      isNavClicking.current = false;
+      window.location.hash = id;
+      return;
+    }
 
     // Execute smooth scroll after a brief delay so layout settles post-drawer close
     setTimeout(() => {

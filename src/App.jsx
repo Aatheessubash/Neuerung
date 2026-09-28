@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import LegalPage from './components/LegalPage';
+import legalDocuments from './constants/legal.json';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import HealthcareContext from './components/HealthcareContext';
@@ -16,6 +18,19 @@ import FloatingContact from './components/FloatingContact';
 export default function App() {
   const [activeModal, setActiveModal] = useState(null);
   const [modalData, setModalData] = useState(null);
+  const [page, setPage] = useState(() => window.location.hash.slice(2));
+
+  useEffect(() => {
+    const handleHashChange = () => setPage(window.location.hash.slice(2));
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    if (Object.hasOwn(legalDocuments, page)) return;
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+  }, [page]);
 
   const openModal = (modalType, data = null) => {
     setActiveModal(modalType);
@@ -26,6 +41,16 @@ export default function App() {
     setActiveModal(null);
     setModalData(null);
   };
+
+  if (Object.hasOwn(legalDocuments, page)) {
+    return (
+      <>
+        <Navbar openModal={openModal} isLegalPage />
+        <LegalPage key={page} document={legalDocuments[page]} slug={page} />
+        <Modals activeModal={activeModal} closeModal={closeModal} modalData={modalData} />
+      </>
+    );
+  }
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'var(--color-body-bg)', color: 'var(--color-body-text)', fontFamily: 'var(--font-body)' }}>
