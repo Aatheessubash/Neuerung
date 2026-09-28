@@ -153,8 +153,8 @@ function devApiPlugin() {
 }
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/neuerung',
+export default defineConfig(({ command }) => ({
+  base: command === 'serve' ? '/' : '/neuerung',
   plugins: [
     react(),
     tailwindcss(),
@@ -174,5 +174,5 @@ export default defineConfig({
       },
     },
   },
-})
+}))
 
